@@ -10,22 +10,22 @@ using System.Threading.Tasks;
 namespace NBi.Testing.Integration.Core.Rest
 {
     [TestFixture()]
-    public class RestEngineTest
+    public class RestCommandTest
     {
         [Test]
         public void Execute_ValidCallForObject_ExpectedResult()
         {
             var factory = new RestClientFactory();
             var client = factory.Instantiate(ContentType.Json, "http://calapi.inadiutorium.cz/api/v0/en/", CredentialsType.Anonymous);
-            var engine = new RestEngine(client);
+            var cmd = new RestCommand(client);
 
-            var parameters = new Dictionary<string, string>();
-            parameters.Add("calendar", "default");
-            parameters.Add("year", "2015");
-            parameters.Add("month", "6");
-            parameters.Add("day", "27");
+            cmd.Uri = "calendars/$calendar$/$year$/$month$/$day$";
+            cmd.Parameters.Add("calendar", "default");
+            cmd.Parameters.Add("year", "2015");
+            cmd.Parameters.Add("month", "6");
+            cmd.Parameters.Add("day", "27");
 
-            var dataset = engine.Execute("calendars/$calendar$/$year$/$month$/$day$", parameters);
+            var dataset = cmd.Execute();
 
             Assert.That(dataset, Is.Not.Null);
             Assert.That(dataset.Tables, Has.Count.EqualTo(1));
@@ -49,12 +49,12 @@ namespace NBi.Testing.Integration.Core.Rest
         {
             var factory = new RestClientFactory();
             var client = factory.Instantiate(ContentType.Json, "https://www.googleapis.com/books/v1/", CredentialsType.Anonymous);
-            var engine = new RestEngine(client);
+            var cmd = new RestCommand(client);
 
-            var parameters = new Dictionary<string, string>();
-            parameters.Add("isbn", "0747532699");
+            cmd.Uri = "volumes?q=isbn:$isbn$";
+            cmd.Parameters.Add("isbn", "0747532699");
 
-            var dataset = engine.Execute("volumes?q=isbn:$isbn$", parameters);
+            var dataset = cmd.Execute();
 
             Assert.That(dataset, Is.Not.Null);
             Assert.That(dataset.Tables, Has.Count.EqualTo(1));
@@ -79,12 +79,12 @@ namespace NBi.Testing.Integration.Core.Rest
         {
             var factory = new RestClientFactory();
             var client = factory.Instantiate(ContentType.Json, "https://www.googleapis.com/books/v1/", CredentialsType.Anonymous);
-            var engine = new RestEngine(client);
+            var cmd = new RestCommand(client);
 
-            var parameters = new Dictionary<string, string>();
-            parameters.Add("q", "isbn:3905829800");
+            cmd.Uri = "volumes";
+            cmd.Parameters.Add("q", "isbn:3905829800");
 
-            var dataset = engine.Execute("volumes", parameters);
+            var dataset = cmd.Execute();
 
             Assert.That(dataset, Is.Not.Null);
             Assert.That(dataset.Tables, Has.Count.EqualTo(1));

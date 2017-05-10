@@ -11,19 +11,23 @@ using System.Threading.Tasks;
 
 namespace NBi.Core.Rest
 {
-    public class RestEngine 
+    public class RestCommand 
     {
         private readonly IRestClient client;
 
-        public RestEngine(IRestClient client)
+        public RestCommand(IRestClient client)
         {
             this.client = client;
+            Parameters = new Dictionary<string, string>();
         }
 
-        public virtual DataSet Execute(string uri, IDictionary<string, string> parameters)
+        public string Uri { get; set; }
+        public IDictionary<string, string> Parameters { get; }
+
+        public virtual DataSet Execute()
         {
             var builder = new UriParametersBuilder();
-            builder.Setup(uri, parameters);
+            builder.Setup(Uri, Parameters);
             builder.Build();
             var content = client.Download(builder.GetUri(), builder.GetRemainingParameters());
             var dataset = client.Parse(content);

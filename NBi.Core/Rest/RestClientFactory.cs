@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NBi.Core.Rest
 {
-    class RestClientFactory
+    public class RestClientFactory
     {
         public IRestClient Instantiate(ContentType contentType, string baseAddress, CredentialsType credentialsType)
         {

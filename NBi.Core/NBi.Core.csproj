@@ -261,6 +261,7 @@
     <Compile Include="Report\ReportCommand.cs" />
     <Compile Include="Rest\ContentType.cs" />
     <Compile Include="Rest\CredentialsType.cs" />
+    <Compile Include="Rest\RestClientFactory.cs" />
     <Compile Include="ResultSet\Comparer\ArrayComparer.cs" />
     <Compile Include="ResultSet\Comparer\TableComparer.cs" />
     <Compile Include="ResultSet\Comparer\CellComparer.cs" />
@@ -268,8 +269,7 @@
     <Compile Include="Rest\IRestClient.cs" />
     <Compile Include="Rest\Json\JsonParser.cs" />
     <Compile Include="Rest\RestClient.cs" />
-    <Compile Include="Rest\RestEngine.cs" />
-    <Compile Include="Rest\RestClientFactory.cs" />
+    <Compile Include="Rest\RestCommand.cs" />
     <Compile Include="Rest\UriParametersBuilder.cs" />
     <Compile Include="ResultSet\Comparer\ComparerFactory.cs" />
     <Compile Include="Report\DatabaseParser.cs" />

@@ -6,6 +6,8 @@ using NBi.Core.Query;
 using NBi.Xml.Constraints;
 using NBi.Xml.Items;
 using NBi.Xml.Systems;
+using NBi.Core.Rest;
+using NBi.Xml.Items.Rest;
 
 namespace NBi.NUnit.Builder
 {
@@ -26,34 +28,50 @@ namespace NBi.NUnit.Builder
             SystemUnderTest = InstantiateSystemUnderTest(SystemUnderTestXml);
         }
 
-        protected virtual IDbCommand InstantiateSystemUnderTest(ExecutionXml executionXml)
+        protected virtual object InstantiateSystemUnderTest(ExecutionXml executionXml)
         {
-            var commandBuilder = new CommandBuilder();
-
-            var connectionString = executionXml.Item.GetConnectionString();
-            var commandText = (executionXml.Item as QueryableXml).GetQuery();
-
-            IEnumerable<IQueryParameter> parameters=null;
-            IEnumerable<IQueryTemplateVariable> variables = null;
-            int timeout = 0;
-            if (executionXml.BaseItem is QueryXml)
-            { 
-                parameters = ((QueryXml)executionXml.BaseItem).GetParameters();
-                variables = ((QueryXml)executionXml.BaseItem).GetVariables();
-                timeout = ((QueryXml)executionXml.BaseItem).Timeout;
-            }
-            if (executionXml.BaseItem is ReportXml)
+            if (executionXml.BaseItem is RestXml)
             {
-                parameters = ((ReportXml)executionXml.BaseItem).GetParameters();
-            }
-            var cmd = commandBuilder.Build(connectionString, commandText, parameters, variables, timeout);
+                var restXml = (RestXml)executionXml.BaseItem;
+                var factory = new RestClientFactory();
+                var restClient = factory.Instantiate(restXml.Location.ContentType, restXml.Location.BaseAddress, restXml.Credentials.Type);
 
-            if (executionXml.BaseItem is ReportXml)
+                var cmd = new RestCommand(restClient);
+                cmd.Uri = restXml.Path;
+                foreach (var param in restXml.Parameters)
+                    cmd.Parameters.Add(param.Name, param.StringValue);
+
+                return cmd;
+            }
+            else
             {
-                cmd.CommandType = ((ReportXml)executionXml.BaseItem).GetCommandType();
-            }
+                var commandBuilder = new CommandBuilder();
 
-            return cmd;
+                var connectionString = executionXml.Item.GetConnectionString();
+                var commandText = (executionXml.Item as QueryableXml).GetQuery();
+
+                IEnumerable<IQueryParameter> parameters = null;
+                IEnumerable<IQueryTemplateVariable> variables = null;
+                int timeout = 0;
+                if (executionXml.BaseItem is QueryXml)
+                {
+                    parameters = ((QueryXml)executionXml.BaseItem).GetParameters();
+                    variables = ((QueryXml)executionXml.BaseItem).GetVariables();
+                    timeout = ((QueryXml)executionXml.BaseItem).Timeout;
+                }
+                if (executionXml.BaseItem is ReportXml)
+                {
+                    parameters = ((ReportXml)executionXml.BaseItem).GetParameters();
+                }
+                var cmd = commandBuilder.Build(connectionString, commandText, parameters, variables, timeout);
+
+                if (executionXml.BaseItem is ReportXml)
+                {
+                    cmd.CommandType = ((ReportXml)executionXml.BaseItem).GetCommandType();
+                }
+
+                return cmd;
+            }
         }
 
 

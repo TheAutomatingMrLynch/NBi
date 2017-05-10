@@ -10,6 +10,7 @@ using NBi.Framework.FailureMessage;
 using NBi.Framework;
 using NBi.Core.Xml;
 using NBi.Core.Transformation;
+using NBi.Core.Rest;
 
 namespace NBi.NUnit.Query
 {
@@ -181,6 +182,8 @@ namespace NBi.NUnit.Query
         {
             if (actual is IDbCommand)
                 return Process((IDbCommand)actual);
+            if (actual is RestCommand)
+                return Process((RestCommand)actual);
             else if (actual is ResultSet)
                 return doMatch((ResultSet)actual);
             else
@@ -233,6 +236,14 @@ namespace NBi.NUnit.Query
                 rsActual = GetResultSet(actual);
             
             return this.Matches(rsActual);
+        }
+
+        public bool Process(RestCommand actual)
+        {
+            var ds = actual.Execute();
+            var rs = new ResultSet();
+            rs.Load(ds);
+            return this.Matches(rs);
         }
 
         public ResultSet ProcessParallel(IDbCommand actual)
