@@ -14,16 +14,19 @@ namespace NBi.Core.Rest
     public class RestCommand 
     {
         private readonly IRestClient client;
+        private readonly IDictionary<string, string> parameters;
 
         public RestCommand(IRestClient client)
         {
             this.client = client;
-            Parameters = new Dictionary<string, string>();
+            parameters = new Dictionary<string, string>();
         }
 
         public string Uri { get; set; }
-        public IDictionary<string, string> Parameters { get; }
-
+        public IDictionary<string, string> Parameters
+        {
+            get { return parameters; }
+        }
         public virtual DataSet Execute()
         {
             var builder = new UriParametersBuilder();
