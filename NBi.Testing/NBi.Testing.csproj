@@ -115,7 +115,7 @@
     <Compile Include="Integration\Core\Query\QueryOleDbEngineTest.cs" />
     <Compile Include="Integration\Core\Query\QuerySqlEngineTest.cs" />
     <Compile Include="Unit\Core\Rest\Json\JsonParserTest.cs" />
-    <Compile Include="Integration\Core\Rest\RestEngineTest.cs" />
+    <Compile Include="Integration\Core\Rest\RestCommandTest.cs" />
     <Compile Include="Integration\GenbiL\Action\ActionTest.cs" />
     <Compile Include="Integration\SqlServer\IntegrationService\EtlDtsWindowsRunnerTest.cs" />
     <Compile Include="Integration\SqlServer\IntegrationService\EtlFileRunnerTest.cs" />
@@ -438,6 +438,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <EmbeddedResource Include="Acceptance\Resources\Positive\QueryAllNoRows.nbits">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Acceptance\Resources\Positive\RestEqualTo.nbits">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Include="Acceptance\Resources\PowerBiDesktop\Sales Analysis.pbix">
