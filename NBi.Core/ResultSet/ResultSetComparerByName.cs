@@ -122,14 +122,18 @@ namespace NBi.Core.ResultSet
             var missingColumns = new List<KeyValuePair<string, string>>();
             foreach (var columnName in settings.GetKeyNames())
             {
-                if (!dt.Columns.Contains(columnName))
-                    missingColumns.Add(new KeyValuePair<string, string>(columnName, "key"));
+                var subTable = GetSubTable(columnName, dt);
+                var name = columnName.Contains(".") ? columnName.Substring(columnName.LastIndexOf(".") + 1) : columnName;
+                if (!subTable.Columns.Contains(name))
+                    missingColumns.Add(new KeyValuePair<string, string>(name, "key"));
             }
 
             foreach (var columnName in settings.GetValueNames())
             {
-                if (!dt.Columns.Contains(columnName))
-                    missingColumns.Add(new KeyValuePair<string, string>(columnName, "value"));
+                var subTable = GetSubTable(columnName, dt);
+                var name = columnName.Contains(".") ? columnName.Substring(columnName.LastIndexOf(".") + 1) : columnName;
+                if (!subTable.Columns.Contains(name))
+                    missingColumns.Add(new KeyValuePair<string, string>(name, "value"));
             }
 
             if (missingColumns.Count > 0)
@@ -143,6 +147,23 @@ namespace NBi.Core.ResultSet
 
                 throw new ResultSetComparerException(exception);
             }
+        }
+
+        private DataTable GetSubTable(string columnName, DataTable dt)
+        {
+            var remainingColumnName = columnName;
+            var subTable = dt;
+            while (remainingColumnName.Contains("."))
+            {
+                var subTableName = columnName.Split(new[] { '.' })[0];
+                var obj = subTable.Rows[0][subTableName];
+                if (!(obj is DataTable))
+                    throw new ResultSetComparerException(string.Format("NBi was looking for the column named '{0}' but the column '{1}' was not a sub-table", columnName, subTableName));
+                remainingColumnName = remainingColumnName.Substring(subTableName.Length + 1);
+                subTable = obj as DataTable;
+            }
+
+            return subTable;
         }
 
         protected void CheckSettingsAndFirstRow(DataTable dt, SettingsResultSetComparisonByName settings)
