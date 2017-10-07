@@ -59,9 +59,8 @@
     <Reference Include="NCalc">
       <HintPath>..\packages\NCalc-Edge.1.4.3\lib\NCalc.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -481,6 +480,14 @@
     <Compile Include="WindowsService\IWindowsServiceStartCommand.cs" />
     <Compile Include="WindowsService\WindowsServiceCommand.cs" />
     <Compile Include="WindowsService\WindowsServiceCommandFactory.cs" />
+    <Compile Include="Json\AbstractSelect.cs" />
+    <Compile Include="Json\AttributeSelect.cs" />
+    <Compile Include="Json\ElementSelect.cs" />
+    <Compile Include="Json\EvaluateSelect.cs" />
+    <Compile Include="Json\SelectFactory.cs" />
+    <Compile Include="Json\JsonPathEngine.cs" />
+    <Compile Include="Json\JsonPathFileEngine.cs" />
+    <Compile Include="Json\JsonPathUrlEngine.cs" />
     <Compile Include="Xml\EvaluateSelect.cs" />
     <Compile Include="Xml\AttributeSelect.cs" />
     <Compile Include="Xml\AbstractSelect.cs" />
