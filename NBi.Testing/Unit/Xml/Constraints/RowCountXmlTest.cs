@@ -22,14 +22,14 @@ namespace NBi.Testing.Unit.Xml.Constraints
 
         #region SetUp & TearDown
         //Called only at instance creation
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetupMethods()
         {
 
         }
 
         //Called only at instance destruction
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDownMethods()
         {
         }
@@ -216,7 +216,7 @@ namespace NBi.Testing.Unit.Xml.Constraints
             var formula = rowCount.Filter.Expression;
 
             Assert.That(formula.Name, Is.EqualTo("LogDepId"));
-            Assert.That(formula.Value, Is.StringContaining("Log10(DepId)"));
+            Assert.That(formula.Value, Does.Contain("Log10(DepId)"));
         }
 
         [Test]
@@ -238,10 +238,10 @@ namespace NBi.Testing.Unit.Xml.Constraints
 
             Debug.WriteLine(content);
 
-            Assert.That(content, Is.StringContaining("<filter"));
-            Assert.That(content, Is.StringContaining("<less-than"));
+            Assert.That(content, Does.Contain("<filter"));
+            Assert.That(content, Does.Contain("<less-than"));
 
-            Assert.That(content, Is.StringMatching(@".*<filter.*/>[\r\n]*.*<less-than.*/>.*"));
+            Assert.That(content, Does.Match(@".*<filter.*/>[\r\n]*.*<less-than.*/>.*"));
         }
 
         [Test]
@@ -270,8 +270,8 @@ namespace NBi.Testing.Unit.Xml.Constraints
 
             Debug.WriteLine(content);
 
-            Assert.That(content, Is.StringContaining("<alias"));
-            Assert.That(content, Is.Not.StringContaining("<variable"));
+            Assert.That(content, Does.Contain("<alias"));
+            Assert.That(content, Is.Not.Contain("<variable"));
         }
     }
 }

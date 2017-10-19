@@ -18,14 +18,14 @@ namespace NBi.Testing.Unit.Xml.Constraints
 
         #region SetUp & TearDown
         //Called only at instance creation
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetupMethods()
         {
 
         }
 
         //Called only at instance destruction
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDownMethods()
         {
         }
@@ -84,7 +84,7 @@ namespace NBi.Testing.Unit.Xml.Constraints
 
             Assert.That(ts.Tests[testNr].Constraints[0], Is.TypeOf<EquivalentToXml>());
             Assert.That(((EquivalentToXml)ts.Tests[testNr].Constraints[0]).Query, Is.Not.Null);
-            Assert.That(((EquivalentToXml)ts.Tests[testNr].Constraints[0]).Query.GetQuery(), Is.StringContaining("Hello").And.StringContaining("World"));
+            Assert.That(((EquivalentToXml)ts.Tests[testNr].Constraints[0]).Query.GetQuery(), Does.Contain("Hello").And.Contain("World"));
         }
 
         [Test]

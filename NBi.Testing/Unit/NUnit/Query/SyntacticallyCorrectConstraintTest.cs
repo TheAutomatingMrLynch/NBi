@@ -59,7 +59,7 @@ namespace NBi.Testing.Unit.NUnit.Query
             var res = syntacticallyCorrectConstraint.Matches(new SqlCommand());
 
             //Test conclusion            
-            Assert.That(res, Is.True);
+            Assert.That(res.IsSuccess, Is.True);
         }
 
         [Test]
@@ -77,7 +77,7 @@ namespace NBi.Testing.Unit.NUnit.Query
             var res = syntacticallyCorrectConstraint.Matches(new SqlCommand());
 
             //Test conclusion            
-            Assert.That(res, Is.False);
+            Assert.That(res.IsSuccess, Is.False);
         }
 
     }

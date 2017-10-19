@@ -45,13 +45,13 @@ namespace NBi.Testing.Unit.NUnit.Structure
             }
 
             //Test conclusion            
-            Assert.That(assertionText, Is.StringContaining("exact").And
-                                            .StringContaining("perspective-name").And
-                                            .StringContaining("dimension-caption").And
-                                            .StringContaining("hierarchy-caption").And
-                                            .StringContaining("levels").And
-                                            .StringContaining("Expected level 1").And
-                                            .StringContaining("Expected level 2"));
+            Assert.That(assertionText, Does.Contain("exact").And
+                                            .Contain("perspective-name").And
+                                            .Contain("dimension-caption").And
+                                            .Contain("hierarchy-caption").And
+                                            .Contain("levels").And
+                                            .Contain("Expected level 1").And
+                                            .Contain("Expected level 2"));
         }
 
 

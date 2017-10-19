@@ -6,6 +6,7 @@ using NBi.Core.ResultSet;
 using NBi.Core.Calculation;
 using NBi.Framework.FailureMessage;
 using NUnitCtr = NUnit.Framework.Constraints;
+using NUnit.Framework.Constraints;
 
 namespace NBi.NUnit.Query
 {
@@ -16,9 +17,9 @@ namespace NBi.NUnit.Query
         {
             filterFunction = filter.AntiApply;
         }
-        protected override bool doMatch(int actual)
+        protected override ConstraintResult doMatch(int actual)
         {
-            return filterResultSet.Rows.Count == 0;
+            return new ConstraintResult(this, actual, filterResultSet.Rows.Count == 0);
         }
        
         public override void WriteDescriptionTo(NUnitCtr.MessageWriter writer)

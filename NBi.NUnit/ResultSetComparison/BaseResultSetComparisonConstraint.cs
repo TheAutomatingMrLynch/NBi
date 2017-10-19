@@ -11,6 +11,7 @@ using NBi.Framework;
 using NBi.Core.Xml;
 using NBi.Core.Transformation;
 using NBi.Core.ResultSet.Analyzer;
+using NUnit.Framework.Constraints;
 
 namespace NBi.NUnit.ResultSetComparison
 {
@@ -178,7 +179,7 @@ namespace NBi.NUnit.ResultSetComparison
         /// </summary>
         /// <param name="actual">An OleDbCommand, SqlCommand or AdomdCommand</param>
         /// <returns>true, if the result of query execution is exactly identical to the content of the resultset</returns>
-        public override bool Matches(object actual)
+        public override NUnitCtr.ConstraintResult Matches(object actual)
         {
             if (actual is IDbCommand)
                 return Process((IDbCommand)actual);
@@ -187,11 +188,11 @@ namespace NBi.NUnit.ResultSetComparison
             else if (actual is ResultSet)
                 return doMatch((ResultSet)actual);
             else
-                return false;
+                throw new ArgumentException();
 
         }
 
-        protected bool doMatch(ResultSet actual)
+        protected ConstraintResult doMatch(ResultSet actual)
         {
             actualResultSet = actual;
 
@@ -213,7 +214,7 @@ namespace NBi.NUnit.ResultSetComparison
                     doPersist(actualResultSet, GetPersistancePath("Actual"));
             }
 
-            return result.Difference == ResultSetDifferenceType.None;
+            return new ConstraintResult(this, actual, result.Difference == ResultSetDifferenceType.None);
         }
 
         protected string GetPersistancePath(string folder)
@@ -225,7 +226,7 @@ namespace NBi.NUnit.ResultSetComparison
         /// </summary>
         /// <param name="actual">IDbCommand</param>
         /// <returns></returns>
-        public bool Process(IDbCommand actual)
+        public ConstraintResult Process(IDbCommand actual)
         {
             ResultSet rsActual = null;
             if (parallelizeQueries)

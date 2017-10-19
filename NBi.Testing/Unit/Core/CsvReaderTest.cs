@@ -182,8 +182,8 @@ namespace NBi.Testing.Unit.Core
                     var values = reader.GetNextRecords(streamReader, recordSeparator, bufferSize, string.Empty, out extraRead);
                     foreach (var value in values)
                     {
-                        Assert.That(value, Is.StringStarting("abc"));
-                        Assert.That(value, Is.StringEnding("abc").Or.StringEnding("\0").Or.StringEnding(recordSeparator));
+                        Assert.That(value, Does.StartWith("abc"));
+                        Assert.That(value, Does.EndWith("abc").Or.EndWith("\0").Or.EndWith(recordSeparator));
                     }
                 }
                 writer.Dispose();
@@ -351,8 +351,8 @@ namespace NBi.Testing.Unit.Core
                     var reader = new CsvReader(1024);
 
                     var ex = Assert.Throws<InvalidDataException>(delegate { reader.Read(stream, true); });
-                    Assert.That(ex.Message, Is.StringContaining(string.Format("row {0} ", rowNumber+1)));
-                    Assert.That(ex.Message, Is.StringContaining(string.Format("{0} more", moreField)));
+                    Assert.That(ex.Message, Does.Contain(string.Format("row {0} ", rowNumber+1)));
+                    Assert.That(ex.Message, Does.Contain(string.Format("{0} more", moreField)));
                 }
             }
         }

@@ -50,9 +50,9 @@ namespace NBi.Testing.Unit.Core.ResultSet
 
             // This must not throw an exception when the header is bigger that requested size
             var text = cf.GetText(20);
-            Assert.That(text, Is.StringContaining("(null)"));
-            Assert.That(text, Is.StringContaining("<>"));
-            Assert.That(text, Is.StringContaining("(empty)"));
+            Assert.That(text, Does.Contain("(null)"));
+            Assert.That(text, Does.Contain("<>"));
+            Assert.That(text, Does.Contain("(empty)"));
         }
 
         [Test]
@@ -76,9 +76,9 @@ namespace NBi.Testing.Unit.Core.ResultSet
             // This must not throw an exception when the header is bigger that requested size
             var text = cf.GetText(20);
 
-            Assert.That(text, Is.StringContaining("(empty)"));
-            Assert.That(text, Is.StringContaining("<>"));
-            Assert.That(text, Is.StringContaining("(null)")); 
+            Assert.That(text, Does.Contain("(empty)"));
+            Assert.That(text, Does.Contain("<>"));
+            Assert.That(text, Does.Contain("(null)")); 
         }
 
         [Test]
@@ -106,7 +106,7 @@ namespace NBi.Testing.Unit.Core.ResultSet
 
             // This should be the returned value
             var text = cf.GetText(length);
-            Assert.That(text, Is.StringStarting("KEY (Text) "));
+            Assert.That(text, Does.StartWith("KEY (Text) "));
             
         }
     }

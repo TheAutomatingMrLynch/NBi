@@ -74,7 +74,7 @@ namespace NBi.Testing.Unit.Xml
             var manager = new XmlManager();
             var xml = manager.XmlSerializeFrom<TestXml>(test);
 
-            Assert.That(xml, Is.StringContaining("<trait name=\"My Trait\">My Trait's value</trait>"));
+            Assert.That(xml, Does.Contain("<trait name=\"My Trait\">My Trait's value</trait>"));
         }
     }
 }

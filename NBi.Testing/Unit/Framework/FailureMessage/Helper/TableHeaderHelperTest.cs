@@ -20,9 +20,9 @@ namespace NBi.Testing.Unit.Framework.FailureMessage
             var formatter = new TableHeaderHelper();
             var text = formatter.GetText(ColumnRole.Value, ColumnType.Numeric, new NumericAbsoluteTolerance(new decimal(0.5), SideTolerance.Both), null);
 
-            Assert.That(text, Is.StringContaining("VALUE"));
-            Assert.That(text, Is.StringContaining("Numeric"));
-            Assert.That(text, Is.StringContaining("(+/- 0.5)"));
+            Assert.That(text, Does.Contain("VALUE"));
+            Assert.That(text, Does.Contain("Numeric"));
+            Assert.That(text, Does.Contain("(+/- 0.5)"));
         }
 
         [Test]
@@ -31,9 +31,9 @@ namespace NBi.Testing.Unit.Framework.FailureMessage
             var formatter = new TableHeaderHelper();
             var text = formatter.GetText(ColumnRole.Value, ColumnType.Numeric, new NumericAbsoluteTolerance(new decimal(0.5), SideTolerance.More), null);
 
-            Assert.That(text, Is.StringContaining("VALUE"));
-            Assert.That(text, Is.StringContaining("Numeric"));
-            Assert.That(text, Is.StringContaining("(+/- +0.5)"));
+            Assert.That(text, Does.Contain("VALUE"));
+            Assert.That(text, Does.Contain("Numeric"));
+            Assert.That(text, Does.Contain("(+/- +0.5)"));
         }
 
         [Test]
@@ -42,9 +42,9 @@ namespace NBi.Testing.Unit.Framework.FailureMessage
             var formatter = new TableHeaderHelper();
             var text = formatter.GetText(ColumnRole.Value, ColumnType.Numeric, new NumericAbsoluteTolerance(new decimal(0.5), SideTolerance.Less), null);
 
-            Assert.That(text, Is.StringContaining("VALUE"));
-            Assert.That(text, Is.StringContaining("Numeric"));
-            Assert.That(text, Is.StringContaining("(+/- -0.5)"));
+            Assert.That(text, Does.Contain("VALUE"));
+            Assert.That(text, Does.Contain("Numeric"));
+            Assert.That(text, Does.Contain("(+/- -0.5)"));
         }
 
         [Test]
@@ -53,9 +53,9 @@ namespace NBi.Testing.Unit.Framework.FailureMessage
             var formatter = new TableHeaderHelper();
             var text = formatter.GetText(ColumnRole.Value, ColumnType.Numeric, new NumericPercentageTolerance(new decimal(0.125), SideTolerance.Both), null);
 
-            Assert.That(text, Is.StringContaining("VALUE"));
-            Assert.That(text, Is.StringContaining("Numeric"));
-            Assert.That(text, Is.StringContaining("(+/- 12.500%)"));
+            Assert.That(text, Does.Contain("VALUE"));
+            Assert.That(text, Does.Contain("Numeric"));
+            Assert.That(text, Does.Contain("(+/- 12.500%)"));
         }
 
         [Test]
@@ -64,9 +64,9 @@ namespace NBi.Testing.Unit.Framework.FailureMessage
             var formatter = new TableHeaderHelper();
             var text = formatter.GetText(ColumnRole.Value, ColumnType.Numeric, new NumericPercentageTolerance(new decimal(0.125), SideTolerance.More), null);
 
-            Assert.That(text, Is.StringContaining("VALUE"));
-            Assert.That(text, Is.StringContaining("Numeric"));
-            Assert.That(text, Is.StringContaining("(+/- +12.500%)"));
+            Assert.That(text, Does.Contain("VALUE"));
+            Assert.That(text, Does.Contain("Numeric"));
+            Assert.That(text, Does.Contain("(+/- +12.500%)"));
         }
 
         [Test]
@@ -75,9 +75,9 @@ namespace NBi.Testing.Unit.Framework.FailureMessage
             var formatter = new TableHeaderHelper();
             var text = formatter.GetText(ColumnRole.Value, ColumnType.DateTime, new DateTimeTolerance(new TimeSpan(0, 15, 0)), null);
 
-            Assert.That(text, Is.StringContaining("VALUE"));
-            Assert.That(text, Is.StringContaining("DateTime"));
-            Assert.That(text, Is.StringContaining("(+/- 00:15:00)"));
+            Assert.That(text, Does.Contain("VALUE"));
+            Assert.That(text, Does.Contain("DateTime"));
+            Assert.That(text, Does.Contain("(+/- 00:15:00)"));
         }
 
         [Test]
@@ -86,9 +86,9 @@ namespace NBi.Testing.Unit.Framework.FailureMessage
             var formatter = new TableHeaderHelper();
             var text = formatter.GetText(ColumnRole.Value, ColumnType.DateTime, null, new DateTimeRounding(new TimeSpan(0, 15, 0), Rounding.RoundingStyle.Floor));
 
-            Assert.That(text, Is.StringContaining("VALUE"));
-            Assert.That(text, Is.StringContaining("DateTime"));
-            Assert.That(text, Is.StringContaining("(floor 00:15:00)"));
+            Assert.That(text, Does.Contain("VALUE"));
+            Assert.That(text, Does.Contain("DateTime"));
+            Assert.That(text, Does.Contain("(floor 00:15:00)"));
         }
 
         [Test]
@@ -97,9 +97,9 @@ namespace NBi.Testing.Unit.Framework.FailureMessage
             var formatter = new TableHeaderHelper();
             var text = formatter.GetText(ColumnRole.Value, ColumnType.Numeric, null, new NumericRounding(10.5, Rounding.RoundingStyle.Round));
 
-            Assert.That(text, Is.StringContaining("VALUE"));
-            Assert.That(text, Is.StringContaining("Numeric"));
-            Assert.That(text, Is.StringContaining("(round 10.5)"));
+            Assert.That(text, Does.Contain("VALUE"));
+            Assert.That(text, Does.Contain("Numeric"));
+            Assert.That(text, Does.Contain("(round 10.5)"));
         }
 
         [Test]
@@ -108,9 +108,9 @@ namespace NBi.Testing.Unit.Framework.FailureMessage
             var formatter = new TableHeaderHelper();
             var text = formatter.GetText(ColumnRole.Value, ColumnType.Numeric, null, null);
 
-            Assert.That(text, Is.StringContaining("VALUE"));
-            Assert.That(text, Is.StringContaining("Numeric"));
-            Assert.That(text, Is.Not.StringEnding(" "));
+            Assert.That(text, Does.Contain("VALUE"));
+            Assert.That(text, Does.Contain("Numeric"));
+            Assert.That(text, Does.Not.EndWith(" "));
         }
     }
 }

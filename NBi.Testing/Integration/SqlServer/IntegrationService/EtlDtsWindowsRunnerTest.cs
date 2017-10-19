@@ -21,7 +21,7 @@ namespace NBi.Testing.Integration.SqlServer.IntegrationService
 
         #region SetUp & TearDown
         //Called only at instance creation
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetupMethods()
         {
             isIntegrationServiceStarted = CheckIfIntegrationServiceStarted();
@@ -53,7 +53,7 @@ namespace NBi.Testing.Integration.SqlServer.IntegrationService
         }
 
         //Called only at instance destruction
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDownMethods()
         {
         }

@@ -21,14 +21,14 @@ namespace NBi.Testing.Unit.Xml.Systems
 
         #region SetUp & TearDown
         //Called only at instance creation
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetupMethods()
         {
 
         }
 
         //Called only at instance destruction
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDownMethods()
         {
         }
@@ -106,11 +106,11 @@ namespace NBi.Testing.Unit.Xml.Systems
 
             Debug.WriteLine(content);
 
-            Assert.That(content, Is.StringContaining("<column"));
-            Assert.That(content, Is.StringContaining("caption=\"My Caption\""));
-            Assert.That(content, Is.StringContaining("perspective=\"My Schema\""));
-            Assert.That(content, Is.Not.StringContaining("efault"));
-            Assert.That(content, Is.Not.StringContaining("eference"));
+            Assert.That(content, Does.Contain("<column"));
+            Assert.That(content, Does.Contain("caption=\"My Caption\""));
+            Assert.That(content, Does.Contain("perspective=\"My Schema\""));
+            Assert.That(content, Is.Not.Contain("efault"));
+            Assert.That(content, Is.Not.Contain("eference"));
         }
         
 

@@ -144,9 +144,9 @@ namespace NBi.Testing.Unit.Core
                 {
                     var text = streamReader.ReadToEnd();
                     var firstCell= text.Split(new string[] { Csv.RecordSeparator }, StringSplitOptions.RemoveEmptyEntries)[0];
-                    Assert.That(firstCell, Is.StringStarting(Csv.TextQualifier.ToString()));
-                    Assert.That(firstCell, Is.StringEnding(Csv.TextQualifier.ToString()));
-                    Assert.That(firstCell, Is.StringContaining(Csv.FieldSeparator.ToString()));
+                    Assert.That(firstCell, Does.StartWith(Csv.TextQualifier.ToString()));
+                    Assert.That(firstCell, Does.EndWith(Csv.TextQualifier.ToString()));
+                    Assert.That(firstCell, Does.Contain(Csv.FieldSeparator.ToString()));
                 }
             }
         }
@@ -168,9 +168,9 @@ namespace NBi.Testing.Unit.Core
                 {
                     var text = streamReader.ReadToEnd();
                     var firstCell = text.Split(new string[] { Csv.RecordSeparator }, StringSplitOptions.RemoveEmptyEntries)[0];
-                    Assert.That(firstCell, Is.Not.StringStarting(Csv.TextQualifier.ToString()));
-                    Assert.That(firstCell, Is.Not.StringEnding(Csv.TextQualifier.ToString()));
-                    Assert.That(firstCell, Is.Not.StringContaining(Csv.FieldSeparator.ToString()));
+                    Assert.That(firstCell, Does.Not.StartWith(Csv.TextQualifier.ToString()));
+                    Assert.That(firstCell, Does.Not.EndWith(Csv.TextQualifier.ToString()));
+                    Assert.That(firstCell, Does.Not.Contain(Csv.FieldSeparator.ToString()));
                 }
             }
         }

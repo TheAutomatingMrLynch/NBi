@@ -20,9 +20,9 @@ namespace NBi.Testing.Unit.Core.Analysis.Metadata.Adomd
     //        //Method under test
     //        var filterString = discovery.Build(filters);
 
-    //        Assert.That(filterString, Is.StringContaining("my perspective")
-    //            .And.StringContaining("my measure-group")
-    //            .And.StringContaining("my dimension"));
+    //        Assert.That(filterString, Does.Contain("my perspective")
+    //            .And.Contain("my measure-group")
+    //            .And.Contain("my dimension"));
 
     //    }
     //}

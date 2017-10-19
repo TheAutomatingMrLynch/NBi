@@ -47,19 +47,19 @@ namespace NBi.NUnit.Member
         }
         #endregion
 
-        protected override bool DoMatch(NUnitCtr.Constraint ctr)
+        protected override ConstraintResult DoMatch(NUnitCtr.Constraint ctr)
         {
             throw new InvalidOperationException();
         }
 
-        protected virtual bool DoMatch(NUnitCtr.Constraint ctr, string member)
+        protected virtual ConstraintResult DoMatch(NUnitCtr.Constraint ctr, string member)
         {
             IResolveConstraint exp = ctr;
             var multipleConstraint = exp.Resolve();
-            return multipleConstraint.Matches(member);
+            return multipleConstraint.ApplyTo(member);
         }
 
-        public override bool Matches(object actual)
+        public override NUnitCtr.ConstraintResult Matches(object actual)
         {
             if (actual is MembersDiscoveryRequest)
                 return Process((MembersDiscoveryRequest)actual);
@@ -67,13 +67,13 @@ namespace NBi.NUnit.Member
             {   
                 this.actual = actual;
 
-                var res = true;
+                var res = new ConstraintResult(this, actual, true);
                 foreach (var member in (MemberResult)actual)
                 {
                     var ctr = BuildInternalConstraint();
-                    if (!DoMatch(ctr, member.Caption))
+                    if (!DoMatch(ctr, member.Caption).IsSuccess)
                     {
-                        res = false;
+                        res = new ConstraintResult(this, actual, false);
                         invalidMembers.Add(member.Caption);
                     }
                 }

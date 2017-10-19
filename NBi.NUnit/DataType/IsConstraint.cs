@@ -29,7 +29,7 @@ namespace NBi.NUnit.DataType
             this.expected = factory.Instantiate(expected);
         }
 
-        public override bool Matches(object actual)
+        public override ConstraintResult Matches(object actual)
         {
             if (actual is IDataTypeDiscoveryCommand)
                 return Process((IDataTypeDiscoveryCommand)actual);
@@ -40,13 +40,13 @@ namespace NBi.NUnit.DataType
                 result &= expected is ILength && Actual is ILength && ((ILength)expected).Length.HasValue ? ((ILength)Actual).Length.Value == ((ILength)expected).Length.Value : result;
                 result &= expected is IScale && Actual is IScale && ((IScale)expected).Scale.HasValue ? ((IScale)Actual).Scale.Value == ((IScale)expected).Scale.Value : result;
                 result &= expected is IPrecision && Actual is IPrecision && ((IPrecision)expected).Precision.HasValue ? ((IPrecision)Actual).Precision.Value == ((IPrecision)expected).Precision.Value : result;
-                return result;
+                return new ConstraintResult(this, actual, result);
             }
             else
                 throw new ArgumentException();
         }
 
-        protected bool Process(IDataTypeDiscoveryCommand actual)
+        protected ConstraintResult Process(IDataTypeDiscoveryCommand actual)
         {
             Command = actual;
             DataTypeInfo type = Command.Execute();

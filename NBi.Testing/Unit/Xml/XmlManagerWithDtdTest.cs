@@ -65,7 +65,7 @@ namespace NBi.Testing.Unit.Xml
         {
             var manager = new XmlManager();
             var ex = Assert.Throws<ArgumentException>(delegate { manager.Load(filename, false); });
-            Assert.That(ex.Message, Is.StringContaining("DTD is prohibited. To activate it, set the flag allow-dtd-processing to true in the config file associated to this test-suite"));
+            Assert.That(ex.Message, Does.Contain("DTD is prohibited. To activate it, set the flag allow-dtd-processing to true in the config file associated to this test-suite"));
         }
     }
 }

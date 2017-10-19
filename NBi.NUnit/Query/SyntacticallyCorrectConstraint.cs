@@ -2,6 +2,7 @@
 using System.Data;
 using NBi.Core.Query;
 using NUnitCtr = NUnit.Framework.Constraints;
+using NUnit.Framework.Constraints;
 
 namespace NBi.NUnit.Query
 {
@@ -46,12 +47,12 @@ namespace NBi.NUnit.Query
         /// </summary>
         /// <param name="actual">SQL string or SQL Command</param>
         /// <returns>true, if the query defined in parameter is syntatically correct else false</returns>
-        public override bool Matches(object actual)
+        public override ConstraintResult Matches(object actual)
         {
             if (actual is IDbCommand)
                 return doMatch((IDbCommand)actual);
             else
-                return false;               
+                throw new ArgumentException();               
         }
         
         /// <summary>
@@ -59,10 +60,10 @@ namespace NBi.NUnit.Query
         /// </summary>
         /// <param name="actual">SQL string</param>
         /// <returns>true, if the query defined in parameter is syntatically correct else false</returns>
-        protected bool doMatch(IDbCommand actual)
+        protected ConstraintResult doMatch(IDbCommand actual)
         {
             parserResult= GetEngine(actual).Parse();
-            return parserResult.IsSuccesful;
+            return new ConstraintResult(this, parserResult, parserResult.IsSuccesful);
         }
 
         public override void WriteDescriptionTo(NUnitCtr.MessageWriter writer)

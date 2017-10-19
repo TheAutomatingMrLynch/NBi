@@ -40,7 +40,6 @@ namespace NBi.NUnit
             Register(typeof(ExecutionXml), typeof(SupersetOfXml), new ResultSetSupersetOfBuilder());
             Register(typeof(ExecutionXml), typeof(SubsetOfXml), new ResultSetSubsetOfBuilder());
             Register(typeof(ExecutionXml), typeof(MatchPatternXml), new ExecutionMatchPatternBuilder());
-            Register(typeof(ExecutionXml), typeof(EvaluateRowsXml), new ExecutionEvaluateRowsBuilder());
             Register(typeof(ExecutionXml), typeof(SuccessfulXml), new ExecutionNonQuerySuccessfulBuilder());
             Register(typeof(ExecutionXml), typeof(RowCountXml), new ExecutionRowCountBuilder());
             Register(typeof(ExecutionXml), typeof(AllRowsXml), new ExecutionAllRowsBuilder());

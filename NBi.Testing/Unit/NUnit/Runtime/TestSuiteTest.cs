@@ -21,14 +21,14 @@ namespace NBi.Testing.Unit.NUnit.Runtime
 
         #region SetUp & TearDown
         //Called only at instance creation
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetupMethods()
         {
 
         }
 
         //Called only at instance destruction
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDownMethods()
         {
         }
@@ -113,10 +113,10 @@ namespace NBi.Testing.Unit.NUnit.Runtime
 
             //Assertion
             Console.WriteLine(testCase.TestName);
-            Assert.That(testCase.TestName, Is.StringContaining("my name contains a regex").And
-                                            .StringContaining("My Caption").And
-                                            .StringContaining("My Display Folder").And
-                                            .StringContaining("and it's parsed!"));
+            Assert.That(testCase.TestName, Does.Contain("my name contains a regex").And
+                                            .Contain("My Caption").And
+                                            .Contain("My Display Folder").And
+                                            .Contain("and it's parsed!"));
         }
 
         [Test]
@@ -158,7 +158,7 @@ namespace NBi.Testing.Unit.NUnit.Runtime
             catch (AssertionException ex)
             {
                 Console.WriteLine(ex.Message);
-                Assert.That(ex.Message, Is.StringContaining("empty"));
+                Assert.That(ex.Message, Does.Contain("empty"));
             }
             catch (Exception ex)
             {
@@ -167,12 +167,12 @@ namespace NBi.Testing.Unit.NUnit.Runtime
         }
 
         [Test]
-        [Ignore]
+        [Ignore("Ignored before switch to 3.x")]
         public void AssertTestCase_TestCaseError_StackTraceIsFilledWithXml()
         {
             var sut = "not empty string";
             var ctrStub = new Mock<Constraint>();
-            ctrStub.Setup(c => c.Matches(It.IsAny<object>())).Throws(new ExternalDependencyNotFoundException("Filename"));
+            ctrStub.Setup(c => c.ApplyTo(It.IsAny<object>())).Throws(new ExternalDependencyNotFoundException("Filename"));
             var ctr = ctrStub.Object;
 
             var xmlContent = "<test><system></system><assert></assert></test>";
@@ -197,12 +197,12 @@ namespace NBi.Testing.Unit.NUnit.Runtime
         }
 
         [Test]
-        [Ignore]
+        [Ignore("Ignored before switch to 3.x")]
         public void AssertTestCase_TestCaseError_MessageIsAvailable()
         {
             var sut = "not empty string";
             var ctrStub = new Mock<Constraint>();
-            ctrStub.Setup(c => c.Matches(It.IsAny<object>())).Throws(new ExternalDependencyNotFoundException("Filename"));
+            ctrStub.Setup(c => c.ApplyTo(It.IsAny<object>())).Throws(new ExternalDependencyNotFoundException("Filename"));
             var ctr = ctrStub.Object;
 
             var xmlContent = "<test><system></system><assert></assert></test>";
@@ -216,7 +216,7 @@ namespace NBi.Testing.Unit.NUnit.Runtime
             catch (CustomStackTraceErrorException ex)
             {
                 //Console.WriteLine(ex.Message);
-                Assert.That(ex.Message, Is.StringContaining("Filename"));
+                Assert.That(ex.Message, Does.Contain("Filename"));
             }
             catch (Exception ex)
             {

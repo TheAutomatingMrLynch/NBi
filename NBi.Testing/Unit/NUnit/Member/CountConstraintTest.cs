@@ -23,7 +23,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = countConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.True);
+            Assert.That(res.IsSuccess, Is.True);
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = countConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.False);
+            Assert.That(res.IsSuccess, Is.False);
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = countConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.True);
+            Assert.That(res.IsSuccess, Is.True);
         }
 
         [Test]
@@ -74,7 +74,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = countConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.False);
+            Assert.That(res.IsSuccess, Is.False);
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = countConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.True);
+            Assert.That(res.IsSuccess, Is.True);
         }
 
         [Test]
@@ -108,7 +108,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = countConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.False);
+            Assert.That(res.IsSuccess, Is.False);
         }
 
         [Test]
@@ -126,7 +126,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = countConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.True);
+            Assert.That(res.IsSuccess, Is.True);
         }
 
         [Test]
@@ -144,7 +144,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = countConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.False);
+            Assert.That(res.IsSuccess, Is.False);
         }
 
         [Test]
@@ -162,7 +162,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = countConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.False);
+            Assert.That(res.IsSuccess, Is.False);
         }
 
         [Test]
@@ -203,13 +203,13 @@ namespace NBi.Testing.Unit.NUnit.Member
             }
 
             //Test conclusion            
-            Assert.That(assertionText, Is.StringContaining("perspective-name").And
-                                            .StringContaining("dimension-caption").And
-                                            .StringContaining("hierarchy-caption").And
-                                            .StringContaining("member-caption").And
-                                            .StringContaining("children").And
-                                            .StringContaining("exactly").And
-                                            .StringContaining("10"));
+            Assert.That(assertionText, Does.Contain("perspective-name").And
+                                            .Contain("dimension-caption").And
+                                            .Contain("hierarchy-caption").And
+                                            .Contain("member-caption").And
+                                            .Contain("children").And
+                                            .Contain("exactly").And
+                                            .Contain("10"));
 
         }
 
@@ -251,13 +251,13 @@ namespace NBi.Testing.Unit.NUnit.Member
             }
 
             //Test conclusion            
-            Assert.That(assertionText, Is.StringContaining("perspective-name").And
-                                            .StringContaining("dimension-caption").And
-                                            .StringContaining("hierarchy-caption").And
-                                            .StringContaining("member-caption").And
-                                            .StringContaining("children").And
-                                            .StringContaining("more than").And
-                                            .StringContaining("10"));
+            Assert.That(assertionText, Does.Contain("perspective-name").And
+                                            .Contain("dimension-caption").And
+                                            .Contain("hierarchy-caption").And
+                                            .Contain("member-caption").And
+                                            .Contain("children").And
+                                            .Contain("more than").And
+                                            .Contain("10"));
 
         }
 
@@ -299,13 +299,13 @@ namespace NBi.Testing.Unit.NUnit.Member
             }
 
             //Test conclusion            
-            Assert.That(assertionText, Is.StringContaining("perspective-name").And
-                                            .StringContaining("dimension-caption").And
-                                            .StringContaining("hierarchy-caption").And
-                                            .StringContaining("member-caption").And
-                                            .StringContaining("children").And
-                                            .StringContaining("less than").And
-                                            .StringContaining("1"));
+            Assert.That(assertionText, Does.Contain("perspective-name").And
+                                            .Contain("dimension-caption").And
+                                            .Contain("hierarchy-caption").And
+                                            .Contain("member-caption").And
+                                            .Contain("children").And
+                                            .Contain("less than").And
+                                            .Contain("1"));
 
         }
         [Test]
@@ -347,14 +347,14 @@ namespace NBi.Testing.Unit.NUnit.Member
             }
 
             //Test conclusion            
-            Assert.That(assertionText, Is.StringContaining("perspective-name").And
-                                            .StringContaining("dimension-caption").And
-                                            .StringContaining("hierarchy-caption").And
-                                            .StringContaining("member-caption").And
-                                            .StringContaining("children").And
-                                            .StringContaining("between").And
-                                            .StringContaining("8").And
-                                            .StringContaining("12"));
+            Assert.That(assertionText, Does.Contain("perspective-name").And
+                                            .Contain("dimension-caption").And
+                                            .Contain("hierarchy-caption").And
+                                            .Contain("member-caption").And
+                                            .Contain("children").And
+                                            .Contain("between").And
+                                            .Contain("8").And
+                                            .Contain("12"));
 
         }
     }

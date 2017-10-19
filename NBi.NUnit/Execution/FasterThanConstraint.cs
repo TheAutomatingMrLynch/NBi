@@ -31,12 +31,12 @@ namespace NBi.NUnit.Execution
         /// </summary>
         /// <param name="actual">SQL string or SQL Command</param>
         /// <returns>true, if the query defined in parameter is executed in less that expected else false</returns>
-        public override bool Matches(object actual)
+        public override NUnitCtr.ConstraintResult Matches(object actual)
         {
             if (actual is IExecution)
                 return doMatch((IExecution)actual);
             else
-                return false;
+                return new NUnitCtr.ConstraintResult(this, null, NUnitCtr.ConstraintStatus.Error);
         }
 
         /// <summary>
@@ -44,13 +44,10 @@ namespace NBi.NUnit.Execution
         /// </summary>
         /// <param name="actual">SQL string</param>
         /// <returns>true, if the query defined in parameter is executed in less that expected else false</returns>
-        public bool doMatch(IExecution actual)
+        public NUnitCtr.ConstraintResult doMatch(IExecution actual)
         {
             Result = actual.Run();
-            return 
-                (
-                    Result.TimeElapsed.TotalMilliseconds < maxTimeMilliSeconds
-                );
+            return new NUnitCtr.ConstraintResult(this, Result.TimeElapsed.TotalMilliseconds, Result.TimeElapsed.TotalMilliseconds < maxTimeMilliSeconds);
         }
 
         /// <summary>

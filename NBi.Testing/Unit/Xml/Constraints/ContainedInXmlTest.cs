@@ -124,7 +124,7 @@ namespace NBi.Testing.Unit.Xml.Constraints
 
             Debug.WriteLine(content);
 
-            Assert.That(content, Is.StringContaining("<contained-in"));
+            Assert.That(content, Does.Contain("<contained-in"));
         }
     }
 }

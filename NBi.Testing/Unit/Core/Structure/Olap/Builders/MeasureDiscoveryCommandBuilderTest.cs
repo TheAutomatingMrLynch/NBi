@@ -22,8 +22,8 @@ namespace NBi.Testing.Unit.Core.Structure.Olap.Builders
             var builder = new MeasureDiscoveryCommandBuilder();
             builder.Build(filters);
             var commandText = builder.GetCommandText();
-            Assert.That(commandText.Replace(" ","").ToLower(), Is.StringContaining("[cube_name]='cubeName'".ToLower()));
-            Assert.That(commandText.Replace(" ", "").ToLower(), Is.Not.StringContaining("[measuregroup_name]=".ToLower()));
+            Assert.That(commandText.Replace(" ","").ToLower(), Does.Contain("[cube_name]='cubeName'".ToLower()));
+            Assert.That(commandText.Replace(" ", "").ToLower(), Is.Not.Contain("[measuregroup_name]=".ToLower()));
         }
 
         [Test]
@@ -38,8 +38,8 @@ namespace NBi.Testing.Unit.Core.Structure.Olap.Builders
             var builder = new MeasureDiscoveryCommandBuilder();
             builder.Build(filters);
             var commandText = builder.GetCommandText();
-            Assert.That(commandText.Replace(" ", "").ToLower(), Is.StringContaining("[cube_name]='cubeName'".ToLower()));
-            Assert.That(commandText.Replace(" ", "").ToLower(), Is.StringContaining("[measuregroup_name]='measureGroupName'".ToLower()));
+            Assert.That(commandText.Replace(" ", "").ToLower(), Does.Contain("[cube_name]='cubeName'".ToLower()));
+            Assert.That(commandText.Replace(" ", "").ToLower(), Does.Contain("[measuregroup_name]='measureGroupName'".ToLower()));
         }
 
         [Test]
@@ -55,9 +55,9 @@ namespace NBi.Testing.Unit.Core.Structure.Olap.Builders
             var builder = new MeasureDiscoveryCommandBuilder();
             builder.Build(filters);
             var commandText = builder.GetCommandText();
-            Assert.That(commandText.Replace(" ", "").ToLower(), Is.StringContaining("[cube_name]='cubeName'".ToLower()));
-            Assert.That(commandText.Replace(" ", "").ToLower(), Is.StringContaining("[measuregroup_name]='measureGroupName'".ToLower()));
-            Assert.That(commandText.Replace(" ", "").ToLower(), Is.StringContaining("[measure_caption]='measureName'".ToLower()));
+            Assert.That(commandText.Replace(" ", "").ToLower(), Does.Contain("[cube_name]='cubeName'".ToLower()));
+            Assert.That(commandText.Replace(" ", "").ToLower(), Does.Contain("[measuregroup_name]='measureGroupName'".ToLower()));
+            Assert.That(commandText.Replace(" ", "").ToLower(), Does.Contain("[measure_caption]='measureName'".ToLower()));
         }
 
         [Test]
@@ -74,10 +74,10 @@ namespace NBi.Testing.Unit.Core.Structure.Olap.Builders
             var builder = new MeasureDiscoveryCommandBuilder();
             builder.Build(filters);
             var commandText = builder.GetCommandText();
-            Assert.That(commandText.Replace(" ", "").ToLower(), Is.StringContaining("[cube_name]='cubeName'".ToLower()));
-            Assert.That(commandText.Replace(" ", "").ToLower(), Is.StringContaining("[measuregroup_name]='measureGroupName'".ToLower()));
-            Assert.That(commandText.Replace(" ", "").ToLower(), Is.StringContaining("[measure_caption]='measureName'".ToLower()));
-            Assert.That(commandText.Replace(" ", "").ToLower(), Is.Not.StringContaining("displayFolderName".ToLower()));
+            Assert.That(commandText.Replace(" ", "").ToLower(), Does.Contain("[cube_name]='cubeName'".ToLower()));
+            Assert.That(commandText.Replace(" ", "").ToLower(), Does.Contain("[measuregroup_name]='measureGroupName'".ToLower()));
+            Assert.That(commandText.Replace(" ", "").ToLower(), Does.Contain("[measure_caption]='measureName'".ToLower()));
+            Assert.That(commandText.Replace(" ", "").ToLower(), Is.Not.Contain("displayFolderName".ToLower()));
         }
 
         [Test]

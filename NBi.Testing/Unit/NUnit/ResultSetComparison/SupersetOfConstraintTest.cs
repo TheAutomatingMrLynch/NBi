@@ -122,7 +122,7 @@ namespace NBi.Testing.Unit.NUnit.ResultSetComparison
 
             //Test conclusion            
             rsbMock.Verify(engine => engine.Build(rs), Times.Once());
-            Assert.That(res, Is.True);
+            Assert.That(res.IsSuccess, Is.True);
         }
 
         [Test]
@@ -149,7 +149,7 @@ namespace NBi.Testing.Unit.NUnit.ResultSetComparison
 
             //Test conclusion            
             rsbMock.Verify(engine => engine.Build(rsExpect), Times.Once());
-            Assert.That(res, Is.False);
+            Assert.That(res.IsSuccess, Is.False);
         }
     }
 }

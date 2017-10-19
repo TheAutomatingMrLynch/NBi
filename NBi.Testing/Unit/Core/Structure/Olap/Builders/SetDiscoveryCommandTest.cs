@@ -22,7 +22,7 @@ namespace NBi.Testing.Unit.Core.Structure.Olap.Builders
             var commandText = builder.GetCommandText().ToLower();
             var fieldsText = commandText.Substring(0,commandText.IndexOf(" from "));
 
-            Assert.That(fieldsText, Is.StringContaining("display").And.StringContaining("folder"));
+            Assert.That(fieldsText, Does.Contain("display").And.Contain("folder"));
 
         }
         
@@ -40,7 +40,7 @@ namespace NBi.Testing.Unit.Core.Structure.Olap.Builders
             var commandText = builder.GetCommandText().ToLower();
             var filtersText = commandText.Substring(commandText.IndexOf(" from "));
 
-            Assert.That(filtersText, Is.Not.StringContaining("display").And.Not.StringContaining("folder"));
+            Assert.That(filtersText, Is.Not.Contain("display").And.Not.Contain("folder"));
 
         }
 
@@ -57,7 +57,7 @@ namespace NBi.Testing.Unit.Core.Structure.Olap.Builders
             builder.Build(filters);
             var commandText = builder.GetCommandText();
 
-            Assert.That(commandText.Replace(" ", "").ToLower(), Is.Not.StringContaining("andand"));
+            Assert.That(commandText.Replace(" ", "").ToLower(), Is.Not.Contain("andand"));
         }
 
         [Test]

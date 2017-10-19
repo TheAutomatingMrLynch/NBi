@@ -17,14 +17,14 @@ namespace NBi.Testing.Unit.Core.ResultSet
 
         #region SetUp & TearDown
         //Called only at instance creation
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetupMethods()
         {
 
         }
 
         //Called only at instance destruction
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDownMethods()
         {
         }
@@ -333,8 +333,8 @@ namespace NBi.Testing.Unit.Core.ResultSet
             
             //Assertion is generating an exception
             var ex = Assert.Throws<ResultSetComparerException>(delegate { comparer.Compare(reference, actual); });
-            Assert.That(ex.Message, Is.StringContaining("<Key1|1>"));
-            Assert.That(ex.Message, Is.StringContaining("<Key1|2>"));
+            Assert.That(ex.Message, Does.Contain("<Key1|1>"));
+            Assert.That(ex.Message, Does.Contain("<Key1|2>"));
         }
 
         [Test]

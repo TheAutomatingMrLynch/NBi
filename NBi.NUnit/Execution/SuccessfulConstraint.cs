@@ -3,6 +3,7 @@ using System.Data;
 using NBi.Core;
 using NBi.Core.Query;
 using NUnitCtr = NUnit.Framework.Constraints;
+using NUnit.Framework.Constraints;
 
 namespace NBi.NUnit.Execution
 {
@@ -19,18 +20,18 @@ namespace NBi.NUnit.Execution
         }
 
 
-        public override bool Matches(object actual)
+        public override ConstraintResult Matches(object actual)
         {
             if (actual is IExecution)
                 return doMatch((IExecution)actual);
             else
-                return false;               
+                return new ConstraintResult(this, null, ConstraintStatus.Error);               
         }
 
-        protected bool doMatch(IExecution actual)
+        protected ConstraintResult doMatch(IExecution actual)
         {
             Result = actual.Run();
-            return Result.IsSuccess;
+            return new ConstraintResult(this, Result, Result.IsSuccess);
         }
 
         public override void WriteDescriptionTo(NUnitCtr.MessageWriter writer)

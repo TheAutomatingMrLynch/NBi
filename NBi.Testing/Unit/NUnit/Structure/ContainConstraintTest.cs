@@ -69,9 +69,9 @@ namespace NBi.Testing.Unit.NUnit.Structure
             }
 
             //Test conclusion            
-            Assert.That(assertionText, Is.StringContaining("perspective-name").And
-                                            .StringContaining("dimension-caption").And
-                                            .StringContaining("Expected hierarchy"));
+            Assert.That(assertionText, Does.Contain("perspective-name").And
+                                            .Contain("dimension-caption").And
+                                            .Contain("Expected hierarchy"));
         }
 
         [Test]
@@ -106,9 +106,9 @@ namespace NBi.Testing.Unit.NUnit.Structure
             }
 
             //Test conclusion            
-            Assert.That(assertionText, Is.StringContaining("perspective-name").And
-                                            .StringContaining("measure-group-caption").And
-                                            .StringContaining("Expected measure"));
+            Assert.That(assertionText, Does.Contain("perspective-name").And
+                                            .Contain("measure-group-caption").And
+                                            .Contain("Expected measure"));
         }
 
 
@@ -144,11 +144,11 @@ namespace NBi.Testing.Unit.NUnit.Structure
             }
 
             //Test conclusion            
-            Assert.That(assertionText, Is.StringContaining("perspective-name").And
-                                            .StringContaining("dimension-caption").And
-                                            .StringContaining("hierarchies").And
-                                            .StringContaining("Expected hierarchy 1").And
-                                            .StringContaining("Expected hierarchy 2"));
+            Assert.That(assertionText, Does.Contain("perspective-name").And
+                                            .Contain("dimension-caption").And
+                                            .Contain("hierarchies").And
+                                            .Contain("Expected hierarchy 1").And
+                                            .Contain("Expected hierarchy 2"));
         }
 
         [Test]
@@ -179,10 +179,10 @@ namespace NBi.Testing.Unit.NUnit.Structure
             }
 
             //Test conclusion            
-            Assert.That(assertionText, Is.StringContaining("find a perspective named 'Expected perspective'.").And
-                                            .StringContaining("Actual perspective 1").And
-                                            .StringContaining("Actual perspective 2").And
-                                            .Not.StringContaining("contain"));
+            Assert.That(assertionText, Does.Contain("find a perspective named 'Expected perspective'.").And
+                                            .Contain("Actual perspective 1").And
+                                            .Contain("Actual perspective 2").And
+                                            .Not.Contain("contain"));
         }
 
         [Test]
@@ -213,13 +213,13 @@ namespace NBi.Testing.Unit.NUnit.Structure
             }
 
             //Test conclusion            
-            Assert.That(assertionText, Is.StringContaining("find the perspectives named").And
-                                            .StringContaining("Expected perspective 1").And
-                                            .StringContaining("Expected perspective 2").And
-                                            .StringContaining(".").And
-                                            .StringContaining("Actual perspective 1").And
-                                            .StringContaining("Actual perspective 2").And
-                                            .Not.StringContaining("contain"));
+            Assert.That(assertionText, Does.Contain("find the perspectives named").And
+                                            .Contain("Expected perspective 1").And
+                                            .Contain("Expected perspective 2").And
+                                            .Contain(".").And
+                                            .Contain("Actual perspective 1").And
+                                            .Contain("Actual perspective 2").And
+                                            .Not.Contain("contain"));
         }
 
     }

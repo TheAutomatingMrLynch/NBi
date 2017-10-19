@@ -5,6 +5,8 @@ using NUnitFwk = NUnit.Framework;
 using NBi.Core.ResultSet;
 using System.Data;
 using NBi.Core.Calculation;
+using NUnit.Framework.Constraints;
+using NUnit.Framework.Internal;
 
 namespace NBi.NUnit.Query
 {
@@ -14,10 +16,10 @@ namespace NBi.NUnit.Query
             : base(childConstraint, filter)
         { }
 
-        protected override bool doMatch(int actual)
+        protected override ConstraintResult doMatch(int actual)
         {
             this.actual = Convert.ToDecimal(actual) / actualResultSet.Rows.Count;
-            return child.Matches(this.actual);
+            return child.ApplyTo(this.actual);
         }
        
         public override void WriteDescriptionTo(NUnitCtr.MessageWriter writer)
@@ -30,10 +32,10 @@ namespace NBi.NUnit.Query
             writer.WriteActualValue(TransformDecimalToPercentage(child.WriteActualValueTo));
         }
 
-        protected string TransformDecimalToPercentage(Action<NUnitFwk.TextMessageWriter> action)
+        protected string TransformDecimalToPercentage(Action<TextMessageWriter> action)
         {
             var sb = new System.Text.StringBuilder();
-            var localWriter = new NUnitFwk.TextMessageWriter();
+            var localWriter = new TextMessageWriter();
             action(localWriter);
             var childMessage = localWriter.ToString();
             sb.Append(childMessage.Substring(0, childMessage.LastIndexOf(" ") + 1));

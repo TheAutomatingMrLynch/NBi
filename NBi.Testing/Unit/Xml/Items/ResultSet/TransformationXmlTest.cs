@@ -19,14 +19,14 @@ namespace NBi.Testing.Unit.Xml.Items.ResultSet
 
         #region SetUp & TearDown
         //Called only at instance creation
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetupMethods()
         {
 
         }
 
         //Called only at instance destruction
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDownMethods()
         {
         }
@@ -105,7 +105,7 @@ namespace NBi.Testing.Unit.Xml.Items.ResultSet
             var manager = new XmlManager();
             var xml = manager.XmlSerializeFrom<ColumnDefinitionXml>(def);
 
-            Assert.That(xml, Is.StringContaining(">value.Trim().ToUpper();<"));
+            Assert.That(xml, Does.Contain(">value.Trim().ToUpper();<"));
         }
 
         [Test]
@@ -120,8 +120,8 @@ namespace NBi.Testing.Unit.Xml.Items.ResultSet
             var manager = new XmlManager();
             var xml = manager.XmlSerializeFrom<ColumnDefinitionXml>(def);
 
-            Assert.That(xml, Is.StringContaining("format"));
-            Assert.That(xml, Is.StringContaining(">##.000<"));
+            Assert.That(xml, Does.Contain("format"));
+            Assert.That(xml, Does.Contain(">##.000<"));
         }
 
         [Test]
@@ -136,8 +136,8 @@ namespace NBi.Testing.Unit.Xml.Items.ResultSet
             var manager = new XmlManager();
             var xml = manager.XmlSerializeFrom<ColumnDefinitionXml>(def);
 
-            Assert.That(xml, Is.StringContaining("native"));
-            Assert.That(xml, Is.StringContaining(">empty-to-null<"));
+            Assert.That(xml, Does.Contain("native"));
+            Assert.That(xml, Does.Contain(">empty-to-null<"));
         }
 
     }

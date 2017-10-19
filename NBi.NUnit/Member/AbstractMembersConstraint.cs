@@ -5,7 +5,7 @@ using NBi.Core.Analysis.Member;
 using NBi.Core.Analysis.Request;
 using NUnitCtr = NUnit.Framework.Constraints;
 using NBi.Framework;
-
+using NUnit.Framework.Constraints;
 
 namespace NBi.NUnit.Member
 {
@@ -62,7 +62,7 @@ namespace NBi.NUnit.Member
         #endregion
         
         #region Specific NUnit
-        public override bool Matches(object actual)
+        public override NUnitCtr.ConstraintResult Matches(object actual)
         {
             if (!isInitialized)
                 InitializeMatching();
@@ -82,9 +82,9 @@ namespace NBi.NUnit.Member
                 throw new ArgumentException();
         }
 
-        protected virtual bool DoMatch(NUnitCtr.Constraint ctr)
+        protected virtual ConstraintResult DoMatch(NUnitCtr.Constraint ctr)
         {
-            return ctr.Matches(actual);
+            return ctr.ApplyTo(actual);
         }
 
 
@@ -103,7 +103,7 @@ namespace NBi.NUnit.Member
 
         protected abstract NUnitCtr.Constraint BuildInternalConstraint();
 
-        protected bool Process(MembersDiscoveryRequest actual)
+        protected ConstraintResult Process(MembersDiscoveryRequest actual)
         {
             Request = actual;
             var engine = MembersEngine;

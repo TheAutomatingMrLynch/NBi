@@ -63,14 +63,14 @@ namespace NBi.NUnit.Query
             return ctr;
         }
 
-        protected virtual bool DoMatch(NUnitCtr.Constraint ctr, string caption)
+        protected virtual ConstraintResult DoMatch(NUnitCtr.Constraint ctr, string caption)
         {
             IResolveConstraint exp = ctr;
             var multipleConstraint = exp.Resolve();
-            return multipleConstraint.Matches(caption);
+            return multipleConstraint.ApplyTo(caption);
         }
 
-        public override bool Matches(object actual)
+        public override ConstraintResult Matches(object actual)
         {
             if (actual is IDbCommand)
                 return Process((IDbCommand)actual);
@@ -78,13 +78,13 @@ namespace NBi.NUnit.Query
             {
                 this.actual = actual;
 
-                var res = true;
+                var res = new ConstraintResult(this, actual, true);
                 foreach (var result in (FormattedResults)actual)
                 {
                     var ctr = BuildInternalConstraint();
-                    if (!DoMatch(ctr, result))
+                    if (!DoMatch(ctr, result).IsSuccess)
                     {
-                        res = false;
+                        res = new ConstraintResult(this, actual, false);
                         invalidMembers.Add(result);
                     }
                 }
@@ -99,7 +99,7 @@ namespace NBi.NUnit.Query
         /// </summary>
         /// <param name="actual">IDbCommand</param>
         /// <returns></returns>
-        public bool Process(IDbCommand actual)
+        public ConstraintResult Process(IDbCommand actual)
         {
             FormattedResults result = GetEngine(actual).GetFormats();
 

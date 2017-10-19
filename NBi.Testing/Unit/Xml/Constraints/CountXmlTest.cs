@@ -66,9 +66,9 @@ namespace NBi.Testing.Unit.Xml.Constraints
             var manager = new XmlManager();
             var xml = manager.XmlSerializeFrom<CountXml>(count);
 
-            Assert.That(xml, Is.StringContaining("exactly"));
-            Assert.That(xml, Is.Not.StringContaining("more-than"));
-            Assert.That(xml, Is.Not.StringContaining("less-than"));
+            Assert.That(xml, Does.Contain("exactly"));
+            Assert.That(xml, Is.Not.Contain("more-than"));
+            Assert.That(xml, Is.Not.Contain("less-than"));
         }
 
         [Test]
@@ -80,9 +80,9 @@ namespace NBi.Testing.Unit.Xml.Constraints
             var manager = new XmlManager();
             var xml = manager.XmlSerializeFrom<CountXml>(count);
 
-            Assert.That(xml, Is.Not.StringContaining("exactly"));
-            Assert.That(xml, Is.Not.StringContaining("more-than"));
-            Assert.That(xml, Is.StringContaining("less-than"));
+            Assert.That(xml, Is.Not.Contain("exactly"));
+            Assert.That(xml, Is.Not.Contain("more-than"));
+            Assert.That(xml, Does.Contain("less-than"));
         }
     }
 }

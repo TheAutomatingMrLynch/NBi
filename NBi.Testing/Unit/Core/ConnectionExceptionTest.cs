@@ -12,14 +12,14 @@ namespace NBi.Testing.Unit.Core
         
         #region SetUp & TearDown
         //Called only at instance creation
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetupMethods()
         {
 
         }
 
         //Called only at instance destruction
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDownMethods()
         {
         }
@@ -57,7 +57,7 @@ namespace NBi.Testing.Unit.Core
                 {
                     //Test can continue
                     Console.Out.WriteLine(nbiEx.Message);
-                    Assert.That(nbiEx.Message, Is.StringContaining(connectionString));
+                    Assert.That(nbiEx.Message, Does.Contain(connectionString));
                 }
             }
         }

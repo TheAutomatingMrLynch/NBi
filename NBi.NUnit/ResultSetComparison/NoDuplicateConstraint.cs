@@ -11,6 +11,7 @@ using NBi.Framework;
 using NBi.Core.Xml;
 using NBi.Core.Transformation;
 using NBi.Core.ResultSet.Analyzer;
+using NUnit.Framework.Constraints;
 
 namespace NBi.NUnit.Query
 {
@@ -35,7 +36,7 @@ namespace NBi.NUnit.Query
         /// </summary>
         /// <param name="actual">An IDbCommand or a result-set or the path to a file containing a result-set</param>
         /// <returns>true, if the result-set has unique rows</returns>
-        public override bool Matches(object actual)
+        public override NUnitCtr.ConstraintResult Matches(object actual)
         {
             this.actual = actual;
             actualResultSet = new ResultSetBuilder().Build(actual);
@@ -47,7 +48,7 @@ namespace NBi.NUnit.Query
                 failure.BuildDuplication(actualResultSet.Rows.Cast<DataRow>(), result);
             }
 
-            return result.HasNoDuplicate;
+            return new ConstraintResult(this, actual, result.HasNoDuplicate);
         }
 
         #region "Error report"

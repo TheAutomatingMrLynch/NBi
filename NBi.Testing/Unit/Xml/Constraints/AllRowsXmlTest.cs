@@ -24,14 +24,14 @@ namespace NBi.Testing.Unit.Xml.Constraints
 
         #region SetUp & TearDown
         //Called only at instance creation
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetupMethods()
         {
 
         }
 
         //Called only at instance destruction
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDownMethods()
         {
         }
@@ -304,8 +304,8 @@ namespace NBi.Testing.Unit.Xml.Constraints
 
             Debug.WriteLine(content);
 
-            Assert.That(content, Is.StringContaining("alias"));
-            Assert.That(content, Is.Not.StringContaining("variable"));
+            Assert.That(content, Does.Contain("alias"));
+            Assert.That(content, Is.Not.Contain("variable"));
         }
 
     }

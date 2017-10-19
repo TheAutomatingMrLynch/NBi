@@ -142,7 +142,7 @@ namespace NBi.Testing.Unit.Framework.FailureMessage
             msg.Build(list, null, null);
             var value = msg.RenderExpected();
 
-            Assert.That(value, Is.Not.StringContaining(" others not displayed."));
+            Assert.That(value, Is.Not.Contain(" others not displayed."));
         }
 
         [Test]
@@ -163,7 +163,7 @@ namespace NBi.Testing.Unit.Framework.FailureMessage
             msg.Build(null, null, compared);
             var value = msg.RenderCompared();
 
-            Assert.That(value, Is.Not.StringContaining(unexpectedText));
+            Assert.That(value, Is.Not.Contain(unexpectedText));
         }
 
         [Test]
@@ -183,7 +183,7 @@ namespace NBi.Testing.Unit.Framework.FailureMessage
             msg.Build(null, null, compared);
             var value = msg.RenderCompared();
 
-            Assert.That(value, Is.StringContaining(expectedText));
+            Assert.That(value, Does.Contain(expectedText));
         }
 
     }

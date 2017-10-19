@@ -19,7 +19,7 @@ namespace NBi.Testing.Unit.Xml.Items
 
             var connString = item.GetConnectionString();
 
-            Assert.That(connString, Is.Not.StringContaining("role"));
+            Assert.That(connString, Is.Not.Contain("role"));
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace NBi.Testing.Unit.Xml.Items
 
             var connString = item.GetConnectionString();
 
-            Assert.That(connString, Is.StringMatching(".*Roles.*=.*\"PowerUser\".*"));
+            Assert.That(connString, Does.Match(".*Roles.*=.*\"PowerUser\".*"));
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace NBi.Testing.Unit.Xml.Items
 
             var connString = item.GetConnectionString();
 
-            Assert.That(connString, Is.StringMatching(".*Roles.*=.*\"PowerUser;LimitedAccess\".*"));
+            Assert.That(connString, Does.Match(".*Roles.*=.*\"PowerUser;LimitedAccess\".*"));
         }
 
         [Test]
@@ -56,8 +56,8 @@ namespace NBi.Testing.Unit.Xml.Items
 
             var connString = item.GetConnectionString();
 
-            Assert.That(connString, Is.StringMatching(".*Roles.*=.*\"PowerUser\".*"));
-            Assert.That(connString, Is.Not.StringMatching("Admin"));
+            Assert.That(connString, Does.Match(".*Roles.*=.*\"PowerUser\".*"));
+            Assert.That(connString, Does.Not.Match("Admin"));
         }
 
         [Test]
@@ -70,8 +70,8 @@ namespace NBi.Testing.Unit.Xml.Items
 
             var connString = item.GetConnectionString();
 
-            Assert.That(connString, Is.StringMatching(".*Roles.*=.*\"PowerUser;LimitedAccess\".*"));
-            Assert.That(connString, Is.Not.StringMatching("Admin"));
+            Assert.That(connString, Does.Match(".*Roles.*=.*\"PowerUser;LimitedAccess\".*"));
+            Assert.That(connString, Does.Not.Match("Admin"));
         }
 
         [Test]
@@ -84,9 +84,9 @@ namespace NBi.Testing.Unit.Xml.Items
 
             var connString = item.GetConnectionString();
 
-            Assert.That(connString, Is.StringMatching(".*Roles.*=.*\"Power User;Limited Access\".*"));
-            Assert.That(connString, Is.Not.StringMatching("Admin"));
-            Assert.That(connString, Is.Not.StringMatching("Maximum"));
+            Assert.That(connString, Does.Match(".*Roles.*=.*\"Power User;Limited Access\".*"));
+            Assert.That(connString, Does.Not.Match("Admin"));
+            Assert.That(connString, Does.Not.Match("Maximum"));
         }
     }
 }

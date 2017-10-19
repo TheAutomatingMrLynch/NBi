@@ -71,11 +71,11 @@ namespace NBi.NUnit.Member
             return this;
         }
 
-        protected override bool DoMatch(NUnitCtr.Constraint ctr)
+        protected override ConstraintResult DoMatch(NUnitCtr.Constraint ctr)
         {
             IResolveConstraint exp = ctr;
             var multipleConstraint = exp.Resolve();
-            return multipleConstraint.Matches(((MemberResult)actual).Count);
+            return multipleConstraint.ApplyTo(((MemberResult)actual).Count);
         }
 
         /// <summary>

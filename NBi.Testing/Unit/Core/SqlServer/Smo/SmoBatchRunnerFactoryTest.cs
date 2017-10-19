@@ -26,7 +26,7 @@ namespace NBi.Testing.Unit.Core.SqlServer.Smo
             IDbConnection conn = null;
             var factory = new SmoBatchRunnerFactory();
             var ex = Assert.Throws<ArgumentNullException>(() => factory.Get(cmd, conn));
-            Assert.That(ex.ParamName, Is.StringContaining("connection"));
+            Assert.That(ex.ParamName, Does.Contain("connection"));
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace NBi.Testing.Unit.Core.SqlServer.Smo
             conn.ConnectionString = string.Empty;
             var factory = new SmoBatchRunnerFactory();
             var ex = Assert.Throws<ArgumentNullException>(() => factory.Get(cmd, conn));
-            Assert.That(ex.Message, Is.StringContaining("No connection-string defined for the sql-run"));
+            Assert.That(ex.Message, Does.Contain("No connection-string defined for the sql-run"));
         }
 
         [Test]
@@ -54,8 +54,8 @@ namespace NBi.Testing.Unit.Core.SqlServer.Smo
             conn.ConnectionString = ConnectionStringReader.GetOleDbSql();
             var factory = new SmoBatchRunnerFactory();
             var ex = Assert.Throws<ArgumentException>(() => factory.Get(cmd, conn));
-            Assert.That(ex.Message, Is.StringContaining("SqlConnection"));
-            Assert.That(ex.Message, Is.StringContaining("OleDbConnection"));
+            Assert.That(ex.Message, Does.Contain("SqlConnection"));
+            Assert.That(ex.Message, Does.Contain("OleDbConnection"));
         }
 
         [Test]

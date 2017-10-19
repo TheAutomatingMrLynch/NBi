@@ -194,9 +194,9 @@ namespace NBi.Testing.Unit.Xml
 
             Debug.WriteLine(content);
 
-            Assert.That(content, Is.StringContaining("My Caption"));
-            Assert.That(content, Is.Not.StringContaining("efault"));
-            Assert.That(content, Is.Not.StringContaining("eference"));
+            Assert.That(content, Does.Contain("My Caption"));
+            Assert.That(content, Is.Not.Contain("efault"));
+            Assert.That(content, Is.Not.Contain("eference"));
         }
 
     }

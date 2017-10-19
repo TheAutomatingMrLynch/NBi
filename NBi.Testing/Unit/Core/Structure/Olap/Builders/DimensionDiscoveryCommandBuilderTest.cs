@@ -22,8 +22,8 @@ namespace NBi.Testing.Unit.Core.Structure.Olap.Builders
             var builder = new DimensionDiscoveryCommandBuilder();
             builder.Build(filters);
             var commandText = builder.GetCommandText();
-            Assert.That(commandText.Replace(" ","").ToLower(), Is.StringContaining("[cube_name]='cubeName'".ToLower()));
-            Assert.That(commandText.Replace(" ", "").ToLower(), Is.Not.StringContaining("[dimension_caption]=".ToLower()));
+            Assert.That(commandText.Replace(" ","").ToLower(), Does.Contain("[cube_name]='cubeName'".ToLower()));
+            Assert.That(commandText.Replace(" ", "").ToLower(), Is.Not.Contain("[dimension_caption]=".ToLower()));
         }
 
         [Test]
@@ -38,8 +38,8 @@ namespace NBi.Testing.Unit.Core.Structure.Olap.Builders
             var builder = new DimensionDiscoveryCommandBuilder();
             builder.Build(filters);
             var commandText = builder.GetCommandText();
-            Assert.That(commandText.Replace(" ", "").ToLower(), Is.StringContaining("[cube_name]='cubeName'".ToLower()));
-            Assert.That(commandText.Replace(" ", "").ToLower(), Is.StringContaining("[dimension_caption]='dimensionName'".ToLower()));
+            Assert.That(commandText.Replace(" ", "").ToLower(), Does.Contain("[cube_name]='cubeName'".ToLower()));
+            Assert.That(commandText.Replace(" ", "").ToLower(), Does.Contain("[dimension_caption]='dimensionName'".ToLower()));
         }
     }
 }

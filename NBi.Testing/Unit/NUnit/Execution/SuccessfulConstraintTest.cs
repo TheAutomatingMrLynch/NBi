@@ -36,7 +36,7 @@ namespace NBi.Testing.Unit.NUnit.Execution
 
             var successfulConstraint = new SuccessfulConstraint();
 
-            Assert.That(successfulConstraint.Matches(engine), Is.True);
+            Assert.That(successfulConstraint.Matches(engine).IsSuccess, Is.True);
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace NBi.Testing.Unit.NUnit.Execution
 
             var successfulConstraint = new SuccessfulConstraint();
 
-            Assert.That(successfulConstraint.Matches(engine), Is.False);
+            Assert.That(successfulConstraint.Matches(engine).IsSuccess, Is.False);
         }
     }
 }

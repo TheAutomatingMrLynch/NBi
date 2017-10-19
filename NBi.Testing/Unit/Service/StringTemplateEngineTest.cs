@@ -66,10 +66,10 @@ namespace NBi.Testing.Unit.Service
 
             //Test the content serialized
             var content = test.Content;
-            Assert.That(content, Is.StringContaining("rule=\"numerical\""));
-            Assert.That(content, Is.Not.StringContaining("descending=\"false\""));
-            Assert.That(content, Is.Not.StringContaining("<rule-definition"));
-            Assert.That(content, Is.Not.StringContaining("<exclude"));
+            Assert.That(content, Does.Contain("rule=\"numerical\""));
+            Assert.That(content, Is.Not.Contain("descending=\"false\""));
+            Assert.That(content, Is.Not.Contain("<rule-definition"));
+            Assert.That(content, Is.Not.Contain("<exclude"));
             
         }
 
@@ -87,9 +87,9 @@ namespace NBi.Testing.Unit.Service
 
             //Test the content serialized
             var content = test.Content;
-            Assert.That(content, Is.Not.StringContaining("<setup"));
-            Assert.That(content, Is.Not.StringContaining("<condition"));
-            Assert.That(content, Is.Not.StringContaining("<cleanup"));
+            Assert.That(content, Is.Not.Contain("<setup"));
+            Assert.That(content, Is.Not.Contain("<condition"));
+            Assert.That(content, Is.Not.Contain("<cleanup"));
         }
 
         [Test]
@@ -115,10 +115,10 @@ namespace NBi.Testing.Unit.Service
 
             //Test the content serialized
             var content = test.Content;
-            Assert.That(content, Is.StringContaining("rule=\"specific\""));
-            Assert.That(content, Is.StringContaining("descending=\"true\""));
-            Assert.That(content, Is.StringContaining("<rule-definition"));
-            Assert.That(content, Is.StringContaining("<exclude"));
+            Assert.That(content, Does.Contain("rule=\"specific\""));
+            Assert.That(content, Does.Contain("descending=\"true\""));
+            Assert.That(content, Does.Contain("<rule-definition"));
+            Assert.That(content, Does.Contain("<exclude"));
         }
 
         [Test]

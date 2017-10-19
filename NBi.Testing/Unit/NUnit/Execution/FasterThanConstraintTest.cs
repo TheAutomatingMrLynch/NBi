@@ -37,7 +37,7 @@ namespace NBi.Testing.Unit.NUnit.Execution
             var fasterThanConstraint = new FasterThanConstraint();
             fasterThanConstraint = fasterThanConstraint.MaxTimeMilliSeconds(5000);
 
-            Assert.That(fasterThanConstraint.Matches(engine), Is.True);
+            Assert.That(fasterThanConstraint.Matches(engine).IsSuccess, Is.True);
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace NBi.Testing.Unit.NUnit.Execution
             var fasterThanConstraint = new FasterThanConstraint();
             fasterThanConstraint = fasterThanConstraint.MaxTimeMilliSeconds(5000);
 
-            Assert.That(fasterThanConstraint.Matches(engine), Is.False);
+            Assert.That(fasterThanConstraint.Matches(engine).IsSuccess, Is.False);
         }
     }
 }

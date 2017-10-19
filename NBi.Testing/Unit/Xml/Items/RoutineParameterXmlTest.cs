@@ -36,12 +36,12 @@ namespace NBi.Testing.Unit.Xml.Items
 
             Debug.WriteLine(content);
 
-            Assert.That(content, Is.StringContaining("caption=\"My Caption\""));
-            Assert.That(content, Is.StringContaining("perspective=\"My Perspective\""));
-            Assert.That(content, Is.StringContaining("routine=\"My Routine\""));
-            Assert.That(content, Is.Not.StringContaining("direction"));
-            Assert.That(content, Is.Not.StringContaining("result"));
-            Assert.That(content, Is.StringContaining("<parameter"));
+            Assert.That(content, Does.Contain("caption=\"My Caption\""));
+            Assert.That(content, Does.Contain("perspective=\"My Perspective\""));
+            Assert.That(content, Does.Contain("routine=\"My Routine\""));
+            Assert.That(content, Is.Not.Contain("direction"));
+            Assert.That(content, Is.Not.Contain("result"));
+            Assert.That(content, Does.Contain("<parameter"));
         }
         [Test]
         public void Serialize_ParameterWithOptionalXml_Serialize()
@@ -65,8 +65,8 @@ namespace NBi.Testing.Unit.Xml.Items
 
             Debug.WriteLine(content);
 
-            Assert.That(content, Is.StringContaining("result=\"yes\""));
-            Assert.That(content, Is.StringContaining("direction=\"in\""));
+            Assert.That(content, Does.Contain("result=\"yes\""));
+            Assert.That(content, Does.Contain("direction=\"in\""));
         }
     }
 }

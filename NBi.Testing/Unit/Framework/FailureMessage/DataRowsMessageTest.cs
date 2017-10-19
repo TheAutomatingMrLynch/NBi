@@ -238,7 +238,7 @@ namespace NBi.Testing.Unit.Framework.FailureMessage
             msg.BuildComparaison(dataTable.Rows.Cast<DataRow>(), null, null);
             var value = msg.RenderExpected();
 
-            Assert.That(value, Is.Not.StringContaining("rows have been skipped for display purpose."));
+            Assert.That(value, Is.Not.Contain("rows have been skipped for display purpose."));
         }
 
         [Test]
@@ -267,7 +267,7 @@ namespace NBi.Testing.Unit.Framework.FailureMessage
             msg.BuildComparaison(null, null, compared);
             var value = msg.RenderCompared();
 
-            Assert.That(value, Is.Not.StringContaining(unexpectedText));
+            Assert.That(value, Is.Not.Contain(unexpectedText));
         }
 
         [Test]
@@ -296,7 +296,7 @@ namespace NBi.Testing.Unit.Framework.FailureMessage
             msg.BuildComparaison(null, null, compared);
             var value = msg.RenderCompared();
 
-            Assert.That(value, Is.StringContaining(expectedText));
+            Assert.That(value, Does.Contain(expectedText));
         }
     }
 }

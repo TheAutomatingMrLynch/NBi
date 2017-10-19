@@ -86,7 +86,7 @@ namespace NBi.Testing.Unit.NUnit.Query
             var res = fasterThanConstraint.Matches(cmd);
 
             //Test conclusion            
-            Assert.That(res, Is.False);
+            Assert.That(res.IsSuccess, Is.False);
         }
 
         [Test]
@@ -106,7 +106,7 @@ namespace NBi.Testing.Unit.NUnit.Query
             var res = fasterThanConstraint.Matches(cmd);
 
             //Test conclusion            
-            Assert.That(res, Is.True);
+            Assert.That(res.IsSuccess, Is.True);
         }
 
     }

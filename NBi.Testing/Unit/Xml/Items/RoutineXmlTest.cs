@@ -34,9 +34,9 @@ namespace NBi.Testing.Unit.Xml.Items
 
             Debug.WriteLine(content);
 
-            Assert.That(content, Is.StringContaining("caption=\"My Caption\""));
-            Assert.That(content, Is.StringContaining("perspective=\"My Perspective\""));
-            Assert.That(content, Is.StringContaining("<routine"));
+            Assert.That(content, Does.Contain("caption=\"My Caption\""));
+            Assert.That(content, Does.Contain("perspective=\"My Perspective\""));
+            Assert.That(content, Does.Contain("<routine"));
         }
     }
 }

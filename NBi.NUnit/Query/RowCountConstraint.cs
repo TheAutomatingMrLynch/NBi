@@ -6,6 +6,7 @@ using NBi.Core.ResultSet;
 using NBi.Core.Calculation;
 using NBi.Framework.FailureMessage;
 using NUnitCtr = NUnit.Framework.Constraints;
+using NUnit.Framework.Constraints;
 
 namespace NBi.NUnit.Query
 {
@@ -74,7 +75,7 @@ namespace NBi.NUnit.Query
         /// </summary>
         /// <param name="actual">An OleDbCommand, SqlCommand or AdomdCommand</param>
         /// <returns>true, if the row-count of query execution validates the child constraint</returns>
-        public override bool Matches(object actual)
+        public override NUnitCtr.ConstraintResult Matches(object actual)
         {
             if (actual is IDbCommand)
                 return Process((IDbCommand)actual);
@@ -86,13 +87,13 @@ namespace NBi.NUnit.Query
             else if (actual is int)
                 return doMatch(((int)actual));
             else
-                return false;
+                return new ConstraintResult(this, null, ConstraintStatus.Error);
         }
 
-        protected virtual bool doMatch(int actual)
+        protected virtual ConstraintResult doMatch(int actual)
         {
             this.actual = actual;
-            return child.Matches(actual);
+            return child.ApplyTo(actual);
         }
        
         public override void WriteDescriptionTo(NUnitCtr.MessageWriter writer)
@@ -119,7 +120,7 @@ namespace NBi.NUnit.Query
         /// </summary>
         /// <param name="actual">IDbCommand</param>
         /// <returns></returns>
-        public bool Process(IDbCommand actual)
+        public ConstraintResult Process(IDbCommand actual)
         {
             var rsActual = GetResultSet(actual);
             return this.Matches(rsActual);

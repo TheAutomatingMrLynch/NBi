@@ -58,10 +58,10 @@ namespace NBi.Testing.Unit.Xml.Items
 
             Debug.WriteLine(content);
 
-            Assert.That(content, Is.StringContaining("My Caption"));
-            Assert.That(content, Is.Not.StringContaining("efault"));
-            Assert.That(content, Is.Not.StringContaining("eference"));
-            Assert.That(content, Is.Not.StringContaining("owner"));
+            Assert.That(content, Does.Contain("My Caption"));
+            Assert.That(content, Is.Not.Contain("efault"));
+            Assert.That(content, Is.Not.Contain("eference"));
+            Assert.That(content, Is.Not.Contain("owner"));
         }
 
         [Test]

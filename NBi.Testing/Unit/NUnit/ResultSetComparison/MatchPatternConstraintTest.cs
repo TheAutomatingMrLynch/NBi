@@ -4,12 +4,13 @@ using NBi.Core.Analysis.Request;
 using NBi.Core.Query;
 using NBi.NUnit.Query;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace NBi.Testing.Unit.NUnit.ResultSetComparison
 {
     public class MatchPatternConstraintTest
     {
-        private class MessageWriter : global::NUnit.Framework.Constraints.MessageWriter
+        private class MessageWriter : TextMessageWriter
         {
 
             public override void DisplayDifferences(object expected, object actual, global::NUnit.Framework.Constraints.Tolerance tolerance)
@@ -21,12 +22,7 @@ namespace NBi.Testing.Unit.NUnit.ResultSetComparison
             {
                 throw new System.NotImplementedException();
             }
-
-            public override void DisplayDifferences(global::NUnit.Framework.Constraints.Constraint constraint)
-            {
-                throw new System.NotImplementedException();
-            }
-
+            
             public override void DisplayStringDifferences(string expected, string actual, int mismatch, bool ignoreCase, bool clipping)
             {
                 throw new System.NotImplementedException();
@@ -48,33 +44,13 @@ namespace NBi.Testing.Unit.NUnit.ResultSetComparison
             {
                 Actual = actual;
             }
-
-            public override void WriteCollectionElements(System.Collections.IEnumerable collection, int start, int max)
-            {
-                throw new System.NotImplementedException();
-            }
-
-            public override void WriteConnector(string connector)
-            {
-                throw new System.NotImplementedException();
-            }
-
-            public override void WriteExpectedValue(object expected)
-            {
-                throw new System.NotImplementedException();
-            }
-
+            
             public override void WriteMessageLine(int level, string message, params object[] args)
             {
                 Message += message + "\r\n";
             }
-
-            public override void WriteModifier(string modifier)
-            {
-                throw new System.NotImplementedException();
-            }
-
-            public override void WritePredicate(string predicate)
+            
+            public virtual void WritePredicate(string predicate)
             {
                 Predicate += predicate;
             }
@@ -105,7 +81,7 @@ namespace NBi.Testing.Unit.NUnit.ResultSetComparison
             var res = matchPatternConstraint.Matches(cells);
 
             //Test conclusion            
-            Assert.That(res, Is.True);
+            Assert.That(res.IsSuccess, Is.True);
         }
 
         [Test]
@@ -123,7 +99,7 @@ namespace NBi.Testing.Unit.NUnit.ResultSetComparison
             var res = matchPatternConstraint.Matches(cells);
 
             //Test conclusion            
-            Assert.That(res, Is.False);
+            Assert.That(res.IsSuccess, Is.False);
         }
 
         [Test]
@@ -144,8 +120,8 @@ namespace NBi.Testing.Unit.NUnit.ResultSetComparison
             matchPatternConstraint.WriteDescriptionTo(msg);
 
             //Test conclusion    
-            Assert.That(msg.Predicate, Is.StringContaining("cell")
-                .And.StringContaining("regex"));
+            Assert.That(msg.Predicate, Does.Contain("cell")
+                .And.Contain("regex"));
         }
 
         [Test]
@@ -166,8 +142,8 @@ namespace NBi.Testing.Unit.NUnit.ResultSetComparison
             matchPatternConstraint.WriteActualValueTo(msg);
 
             //Test conclusion    
-            Assert.That(msg.Message, Is.StringContaining("$125")
-                .And.StringContaining("doesn't validate this pattern"));
+            Assert.That(msg.Message, Does.Contain("$125")
+                .And.Contain("doesn't validate this pattern"));
         }
 
     }

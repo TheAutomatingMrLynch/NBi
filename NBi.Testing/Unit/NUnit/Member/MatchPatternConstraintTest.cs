@@ -23,7 +23,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = matchPatternConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.True);
+            Assert.That(res.IsSuccess, Is.True);
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = matchPatternConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.False);
+            Assert.That(res.IsSuccess, Is.False);
         }
 
         [Test]
@@ -84,16 +84,16 @@ namespace NBi.Testing.Unit.NUnit.Member
             }
 
             //Test conclusion            
-            Assert.That(assertionText, Is.StringContaining("perspective-name").And
-                                            .StringContaining("dimension-caption").And
-                                            .StringContaining("hierarchy-caption").And
-                                            .StringContaining("member-caption").And
-                                            .StringContaining("children").And
-                                            .StringContaining("regex pattern").And
-                                            .StringContaining(@"^[2-9]\d{2}-\d{3}-\d{4}$").And
-                                            .StringContaining(@"But was:    2 elements").And
-                                            .StringContaining(@"000-000-0000").And
-                                            .Not.StringContaining(@"444-222-3333"));
+            Assert.That(assertionText, Does.Contain("perspective-name").And
+                                            .Contain("dimension-caption").And
+                                            .Contain("hierarchy-caption").And
+                                            .Contain("member-caption").And
+                                            .Contain("children").And
+                                            .Contain("regex pattern").And
+                                            .Contain(@"^[2-9]\d{2}-\d{3}-\d{4}$").And
+                                            .Contain(@"But was:    2 elements").And
+                                            .Contain(@"000-000-0000").And
+                                            .Not.Contain(@"444-222-3333"));
 
 
         }

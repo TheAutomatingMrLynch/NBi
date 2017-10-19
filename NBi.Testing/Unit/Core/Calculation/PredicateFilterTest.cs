@@ -64,7 +64,7 @@ namespace NBi.Testing.Unit.Core.Calculation
             var result = filter.Apply(rs);
 
             Assert.That(result.Rows, Has.Count.EqualTo(2));
-            Assert.That(filter.Describe(), Is.StringContaining("null").And.StringContaining("or empty"));
+            Assert.That(filter.Describe(), Does.Contain("null").And.Contain("or empty"));
         }
 
         [Test]

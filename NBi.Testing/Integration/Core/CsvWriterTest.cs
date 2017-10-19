@@ -47,7 +47,7 @@ namespace NBi.Testing.Integration.Core
                 {
                     var text = streamReader.ReadToEnd();
                     var firstCell = text.Split(new string[] { Csv.RecordSeparator }, StringSplitOptions.RemoveEmptyEntries)[0];
-                    Assert.That(firstCell, Is.StringContaining("€"));
+                    Assert.That(firstCell, Does.Contain("€"));
                 }
             }
         }

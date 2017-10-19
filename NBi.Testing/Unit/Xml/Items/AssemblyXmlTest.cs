@@ -17,14 +17,14 @@ namespace NBi.Testing.Unit.Xml.Items
 
         #region SetUp & TearDown
         //Called only at instance creation
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetupMethods()
         {
 
         }
 
         //Called only at instance destruction
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDownMethods()
         {
         }
@@ -171,8 +171,8 @@ namespace NBi.Testing.Unit.Xml.Items
             Assert.That(assembly.ConnectionString, Is.EqualTo("data source=foo;initial catalog=bar"));
             Assert.That(assembly.Roles, Is.EqualTo("admin"));
             Assert.That(assembly.Timeout, Is.EqualTo(10));
-            Assert.That(assembly.GetConnectionString(), Is.StringContaining("data source=foo;initial catalog=bar"));
-            Assert.That(assembly.GetConnectionString(), Is.StringContaining("Roles=\"admin\""));
+            Assert.That(assembly.GetConnectionString(), Does.Contain("data source=foo;initial catalog=bar"));
+            Assert.That(assembly.GetConnectionString(), Does.Contain("Roles=\"admin\""));
         }
 
 

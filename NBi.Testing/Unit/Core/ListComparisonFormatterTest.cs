@@ -20,10 +20,10 @@ namespace NBi.Testing.Unit.Core
             var formatter = new ListComparisonFormatter();
             var display = formatter.Format(res).ToString();
 
-            Assert.That(display, Is.StringContaining("Missing items"));
-            Assert.That(display, Is.StringContaining("<a>"));
-            Assert.That(display, Is.StringContaining("<b>"));
-            Assert.That(display, Is.StringContaining("<c>"));
+            Assert.That(display, Does.Contain("Missing items"));
+            Assert.That(display, Does.Contain("<a>"));
+            Assert.That(display, Does.Contain("<b>"));
+            Assert.That(display, Does.Contain("<c>"));
 
         }
 
@@ -38,7 +38,7 @@ namespace NBi.Testing.Unit.Core
             var formatter = new ListComparisonFormatter();
             var display = formatter.Format(res).ToString();
 
-            Assert.That(display, Is.StringContaining("No unexpected"));
+            Assert.That(display, Does.Contain("No unexpected"));
 
         }
 
@@ -54,13 +54,13 @@ namespace NBi.Testing.Unit.Core
             var formatter = new ListComparisonFormatter();
             var display = formatter.Format(res).ToString();
 
-            Assert.That(display, Is.Not.StringContaining("Missing items"));
-            Assert.That(display, Is.StringContaining("Missing item"));
-            Assert.That(display, Is.StringContaining("Unexpected items"));
-            Assert.That(display, Is.StringContaining("<x>"));
-            Assert.That(display, Is.StringContaining("<a>"));
-            Assert.That(display, Is.StringContaining("<b>"));
-            Assert.That(display, Is.StringContaining("<c>"));
+            Assert.That(display, Is.Not.Contain("Missing items"));
+            Assert.That(display, Does.Contain("Missing item"));
+            Assert.That(display, Does.Contain("Unexpected items"));
+            Assert.That(display, Does.Contain("<x>"));
+            Assert.That(display, Does.Contain("<a>"));
+            Assert.That(display, Does.Contain("<b>"));
+            Assert.That(display, Does.Contain("<c>"));
 
         }
 
@@ -75,8 +75,8 @@ namespace NBi.Testing.Unit.Core
             var formatter = new ListComparisonFormatter();
             var display = formatter.Format(res).ToString();
 
-            Assert.That(display, Is.StringContaining("No missing item"));
-            Assert.That(display, Is.StringContaining("No unexpected item"));
+            Assert.That(display, Does.Contain("No missing item"));
+            Assert.That(display, Does.Contain("No unexpected item"));
 
         }
 

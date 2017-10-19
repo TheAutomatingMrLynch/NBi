@@ -106,15 +106,15 @@ namespace NBi.NUnit.Member
 
 		#endregion
 
-		protected override bool DoMatch(NUnitCtr.Constraint ctr)
+		protected override ConstraintResult DoMatch(NUnitCtr.Constraint ctr)
 		{
 				if (specific == null)
-					return ctr.Matches(actual);
+					return ctr.ApplyTo(actual);
 				else
 					return SpecificMatches(actual);
 		}
 
-		protected bool SpecificMatches(object actual)
+		protected ConstraintResult SpecificMatches(object actual)
 		{          
 			int index=0;
 			
@@ -127,14 +127,14 @@ namespace NBi.NUnit.Member
 				if (i > -1) //found
 				{
 					if (i < index)
-						return false;
+						return new ConstraintResult(this, actual, false);
 					else
 						index = i;
 				}
 			}
 
-			return true;
-		}
+			return new ConstraintResult(this, actual, true);
+        }
 
         protected override void PreInitializeMatching()
         {

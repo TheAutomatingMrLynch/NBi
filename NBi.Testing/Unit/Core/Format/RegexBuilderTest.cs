@@ -14,14 +14,14 @@ namespace NBi.Testing.Unit.Core.Format
         
         #region SetUp & TearDown
         //Called only at instance creation
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetupMethods()
         {
 
         }
 
         //Called only at instance destruction
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDownMethods()
         {
         }
@@ -53,7 +53,7 @@ namespace NBi.Testing.Unit.Core.Format
                 );
 
             Assert.That(result, Is.EqualTo(@"^?[0-9]{1,3}(?:\,?[0-9]{3})*\.[0-9]{2}$"));
-            Assert.That("1,125,125.21", Is.StringMatching(result));
+            Assert.That("1,125,125.21", Does.Match(result));
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace NBi.Testing.Unit.Core.Format
                 );
 
             Assert.That(result, Is.EqualTo(@"^?[0-9]*\,[0-9]{3}$"));
-            Assert.That("1125125,215", Is.StringMatching(result));
+            Assert.That("1125125,215", Does.Match(result));
         }
 
         [Test]
@@ -86,7 +86,7 @@ namespace NBi.Testing.Unit.Core.Format
                 );
 
             Assert.That(result, Is.EqualTo(@"^?[0-9]*$"));
-            Assert.That("1125", Is.StringMatching(result));
+            Assert.That("1125", Does.Match(result));
         }
 
         [Test]
@@ -101,7 +101,7 @@ namespace NBi.Testing.Unit.Core.Format
                 );
 
             Assert.That(result, Is.EqualTo(@"^?[0-9]{1,3}(?:\,?[0-9]{3})*$"));
-            Assert.That("1,125", Is.StringMatching(result));
+            Assert.That("1,125", Does.Match(result));
         }
 
         [Test]
@@ -120,7 +120,7 @@ namespace NBi.Testing.Unit.Core.Format
                 );
 
             Assert.That(result, Is.EqualTo(@"^\$?[0-9]{1,3}(?:\,?[0-9]{3})*\.[0-9]{2}$"));
-            Assert.That("$1,125,125.21", Is.StringMatching(result));
+            Assert.That("$1,125,125.21", Does.Match(result));
         }
 
         [Test]
@@ -139,7 +139,7 @@ namespace NBi.Testing.Unit.Core.Format
                 );
 
             Assert.That(result, Is.EqualTo(@"^?[0-9]{1,3}(?:\s?[0-9]{3})*\,[0-9]{2}\s\€$"));
-            Assert.That("1 125 125,21 €", Is.StringMatching(result));
+            Assert.That("1 125 125,21 €", Does.Match(result));
         }
 
         [Test]
@@ -158,7 +158,7 @@ namespace NBi.Testing.Unit.Core.Format
                 );
 
             Assert.That(result, Is.EqualTo(@"^?[0-9]{1,3}(?:\s?[0-9]{3})*\,[0-9]{2}\sk\€$"));
-            Assert.That("1 125 125,21 k€", Is.StringMatching(result));
+            Assert.That("1 125 125,21 k€", Does.Match(result));
         }
 
         [Test]
@@ -177,7 +177,7 @@ namespace NBi.Testing.Unit.Core.Format
                 );
 
             Assert.That(result, Is.EqualTo(@"^?[0-9]{1,3}(?:\s?[0-9]{3})*\,[0-9]{2}\sKilo\sEuro\s\(k\€\)$"));
-            Assert.That("1 125 125,21 Kilo Euro (k€)", Is.StringMatching(result));
+            Assert.That("1 125 125,21 Kilo Euro (k€)", Does.Match(result));
         }
     }
 }

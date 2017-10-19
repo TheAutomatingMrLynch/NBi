@@ -74,10 +74,10 @@ namespace NBi.Testing.Unit.Xml
 
             Debug.WriteLine(content);
 
-            Assert.That(content, Is.StringContaining("<variables"));
-            Assert.That(content, Is.StringContaining("<variable name=\"year\">"));
-            Assert.That(content, Is.StringContaining("<script"));
-            Assert.That(content, Is.StringContaining("DateTime.Now.Year"));
+            Assert.That(content, Does.Contain("<variables"));
+            Assert.That(content, Does.Contain("<variable name=\"year\">"));
+            Assert.That(content, Does.Contain("<script"));
+            Assert.That(content, Does.Contain("DateTime.Now.Year"));
         }
     }
 }

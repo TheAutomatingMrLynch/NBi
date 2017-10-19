@@ -60,9 +60,9 @@ namespace NBi.Testing.Unit.NUnit.DataType
 
             //Test conclusion   
             Console.WriteLine(assertionText);
-            Assert.That(assertionText, Is.StringContaining("ccc-name").And
-                                            .StringContaining("table-name").And
-                                            .StringContaining("perspective-name"));
+            Assert.That(assertionText, Does.Contain("ccc-name").And
+                                            .Contain("table-name").And
+                                            .Contain("perspective-name"));
         }
 
         [Test]
@@ -97,8 +97,8 @@ namespace NBi.Testing.Unit.NUnit.DataType
 
             //Test conclusion   
             Console.WriteLine(assertionText);
-            Assert.That(assertionText, Is.StringContaining("bit").And
-                                            .StringContaining("int")
+            Assert.That(assertionText, Does.Contain("bit").And
+                                            .Contain("int")
                                             );
         }
 
@@ -134,9 +134,9 @@ namespace NBi.Testing.Unit.NUnit.DataType
 
             //Test conclusion   
             Console.WriteLine(assertionText);
-            Assert.That(assertionText, Is.StringContaining("varchar").And
-                                            .StringContaining("nvarchar").And
-                                            .Not.StringContaining("10")
+            Assert.That(assertionText, Does.Contain("varchar").And
+                                            .Contain("nvarchar").And
+                                            .Not.Contain("10")
                                             );
         }
 
@@ -172,10 +172,10 @@ namespace NBi.Testing.Unit.NUnit.DataType
 
             //Test conclusion   
             Console.WriteLine(assertionText);
-            Assert.That(assertionText, Is.StringContaining("varchar").And
-                                            .StringContaining("decimal").And
-                                            .Not.StringContaining("10").And
-                                            .Not.StringContaining("3")
+            Assert.That(assertionText, Does.Contain("varchar").And
+                                            .Contain("decimal").And
+                                            .Not.Contain("10").And
+                                            .Not.Contain("3")
                                             );
         }
 
@@ -211,8 +211,8 @@ namespace NBi.Testing.Unit.NUnit.DataType
 
             //Test conclusion   
             Console.WriteLine(assertionText);
-            Assert.That(assertionText, Is.StringContaining("varchar(10)").And
-                                            .StringContaining("nvarchar(20)")
+            Assert.That(assertionText, Does.Contain("varchar(10)").And
+                                            .Contain("nvarchar(20)")
                                             );
         }
 
@@ -248,8 +248,8 @@ namespace NBi.Testing.Unit.NUnit.DataType
 
             //Test conclusion   
             Console.WriteLine(assertionText);
-            Assert.That(assertionText, Is.StringContaining("decimal(11,2)").And
-                                            .StringContaining("decimal(10,3)")
+            Assert.That(assertionText, Does.Contain("decimal(11,2)").And
+                                            .Contain("decimal(10,3)")
                                             );
         }
 

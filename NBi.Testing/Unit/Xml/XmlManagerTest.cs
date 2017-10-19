@@ -27,7 +27,7 @@ namespace NBi.Testing.Unit.Xml
             manager.Load(filename);
 
             Assert.That(manager.TestSuite.Tests[0].Content, Is.Not.Null);
-            Assert.That(manager.TestSuite.Tests[0].Content, Is.StringEnding("</test>"));
+            Assert.That(manager.TestSuite.Tests[0].Content, Does.EndWith("</test>"));
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace NBi.Testing.Unit.Xml
 
             var manager = new XmlManager();
             var ex = Assert.Throws<ArgumentException>(delegate { manager.Load(filename); });
-            Assert.That(ex.Message, Is.StringContaining("At line 14"));
+            Assert.That(ex.Message, Does.Contain("At line 14"));
         }
 
         [Test]
@@ -56,8 +56,8 @@ namespace NBi.Testing.Unit.Xml
 
             var manager = new XmlManager();
             var exception = Assert.Throws<ArgumentException>(delegate { manager.Load(filename); });
-            Assert.That(exception.Message, Is.StringContaining("1 error has been found during the validation of the test-suite"));
-            Assert.That(exception.Message, Is.StringContaining("\tAt line 4: The element 'test' in namespace 'http://NBi/TestSuite' has invalid child element 'syntacticallyCorrect' in namespace 'http://NBi/TestSuite'."));
+            Assert.That(exception.Message, Does.Contain("1 error has been found during the validation of the test-suite"));
+            Assert.That(exception.Message, Does.Contain("\tAt line 4: The element 'test' in namespace 'http://NBi/TestSuite' has invalid child element 'syntacticallyCorrect' in namespace 'http://NBi/TestSuite'."));
         }
 
         [Test]
@@ -76,9 +76,9 @@ namespace NBi.Testing.Unit.Xml
 
             var manager = new XmlManager();
             var exception = Assert.Throws<ArgumentException>(delegate { manager.Load(filename); });
-            Assert.That(exception.Message, Is.StringContaining("2 errors have been found during the validation of the test-suite"));
-            Assert.That(exception.Message, Is.StringContaining("At line 6: The element 'execution' in namespace 'http://NBi/TestSuite' has invalid child element 'sql' in namespace 'http://NBi/TestSuite'."));
-            Assert.That(exception.Message, Is.StringContaining("At line 11: The 'name' attribute is not declared."));
+            Assert.That(exception.Message, Does.Contain("2 errors have been found during the validation of the test-suite"));
+            Assert.That(exception.Message, Does.Contain("At line 6: The element 'execution' in namespace 'http://NBi/TestSuite' has invalid child element 'sql' in namespace 'http://NBi/TestSuite'."));
+            Assert.That(exception.Message, Does.Contain("At line 11: The 'name' attribute is not declared."));
         }
     }
 }

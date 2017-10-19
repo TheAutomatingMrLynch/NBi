@@ -176,7 +176,7 @@ namespace NBi.Testing.Integration.Core.Structure.Tabular
         }
 
         //[Test]
-        //[Ignore]
+        //[Ignore("Ignored before switch to 3.x")]
         //public void Execute_TabularDateDimensionLinkedToThreeMeasureGroups_ListStructureContainingThreeElements()
         //{
         //    var disco = new DiscoveryRequestFactory().BuildRelation(

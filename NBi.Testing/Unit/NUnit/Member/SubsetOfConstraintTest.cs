@@ -25,7 +25,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = subsetOfConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.True);
+            Assert.That(res.IsSuccess, Is.True);
         }
 
         [Test]
@@ -42,7 +42,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = subsetOfConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.False);
+            Assert.That(res.IsSuccess, Is.False);
         }
 
         [Test]

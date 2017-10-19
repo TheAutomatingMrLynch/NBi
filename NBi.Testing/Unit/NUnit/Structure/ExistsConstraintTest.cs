@@ -65,8 +65,8 @@ namespace NBi.Testing.Unit.NUnit.Structure
 
             //Test conclusion   
             Console.WriteLine(assertionText);
-            Assert.That(assertionText, Is.StringContaining("perspective-name").And
-                                            .StringContaining("expected-dimension-caption"));
+            Assert.That(assertionText, Does.Contain("perspective-name").And
+                                            .Contain("expected-dimension-caption"));
         }
 
         [Test]
@@ -100,9 +100,9 @@ namespace NBi.Testing.Unit.NUnit.Structure
 
             //Test conclusion     
             Console.WriteLine(assertionText);
-            Assert.That(assertionText, Is.StringContaining("perspective-name").And
-                                            .StringContaining("dimension-caption").And
-                                            .StringContaining("expected-hierarchy-caption"));
+            Assert.That(assertionText, Does.Contain("perspective-name").And
+                                            .Contain("dimension-caption").And
+                                            .Contain("expected-hierarchy-caption"));
         }
 
         [Test]
@@ -136,8 +136,8 @@ namespace NBi.Testing.Unit.NUnit.Structure
 
             //Test conclusion   
             Console.WriteLine(assertionText);
-            Assert.That(assertionText, Is.StringContaining("perspective-name").And
-                                            .StringContaining("expected-measure-group-caption"));
+            Assert.That(assertionText, Does.Contain("perspective-name").And
+                                            .Contain("expected-measure-group-caption"));
         }
 
         [Test]
@@ -172,7 +172,7 @@ namespace NBi.Testing.Unit.NUnit.Structure
 
             //Test conclusion      
             Console.WriteLine(assertionText);
-            Assert.That(assertionText, Is.StringContaining("not find"));
+            Assert.That(assertionText, Does.Contain("not find"));
         }
 
         [Test]
@@ -206,8 +206,8 @@ namespace NBi.Testing.Unit.NUnit.Structure
 
             //Test conclusion
             Console.WriteLine(assertionText);
-            Assert.That(assertionText, Is.StringContaining(actuals[0]).And
-                                            .StringContaining(actuals[1]));
+            Assert.That(assertionText, Does.Contain(actuals[0]).And
+                                            .Contain(actuals[1]));
         }
 
         [Test]
@@ -241,7 +241,7 @@ namespace NBi.Testing.Unit.NUnit.Structure
 
             //Test conclusion            
             Console.WriteLine(assertionText);
-            Assert.That(assertionText, Is.StringContaining("nothing found"));
+            Assert.That(assertionText, Does.Contain("nothing found"));
         }
 
         [Test]
@@ -275,7 +275,7 @@ namespace NBi.Testing.Unit.NUnit.Structure
 
             //Test conclusion   
             Console.WriteLine(assertionText);
-            Assert.That(assertionText, Is.StringContaining("The value 'expected-dimension-catpion' is close to your expectation."));
+            Assert.That(assertionText, Does.Contain("The value 'expected-dimension-catpion' is close to your expectation."));
         }
 
         [Test]

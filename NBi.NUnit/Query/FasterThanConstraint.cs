@@ -2,6 +2,7 @@
 using System.Data;
 using NBi.Core.Query;
 using NUnitCtr = NUnit.Framework.Constraints;
+using NUnit.Framework.Constraints;
 
 namespace NBi.NUnit.Query
 {
@@ -65,12 +66,12 @@ namespace NBi.NUnit.Query
         /// </summary>
         /// <param name="actual">SQL string or SQL Command</param>
         /// <returns>true, if the query defined in parameter is executed in less that expected else false</returns>
-        public override bool Matches(object actual)
+        public override NUnitCtr.ConstraintResult Matches(object actual)
         {
             if (actual is IDbCommand)
                 return doMatch((IDbCommand)actual);
             else
-                return false;
+                throw new ArgumentException();
         }
 
         /// <summary>
@@ -78,14 +79,13 @@ namespace NBi.NUnit.Query
         /// </summary>
         /// <param name="actual">SQL string</param>
         /// <returns>true, if the query defined in parameter is executed in less that expected else false</returns>
-        public bool doMatch(IDbCommand actual)
+        public ConstraintResult doMatch(IDbCommand actual)
         {
             var engine = GetEngine(actual);
             if (cleanCache)
                 engine.CleanCache();
             performanceResult = engine.CheckPerformance(timeOutMilliSeconds);
-            return 
-                (
+            return new ConstraintResult(this, actual, 
                     performanceResult.TimeElapsed.TotalMilliseconds < maxTimeMilliSeconds
                     && ! performanceResult.IsTimeOut
                 );

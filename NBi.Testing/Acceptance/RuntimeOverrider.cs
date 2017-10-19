@@ -68,13 +68,13 @@ namespace NBi.Testing.Acceptance
                 }
             }
 
-            [Ignore]
+            [Ignore("Ignored before switch to 3.x")]
             public override void ExecuteTestCases(TestXml test)
             {
                 base.ExecuteTestCases(test);
             }
 
-            [Ignore]
+            [Ignore("Ignored before switch to 3.x")]
             public void ExecuteTestCases(TestXml test, ITestConfiguration configuration)
             {
                 base.Configuration = configuration;
@@ -82,7 +82,7 @@ namespace NBi.Testing.Acceptance
             }
         }
 
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetupMethods()
         {
             //Build the fullpath for the file to read

@@ -151,8 +151,8 @@ namespace NBi.Testing.Unit.Framework.FailureMessage
             var value = msg.Build(dataTable.Rows.Cast<DataRow>()).ToMarkdown();
             var lines = value.Replace("\n", string.Empty).Split('\r');
 
-            Assert.That(value, Is.StringContaining("10.752 "));
-            Assert.That(value, Is.StringContaining("20.8445585"));
+            Assert.That(value, Does.Contain("10.752 "));
+            Assert.That(value, Does.Contain("20.8445585"));
         }
 
         

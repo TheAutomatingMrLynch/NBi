@@ -20,14 +20,14 @@ namespace NBi.Testing.Unit.Xml.Items
 
         #region SetUp & TearDown
         //Called only at instance creation
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetupMethods()
         {
 
         }
 
         //Called only at instance destruction
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDownMethods()
         {
         }
@@ -73,7 +73,7 @@ namespace NBi.Testing.Unit.Xml.Items
             var query = (QueryXml)((ExecutionXml)ts.Tests[testNr].Systems[0]).BaseItem;
 
             Assert.That(query, Is.Not.Null);
-            Assert.That(query.GetQuery(), Is.StringContaining("select top 1 myColumn from myTable"));
+            Assert.That(query.GetQuery(), Does.Contain("select top 1 myColumn from myTable"));
             Assert.That(query.Parameters, Has.Count.EqualTo(0));
         }
 
@@ -87,7 +87,7 @@ namespace NBi.Testing.Unit.Xml.Items
 
             var query = (QueryXml)((ExecutionXml)ts.Tests[testNr].Systems[0]).BaseItem;
 
-            Assert.That(query.GetQuery(), Is.StringContaining("select myColumn from myTable where myFirstField=@FirstField and 1=@NonEmpty"));
+            Assert.That(query.GetQuery(), Does.Contain("select myColumn from myTable where myFirstField=@FirstField and 1=@NonEmpty"));
 
             Assert.That(query.Parameters, Is.Not.Null);
             Assert.That(query.Parameters, Is.Not.Empty);
@@ -172,9 +172,9 @@ namespace NBi.Testing.Unit.Xml.Items
 
             Debug.WriteLine(content);
 
-            Assert.That(content, Is.StringContaining("<![CDATA["));
-            Assert.That(content, Is.StringContaining("select * from table"));
-            Assert.That(content, Is.StringContaining("my connection-string"));
+            Assert.That(content, Does.Contain("<![CDATA["));
+            Assert.That(content, Does.Contain("select * from table"));
+            Assert.That(content, Does.Contain("my connection-string"));
             Assert.That(content.Split(new[] { ' ' }), Has.Exactly(1).EqualTo("*"));
         }
 

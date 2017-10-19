@@ -45,7 +45,7 @@ namespace NBi.NUnit.Query
         /// </summary>
         /// <param name="actual">An OleDbCommand, SqlCommand or AdomdCommand</param>
         /// <returns>true, if the row-count of query execution validates the child constraint</returns>
-        public override bool Matches(object actual)
+        public override NUnitCtr.ConstraintResult Matches(object actual)
         {
             if (actual is IDbCommand)
                 return Process((IDbCommand)actual);
@@ -58,7 +58,7 @@ namespace NBi.NUnit.Query
             else if (actual is int)
                 return doMatch(((int)actual));
             else
-                return false;
+                return new NUnitCtr.ConstraintResult(this, null, NUnitCtr.ConstraintStatus.Error);
         }
 
        

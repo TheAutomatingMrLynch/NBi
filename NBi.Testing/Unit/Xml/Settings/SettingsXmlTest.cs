@@ -19,14 +19,14 @@ namespace NBi.Testing.Unit.Xml.Settings
 
         #region SetUp & TearDown
         //Called only at instance creation
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetupMethods()
         {
 
         }
 
         //Called only at instance destruction
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDownMethods()
         {
         }
@@ -101,9 +101,9 @@ namespace NBi.Testing.Unit.Xml.Settings
             // Create an instance of the XmlSerializer specifying type and namespace.
             TestSuiteXml ts = DeserializeSample("SettingsXmlWithDefault");
 
-            Assert.That(((ExecutionXml)ts.Tests[testNr].Systems[0]).Item.GetConnectionString(), Is.Not.StringContaining("\r"));
-            Assert.That(((ExecutionXml)ts.Tests[testNr].Systems[0]).Item.GetConnectionString(), Is.Not.StringContaining("\n"));
-            Assert.That(((ExecutionXml)ts.Tests[testNr].Systems[0]).Item.GetConnectionString(), Is.StringContaining("Roles=\"admin\""));
+            Assert.That(((ExecutionXml)ts.Tests[testNr].Systems[0]).Item.GetConnectionString(), Is.Not.Contain("\r"));
+            Assert.That(((ExecutionXml)ts.Tests[testNr].Systems[0]).Item.GetConnectionString(), Is.Not.Contain("\n"));
+            Assert.That(((ExecutionXml)ts.Tests[testNr].Systems[0]).Item.GetConnectionString(), Does.Contain("Roles=\"admin\""));
         }
 
         [Test]
@@ -373,18 +373,18 @@ namespace NBi.Testing.Unit.Xml.Settings
             var manager = new XmlManager();
             var xml = manager.XmlSerializeFrom<CsvProfileXml>(profile);
 
-            Assert.That(xml, Is.StringContaining("field-separator"));
-            Assert.That(xml, Is.StringContaining("#"));
+            Assert.That(xml, Does.Contain("field-separator"));
+            Assert.That(xml, Does.Contain("#"));
 
-            Assert.That(xml, Is.StringContaining("record-separator"));
-            Assert.That(xml, Is.StringContaining("Cr"));
+            Assert.That(xml, Does.Contain("record-separator"));
+            Assert.That(xml, Does.Contain("Cr"));
 
-            Assert.That(xml, Is.Not.StringContaining("<FieldSeparator>"));
-            Assert.That(xml, Is.Not.StringContaining("<TextQualifier>"));
-            Assert.That(xml, Is.Not.StringContaining("<RecordSeparator>"));
-            Assert.That(xml, Is.Not.StringContaining("<FirstRowHeader>"));
+            Assert.That(xml, Is.Not.Contain("<FieldSeparator>"));
+            Assert.That(xml, Is.Not.Contain("<TextQualifier>"));
+            Assert.That(xml, Is.Not.Contain("<RecordSeparator>"));
+            Assert.That(xml, Is.Not.Contain("<FirstRowHeader>"));
 
-            Assert.That(xml, Is.Not.StringContaining("first-row-header"));
+            Assert.That(xml, Is.Not.Contain("first-row-header"));
         }
 
         [Test]
@@ -397,7 +397,7 @@ namespace NBi.Testing.Unit.Xml.Settings
             var manager = new XmlManager();
             var xml = manager.XmlSerializeFrom<CsvProfileXml>(profile);
 
-            Assert.That(xml, Is.Not.StringContaining("record-separator"));
+            Assert.That(xml, Is.Not.Contain("record-separator"));
         }
 
         [Test]
@@ -409,7 +409,7 @@ namespace NBi.Testing.Unit.Xml.Settings
             var manager = new XmlManager();
             var xml = manager.XmlSerializeFrom<CsvProfileXml>(profile);
 
-            Assert.That(xml, Is.StringContaining("first-row-header"));
+            Assert.That(xml, Does.Contain("first-row-header"));
         }
 
         [Test]
@@ -421,7 +421,7 @@ namespace NBi.Testing.Unit.Xml.Settings
             var manager = new XmlManager();
             var xml = manager.XmlSerializeFrom<CsvProfileXml>(profile);
 
-            Assert.That(xml, Is.Not.StringContaining("first-row-header"));
+            Assert.That(xml, Is.Not.Contain("first-row-header"));
         }
 
         [Test]
@@ -433,7 +433,7 @@ namespace NBi.Testing.Unit.Xml.Settings
             var manager = new XmlManager();
             var xml = manager.XmlSerializeFrom<CsvProfileXml>(profile);
 
-            Assert.That(xml, Is.Not.StringContaining("empty-cell"));
+            Assert.That(xml, Is.Not.Contain("empty-cell"));
         }
 
         [Test]
@@ -445,8 +445,8 @@ namespace NBi.Testing.Unit.Xml.Settings
             var manager = new XmlManager();
             var xml = manager.XmlSerializeFrom<CsvProfileXml>(profile);
 
-            Assert.That(xml, Is.StringContaining("empty-cell"));
-            Assert.That(xml, Is.StringContaining("my value"));
+            Assert.That(xml, Does.Contain("empty-cell"));
+            Assert.That(xml, Does.Contain("my value"));
         }
 
         [Test]
@@ -459,7 +459,7 @@ namespace NBi.Testing.Unit.Xml.Settings
             var manager = new XmlManager();
             var xml = manager.XmlSerializeFrom<CsvProfileXml>(profile);
 
-            Assert.That(xml, Is.Not.StringContaining("field-separator"));
+            Assert.That(xml, Is.Not.Contain("field-separator"));
         }
 
         [Test]
@@ -472,9 +472,9 @@ namespace NBi.Testing.Unit.Xml.Settings
             var manager = new XmlManager();
             var xml = manager.XmlSerializeFrom<SettingsXml>(settings);
 
-            Assert.That(xml, Is.Not.StringContaining("field-separator"));
-            Assert.That(xml, Is.Not.StringContaining("record-separator"));
-            Assert.That(xml, Is.Not.StringContaining("csv-profile"));
+            Assert.That(xml, Is.Not.Contain("field-separator"));
+            Assert.That(xml, Is.Not.Contain("record-separator"));
+            Assert.That(xml, Is.Not.Contain("csv-profile"));
         }
     }
 }

@@ -15,14 +15,14 @@ namespace NBi.Testing.Unit.NUnit.Member
 
         #region SetUp & TearDown
         //Called only at instance creation
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetupMethods()
         {
 
         }
 
         //Called only at instance destruction
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDownMethods()
         {
         }
@@ -55,7 +55,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = orderedConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.True);
+            Assert.That(res.IsSuccess, Is.True);
         }
 
         [Test]
@@ -73,7 +73,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = orderedConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.False);
+            Assert.That(res.IsSuccess, Is.False);
         }
 
         [Test]
@@ -116,12 +116,12 @@ namespace NBi.Testing.Unit.NUnit.Member
                 assertionText = ex.Message;
             }
             //Test conclusion            
-            Assert.That(assertionText, Is.StringContaining("perspective-name").And
-                                            .StringContaining("dimension-caption").And
-                                            .StringContaining("hierarchy-caption").And
-                                            .StringContaining("member-caption").And
-                                            .StringContaining("children").And
-                                            .StringContaining("alphabetic"));
+            Assert.That(assertionText, Does.Contain("perspective-name").And
+                                            .Contain("dimension-caption").And
+                                            .Contain("hierarchy-caption").And
+                                            .Contain("member-caption").And
+                                            .Contain("children").And
+                                            .Contain("alphabetic"));
 
         }
 
@@ -140,7 +140,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = orderedConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.True);
+            Assert.That(res.IsSuccess, Is.True);
         }
 
         [Test]
@@ -158,7 +158,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = orderedConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.False);
+            Assert.That(res.IsSuccess, Is.False);
         }
 
         [Test]
@@ -177,7 +177,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = orderedConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.True);
+            Assert.That(res.IsSuccess, Is.True);
         }
 
         [Test]
@@ -196,7 +196,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = orderedConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.False);
+            Assert.That(res.IsSuccess, Is.False);
         }
 
         [Test]
@@ -214,7 +214,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = orderedConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.True);
+            Assert.That(res.IsSuccess, Is.True);
         }
 
         [Test]
@@ -232,7 +232,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = orderedConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.False);
+            Assert.That(res.IsSuccess, Is.False);
         }
 
         [Test]
@@ -255,7 +255,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = orderedConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.True);
+            Assert.That(res.IsSuccess, Is.True);
         }
 
         [Test]
@@ -278,7 +278,7 @@ namespace NBi.Testing.Unit.NUnit.Member
             var res = orderedConstraint.Matches(members);
 
             //Test conclusion            
-            Assert.That(res, Is.False);
+            Assert.That(res.IsSuccess, Is.False);
         }
 
         [Test]
@@ -322,12 +322,12 @@ namespace NBi.Testing.Unit.NUnit.Member
                 assertionText = ex.Message;
             }
             //Test conclusion            
-            Assert.That(assertionText, Is.StringContaining("perspective-name").And
-                                            .StringContaining("dimension-caption").And
-                                            .StringContaining("hierarchy-caption").And
-                                            .StringContaining("member-caption").And
-                                            .StringContaining("children").And
-                                            .StringContaining("specifically"));
+            Assert.That(assertionText, Does.Contain("perspective-name").And
+                                            .Contain("dimension-caption").And
+                                            .Contain("hierarchy-caption").And
+                                            .Contain("member-caption").And
+                                            .Contain("children").And
+                                            .Contain("specifically"));
 
         }
 

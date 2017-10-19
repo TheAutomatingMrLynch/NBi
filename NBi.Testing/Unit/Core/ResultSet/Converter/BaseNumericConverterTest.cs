@@ -11,14 +11,14 @@ namespace NBi.Testing.Unit.Core.ResultSet.Converter
     {
         #region SetUp & TearDown
         //Called only at instance creation
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetupMethods()
         {
 
         }
 
         //Called only at instance destruction
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDownMethods()
         {
         }
@@ -94,7 +94,7 @@ namespace NBi.Testing.Unit.Core.ResultSet.Converter
         }
 
         [Test]
-        [Ignore]
+        [Ignore("Ignored before switch to 3.x")]
         public void IsValid_StringDoubleAlternativeDecimalSeparator_False()
         {
             

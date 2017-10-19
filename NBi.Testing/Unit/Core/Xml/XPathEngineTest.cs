@@ -162,8 +162,8 @@ namespace NBi.Testing.Unit.Core.Xml
             {
                 var engine = new XPathStreamEngine(reader, from, selects);
                 var result = engine.Execute();
-                Assert.That(result.Rows[0].ItemArray[0], Is.StringStarting("Ellen Adams"));
-                Assert.That(result.Rows[0].ItemArray[0], Is.StringContaining("Maple Street"));
+                Assert.That(result.Rows[0].ItemArray[0], Does.StartWith("Ellen Adams"));
+                Assert.That(result.Rows[0].ItemArray[0], Does.Contain("Maple Street"));
             }
         }
 
