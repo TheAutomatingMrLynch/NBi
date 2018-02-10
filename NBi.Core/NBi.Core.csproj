@@ -332,6 +332,32 @@
     <Compile Include="Query\Format\AdomdFormatEngine.cs" />
     <Compile Include="Query\Format\FormatEngineFactory.cs" />
     <Compile Include="Query\Format\IFormatEngine.cs" />
+    <Compile Include="Query\Generation\Ansi\FieldFormatterAnsi.cs" />
+    <Compile Include="Query\Generation\Ansi\AnsiGenerator.cs" />
+    <Compile Include="Query\Generation\Ansi\TargetFormatterAnsi.cs" />
+    <Compile Include="Query\Generation\BaseTargetFormatter.cs" />
+    <Compile Include="Query\Generation\BaseFieldFormatter.cs" />
+    <Compile Include="Query\Generation\ITarget.cs" />
+    <Compile Include="Query\Generation\ITargetFormatter.cs" />
+    <Compile Include="Query\Generation\IFieldFormatter.cs" />
+    <Compile Include="Query\Generation\MsSql\MsSqlGenerator.cs" />
+    <Compile Include="Query\Generation\MsSql\TargetFormatterMsSql.cs" />
+    <Compile Include="Query\Generation\MsSql\FieldFormatterMsSql.cs" />
+    <Compile Include="Query\Generation\MySql\FieldFormatterMySql.cs" />
+    <Compile Include="Query\Generation\MySql\MySqlGenerator.cs" />
+    <Compile Include="Query\Generation\MySql\TargetFormatterMySql.cs" />
+    <Compile Include="Query\Generation\Oracle\FieldFormatterOracle.cs" />
+    <Compile Include="Query\Generation\Oracle\OracleGenerator.cs" />
+    <Compile Include="Query\Generation\Oracle\TargetFormatterOracle.cs" />
+    <Compile Include="Query\Generation\SqlDialect.cs" />
+    <Compile Include="Query\Generation\SqlGeneratorFactory.cs" />
+    <Compile Include="Query\Generation\Teradata\FieldFormatterTeradata.cs" />
+    <Compile Include="Query\Generation\Teradata\TeradataGenerator.cs" />
+    <Compile Include="Query\Generation\Teradata\TargetFormatterTeradata.cs" />
+    <Compile Include="Query\Generation\Postgresql\FieldFormatterPostgresql.cs" />
+    <Compile Include="Query\Generation\Postgresql\PostgresqlGenerator.cs" />
+    <Compile Include="Query\Generation\Postgresql\TargetFormatterPostgresql.cs" />
+    <Compile Include="Query\Generation\SqlTarget.cs" />
     <Compile Include="Query\IQuery.cs" />
     <Compile Include="Query\Performance\AdomdPerformanceEngine.cs" />
     <Compile Include="Query\Performance\DbCommandPerformanceEngine.cs" />
@@ -342,6 +368,7 @@
     <Compile Include="Query\Performance\SqlPerformanceEngine.cs" />
     <Compile Include="Query\Execution\ExecutionEngineFactory.cs" />
     <Compile Include="Query\Execution\AdomdExecutionEngine.cs" />
+    <Compile Include="Query\Generation\SqlGenerator.cs" />
     <Compile Include="Query\Query.cs" />
     <Compile Include="Query\Resolver\QueryResolver.cs" />
     <Compile Include="Query\Resolver\QueryResolverArgs.cs" />
@@ -654,6 +681,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

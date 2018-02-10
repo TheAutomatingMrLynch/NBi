@@ -299,6 +299,8 @@
     <Compile Include="Unit\Core\OfficeDataConnectionFileParserTest.cs" />
     <Compile Include="Unit\Core\Query\Command\OleDbCommandFactoryTest.cs" />
     <Compile Include="Unit\Core\Query\Command\SqlCommandFactoryTest.cs" />
+    <Compile Include="Unit\Core\Query\Generation\SqlGenerationFactoryTest.cs" />
+    <Compile Include="Unit\Core\Query\Generation\SqlGeneratorTest.cs" />
     <Compile Include="Unit\Core\Query\Performance\PerformanceEngineFactoryTest.cs" />
     <Compile Include="Unit\Core\Query\Client\ClientProviderTest.cs" />
     <Compile Include="Unit\Core\Query\Client\AdomdClientFactoryTest.cs" />
