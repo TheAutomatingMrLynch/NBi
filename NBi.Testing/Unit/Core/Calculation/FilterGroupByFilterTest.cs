@@ -26,7 +26,7 @@ namespace NBi.Testing.Unit.Core.Calculation
             var rs = resolver.Execute();
 
             var settings = new SettingsIndexResultSet(KeysChoice.First, ValuesChoice.None, NumericAbsoluteTolerance.None);
-            var grouping = new IndexByColumnGrouping(settings);
+            var grouping = new ColumnIndexGrouping(settings);
 
             var filter = new TopRanking(2, new ColumnPositionIdentifier(1), ColumnType.Numeric);
 

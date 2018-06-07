@@ -8,13 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NBi.Core.Calculation.Grouping.CasedBase
+namespace NBi.Core.Calculation.Grouping.CaseBased
 {
-    class GroupByCase : IGroupBy
+    class CaseGrouping : IGroupBy
     {
         protected IEnumerable<IPredication> Cases { get; }
 
-        public GroupByCase(IEnumerable<IPredication> cases)
+        public CaseGrouping(IEnumerable<IPredication> cases)
         {
             Cases = cases;
         }
@@ -27,10 +27,12 @@ namespace NBi.Core.Calculation.Grouping.CasedBase
             stopWatch.Start();
             foreach (DataRow row in resultSet.Rows)
             {
-                var predication = Cases.FirstOrDefault(p => p.Execute(row));
-                if (!dico.ContainsKey(predication))
-                    dico.Add(predication, row.Table.Clone());
-                dico[predication].ImportRow(row);
+                var index = Cases.Select((p, i) => new { Predication = p, Index =  i })
+                                .FirstOrDefault(x => x.Predication.Execute(row))
+                                ?.Index ?? -1;
+                if (!dico.ContainsKey(index))
+                    dico.Add(index, row.Table.Clone());
+                dico[index].ImportRow(row);
             }
             Trace.WriteLineIf(NBiTraceSwitch.TraceInfo, $"Building rows' groups by cases: {dico.Count} [{stopWatch.Elapsed.ToString(@"d\d\.hh\h\:mm\m\:ss\s\ \+fff\m\s")}");
 

@@ -8,14 +8,14 @@ using NBi.Core.ResultSet;
 
 namespace NBi.Core.Calculation.Grouping.ColumnBased
 {
-    class IndexByColumnGrouping : AbstractByColumnGrouping
+    class ColumnNameGrouping : ColumnGrouping
     {
-        protected new SettingsIndexResultSet Settings { get => base.Settings as SettingsIndexResultSet; }
+        protected new SettingsNameResultSet Settings { get => base.Settings as SettingsNameResultSet; }
 
-        public IndexByColumnGrouping(SettingsIndexResultSet settings)
+        public ColumnNameGrouping(SettingsNameResultSet settings)
             : base(settings) { }
 
         protected override DataRowKeysComparer BuildDataRowsKeyComparer(DataTable x)
-            => new DataRowKeysComparerByIndex(Settings, x.Columns.Count);
+            => new DataRowKeysComparerByName(Settings);
     }
 }

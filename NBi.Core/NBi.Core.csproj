@@ -99,13 +99,13 @@
     <Compile Include="Calculation\Predication\PredicationFactory.cs" />
     <Compile Include="Calculation\Predication\XOrCombinationPredication.cs" />
     <Compile Include="Calculation\ComparerType.cs" />
-    <Compile Include="Calculation\Grouping\ColumnBased\AbstractByColumnGrouping.cs" />
-    <Compile Include="Calculation\Grouping\CaseBased\GroupByCase.cs" />
+    <Compile Include="Calculation\Grouping\ColumnBased\ColumnGrouping.cs" />
+    <Compile Include="Calculation\Grouping\CaseBased\CaseGrouping.cs" />
     <Compile Include="Calculation\Grouping\GroupByFactory.cs" />
     <Compile Include="Calculation\Grouping\NoneGrouping.cs" />
     <Compile Include="Calculation\Grouping\IGroupBy.cs" />
-    <Compile Include="Calculation\Grouping\ColumnBased\NameByColumnGrouping.cs" />
-    <Compile Include="Calculation\Grouping\ColumnBased\IndexByColumnGrouping.cs" />
+    <Compile Include="Calculation\Grouping\ColumnBased\ColumnNameGrouping.cs" />
+    <Compile Include="Calculation\Grouping\ColumnBased\ColumnIndexGrouping.cs" />
     <Compile Include="Calculation\ICultureSensitivePredicateInfo.cs" />
     <Compile Include="Calculation\ICaseSensitivePredicateInfo.cs" />
     <Compile Include="Calculation\ISecondOperandPredicateInfo.cs" />

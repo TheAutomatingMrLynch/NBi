@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace NBi.Core.Calculation.Grouping.ColumnBased
 {
-    public abstract class AbstractByColumnGrouping : IGroupBy
+    public abstract class ColumnGrouping : IGroupBy
     {
         protected ISettingsResultSet Settings { get; }
 
-        public AbstractByColumnGrouping(ISettingsResultSet settings)
+        public ColumnGrouping(ISettingsResultSet settings)
         {
             Settings = settings;
         }

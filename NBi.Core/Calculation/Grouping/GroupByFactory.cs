@@ -40,10 +40,10 @@ namespace NBi.Core.Calculation.Grouping
 
             var settings = builder.GetSettings();
             if (settings is SettingsIndexResultSet)
-                return new IndexByColumnGrouping(settings as SettingsIndexResultSet);
+                return new ColumnIndexGrouping(settings as SettingsIndexResultSet);
 
             else if (settings is SettingsNameResultSet)
-                return new NameByColumnGrouping(settings as SettingsNameResultSet);
+                return new ColumnNameGrouping(settings as SettingsNameResultSet);
 
             throw new ArgumentOutOfRangeException(nameof(settings));
         }

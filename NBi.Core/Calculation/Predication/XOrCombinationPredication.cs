@@ -11,15 +11,12 @@ namespace NBi.Core.Calculation.Predication
 {
     class XOrCombinationPredication : BaseCombinationPredication
     {
-        private bool hasSwitched = false;
-
         public XOrCombinationPredication(IList<IPredication> predications)
             : base(predications)
         { }
 
         protected override bool ContinueCondition(bool state)
             => true;
-            
 
         protected override bool StartState()
             => false;

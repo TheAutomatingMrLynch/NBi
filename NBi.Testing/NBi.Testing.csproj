@@ -269,6 +269,7 @@
     <Compile Include="Integration\NUnit\Structure\LinkedToConstraintTest.cs" />
     <Compile Include="Integration\NUnit\Structure\ExistsConstraintTest.cs" />
     <Compile Include="Unit\Core\Analysis\Metadata\Adomd\MeasureGroupLinkedToDiscoveryCommandTest.cs" />
+    <Compile Include="Unit\Core\Calculation\Grouping\CaseBased\GroupByCaseTest.cs" />
     <Compile Include="Unit\Core\Calculation\Predication\XOrCombinationPredicationTest.cs" />
     <Compile Include="Unit\Core\Calculation\Predication\OrCombinationPredicationTest.cs" />
     <Compile Include="Unit\Core\Calculation\Predication\AndCombinationPredicationTest.cs" />
