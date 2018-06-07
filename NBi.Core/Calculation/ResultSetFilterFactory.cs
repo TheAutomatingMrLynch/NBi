@@ -1,6 +1,6 @@
 ﻿using NBi.Core.Calculation.Grouping;
 using NBi.Core.Calculation.Predicate;
-using NBi.Core.Calculation.Predicate.Combination;
+using NBi.Core.Calculation.Predication;
 using NBi.Core.Calculation.Ranking;
 using NBi.Core.Evaluate;
 using NBi.Core.ResultSet;
@@ -20,44 +20,42 @@ namespace NBi.Core.Calculation
             if (predicateInfo.Operand == null)
                 throw new ArgumentException("You must specify an operand for a predicate. The operand is the column or alias or expression on which the predicate will be evaluated.");
 
-            var factory = new PredicateFactory();
-            var predicate = factory.Instantiate(predicateInfo);
+            var predicateFactory = new PredicateFactory();
+            var predicate = predicateFactory.Instantiate(predicateInfo);
 
-            var pf = new SinglePredicateFilter(aliases, expressions, predicateInfo.Operand, predicate.Execute, predicate.ToString);
+            var predicationFactory = new PredicationFactory();
+            var predication = predicationFactory.Instantiate(predicate, predicateInfo.Operand, aliases, expressions);
 
-            return pf;
+            var filter = new PredicationFilter(predication);
+
+            return filter;
         }
 
         public IResultSetFilter Instantiate(IEnumerable<IColumnAlias> aliases, IEnumerable<IColumnExpression> expressions, CombinationOperator combinationOperator, IEnumerable<IPredicateInfo> predicateInfos)
         {
-            var predications = new List<Predication>();
+            var predications = new List<IPredication>();
 
-            var factory = new PredicateFactory();
+            var predicateFactory = new PredicateFactory();
+            var predicationFactory = new PredicationFactory();
             foreach (var predicateInfo in predicateInfos)
             {
                 if (predicateInfo.Operand == null)
                     throw new ArgumentException("You must specify an operand for a predicate. The operand is the column or alias or expression on which the predicate will be evaluated.");
 
-                var predicate = factory.Instantiate(predicateInfo);
-                predications.Add(new Predication(predicate, predicateInfo.Operand));
+                var predicate = predicateFactory.Instantiate(predicateInfo);
+                
+                var localPredication = predicationFactory.Instantiate(predicate, predicateInfo.Operand, aliases, expressions);
+                predications.Add(localPredication);
             }
+            var predication = predicationFactory.Instantiate(predications, combinationOperator);
 
-            switch (combinationOperator)
-            {
-                case CombinationOperator.Or:
-                    return new OrCombinationPredicateFilter(aliases, expressions, predications);
-                case CombinationOperator.XOr:
-                    return new XOrCombinationPredicateFilter(aliases, expressions, predications);
-                case CombinationOperator.And:
-                    return new AndCombinationPredicateFilter(aliases, expressions, predications);
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(combinationOperator));
-            }
+            var filter = new PredicationFilter(predication);
+            return filter;
         }
 
         public IResultSetFilter Instantiate(IRankingInfo rankingInfo, IEnumerable<IColumnDefinitionLight> columns)
         {
-            var groupingFactory = new ByColumnGroupingFactory();
+            var groupingFactory = new GroupByFactory();
             var grouping = groupingFactory.Instantiate(columns);
 
             var rankingFactory = new RankingFactory();

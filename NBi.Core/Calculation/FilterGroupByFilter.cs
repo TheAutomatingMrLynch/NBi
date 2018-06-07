@@ -12,9 +12,9 @@ namespace NBi.Core.Calculation
     class FilterGroupByFilter: IResultSetFilter
     {
         private readonly IResultSetFilter filter;
-        private readonly IByColumnGrouping groupBy;
+        private readonly IGroupBy groupBy;
 
-        public FilterGroupByFilter(IResultSetFilter filter, IByColumnGrouping groupBy)
+        public FilterGroupByFilter(IResultSetFilter filter, IGroupBy groupBy)
         {
             this.filter = filter;
             this.groupBy = groupBy;

@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NBi.Testing.Unit.Core.Calculation
+namespace NBi.Testing.Unit.Core.Calculation.Predicate
 {
     public class PredicateTwoOperandsTest
     {

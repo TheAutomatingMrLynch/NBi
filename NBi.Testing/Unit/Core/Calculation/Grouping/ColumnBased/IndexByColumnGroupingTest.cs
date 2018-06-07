@@ -1,4 +1,4 @@
-﻿using NBi.Core.Calculation.Grouping;
+﻿using NBi.Core.Calculation.Grouping.ColumnBased;
 using NBi.Core.ResultSet;
 using NBi.Core.ResultSet.Resolver;
 using NBi.Core.Scalar.Comparer;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static NBi.Core.ResultSet.SettingsIndexResultSet;
 
-namespace NBi.Testing.Unit.Core.Calculation.Grouping
+namespace NBi.Testing.Unit.Core.Calculation.Grouping.ColumnBased
 {
     public class IndexByColumnGroupingTest
     {

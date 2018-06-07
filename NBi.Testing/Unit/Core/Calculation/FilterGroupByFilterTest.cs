@@ -1,5 +1,6 @@
 ﻿using NBi.Core.Calculation;
 using NBi.Core.Calculation.Grouping;
+using NBi.Core.Calculation.Grouping.ColumnBased;
 using NBi.Core.Calculation.Ranking;
 using NBi.Core.ResultSet;
 using NBi.Core.ResultSet.Resolver;
