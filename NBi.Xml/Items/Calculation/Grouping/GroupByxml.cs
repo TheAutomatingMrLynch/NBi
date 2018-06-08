@@ -12,5 +12,8 @@ namespace NBi.Xml.Items.Calculation.Grouping
     {
         [XmlElement("column")]
         public List<ColumnDefinitionLightXml> Columns { get; set; }
+
+        [XmlElement("case")]
+        public List<CaseXml> Cases { get; set; }
     }
 }

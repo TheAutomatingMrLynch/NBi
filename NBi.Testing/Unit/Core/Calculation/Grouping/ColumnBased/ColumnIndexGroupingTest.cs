@@ -12,7 +12,7 @@ using static NBi.Core.ResultSet.SettingsIndexResultSet;
 
 namespace NBi.Testing.Unit.Core.Calculation.Grouping.ColumnBased
 {
-    public class IndexByColumnGroupingTest
+    public class ColumnIndexGroupingTest
     {
         [Test]
         public void Execute_SingleColumn_TwoGroups()

@@ -10,11 +10,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace NBi.Xml.Items.Calculation
+namespace NBi.Xml.Items.Calculation.Predication
 {
-    public class PredicationXml : IPredicateInfo, IReferencePredicateInfo, ISecondOperandPredicateInfo, ICultureSensitivePredicateInfo, ICaseSensitivePredicateInfo 
+    public class SinglePredicationXml : AbstractPredicationXml, IPredicateInfo, IReferencePredicateInfo, ISecondOperandPredicateInfo, ICultureSensitivePredicateInfo, ICaseSensitivePredicateInfo 
     {
-        public PredicationXml()
+        public SinglePredicationXml()
         {
             ColumnIndex = -1;
             ColumnType = ColumnType.Numeric;

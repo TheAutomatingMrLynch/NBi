@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.Text;
 using System.Diagnostics;
+using NBi.Xml.Items.Calculation.Predication;
 #endregion
 
 namespace NBi.Testing.Unit.Xml.Constraints
@@ -339,7 +340,7 @@ namespace NBi.Testing.Unit.Xml.Constraints
                 new AliasXml() {Column = 1, Name="Col1"},
                 new AliasXml() {Column = 0, Name="Col2"}
             },
-                Predication = new PredicationXml()
+                Predication = new SinglePredicationXml()
             };
 #pragma warning restore 0618
 
@@ -362,7 +363,7 @@ namespace NBi.Testing.Unit.Xml.Constraints
         {
             var allRowsXml = new AllRowsXml
             {
-                Predication = new PredicationXml()
+                Predication = new SinglePredicationXml()
                 {
                     Predicate = new AnyOfXml()
                     {

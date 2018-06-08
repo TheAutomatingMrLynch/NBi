@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 using NBi.Xml.Constraints;
 using NBi.Xml.Constraints.Comparer;
 using NBi.Xml.Items.Calculation;
+using NBi.Xml.Items.Calculation.Predication;
 
 namespace NBi.Xml.SerializationOption
 {
@@ -27,10 +28,10 @@ namespace NBi.Xml.SerializationOption
             AddAsElement((NoRowsXml c) => c.InternalAliasesOld, "variable");
             AddAsElement((FilterXml f) => f.InternalAliasesOld, "variable");
 
-            AddAsAttribute((PredicationXml p) => p.Name, "name");
+            AddAsAttribute((SinglePredicationXml p) => p.Name, "name");
 
             AddToArrayyAttributes((TestXml t) => t.Constraints, "subsetOf", typeof(SubsetOf1xXml));
-            AddToElements((PredicationXml p) => p.Predicate, "within-list", typeof(WithinListXml));
+            AddToElements((SinglePredicationXml p) => p.Predicate, "within-list", typeof(WithinListXml));
             #pragma warning restore 0618
         }
 

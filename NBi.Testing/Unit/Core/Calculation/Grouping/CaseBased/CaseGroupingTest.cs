@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace NBi.Testing.Unit.Core.Calculation.Grouping.CaseBased
 {
-    public class GroupByCaseTest
+    public class CaseGroupingTest
     {
         [Test]
         public void Execute_SingleColumn_TwoGroups()

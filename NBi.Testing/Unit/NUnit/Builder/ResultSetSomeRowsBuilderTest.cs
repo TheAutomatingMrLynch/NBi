@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using NBi.Core.Variable;
 using NBi.Core.ResultSet;
 using NBi.Core.Injection;
+using NBi.Xml.Items.Calculation.Predication;
 #endregion
 
 namespace NBi.Testing.Unit.NUnit.Builder
@@ -66,7 +67,7 @@ namespace NBi.Testing.Unit.NUnit.Builder
 
             var ctrXml = new SomeRowsXml
             {
-                Predication = new PredicationXml()
+                Predication = new SinglePredicationXml()
                 {
                     Predicate = new MoreThanXml() { Value = "100" },
                     Operand = new ColumnPositionIdentifier(0)
@@ -95,7 +96,7 @@ namespace NBi.Testing.Unit.NUnit.Builder
 
             var ctrXml = new SomeRowsXml
             {
-                Predication = new PredicationXml()
+                Predication = new SinglePredicationXml()
                 {
                     Predicate = new MoreThanXml() { Value = "@year" },
                     Operand = new ColumnPositionIdentifier(0)
@@ -129,7 +130,7 @@ namespace NBi.Testing.Unit.NUnit.Builder
 
             var ctrXml = new SomeRowsXml
             {
-                Predication = new PredicationXml()
+                Predication = new SinglePredicationXml()
                 {
                     Predicate = new MoreThanXml() { Value = "@year" },
                     Operand = new ColumnPositionIdentifier(0)
@@ -166,7 +167,7 @@ namespace NBi.Testing.Unit.NUnit.Builder
 
             var ctrXml = new SomeRowsXml
             {
-                Predication = new PredicationXml()
+                Predication = new SinglePredicationXml()
                 {
                     Predicate = new MoreThanXml() { Value = "100" },
                     Operand = new ColumnPositionIdentifier(0)
@@ -191,7 +192,7 @@ namespace NBi.Testing.Unit.NUnit.Builder
 
             var ctrXml = new SomeRowsXml
             {
-                Predication = new PredicationXml()
+                Predication = new SinglePredicationXml()
                 {
                     Predicate = new MoreThanXml() { Value = "100" },
                     Operand = new ColumnPositionIdentifier(0)

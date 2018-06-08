@@ -4,6 +4,7 @@ using NBi.Xml.Constraints;
 using NBi.Xml.Constraints.Comparer;
 using NBi.Xml.Items.Calculation;
 using NBi.Xml.Items.Calculation.Grouping;
+using NBi.Xml.Items.Calculation.Predication;
 using NBi.Xml.Items.Calculation.Ranking;
 using NBi.Xml.Items.ResultSet;
 using NBi.Xml.Systems;
@@ -132,6 +133,39 @@ namespace NBi.Testing.Unit.Xml.Items.Calculation
         }
 
         [Test]
+        public void Deserialize_RankingWithCases_CaseGrouping()
+        {
+            int testNr = 2;
+
+            // Create an instance of the XmlSerializer specifying type and namespace.
+            TestSuiteXml ts = DeserializeSample();
+
+            Assert.That(ts.Tests[testNr].Systems[0], Is.TypeOf<ResultSetSystemXml>());
+            var alteration = (ts.Tests[testNr].Systems[0] as ResultSetSystemXml).Alteration;
+            Assert.That(alteration.Filters, Is.Not.Null.And.Not.Empty);
+            Assert.That(alteration.Filters[0].Ranking.GroupBy, Is.Not.Null);
+            Assert.That(alteration.Filters[0].Ranking.GroupBy.Cases, Is.Not.Null);
+            Assert.That(alteration.Filters[0].Ranking.GroupBy.Cases.Count, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void Deserialize_RankingWithCases_PredicateOrCombination()
+        {
+            int testNr = 2;
+
+            // Create an instance of the XmlSerializer specifying type and namespace.
+            TestSuiteXml ts = DeserializeSample();
+
+            Assert.That(ts.Tests[testNr].Systems[0], Is.TypeOf<ResultSetSystemXml>());
+            var alteration = (ts.Tests[testNr].Systems[0] as ResultSetSystemXml).Alteration;
+            Assert.That(alteration.Filters, Is.Not.Null.And.Not.Empty);
+            Assert.That(alteration.Filters[0].Ranking.GroupBy.Cases[0].Predication, Is.Not.Null);
+            Assert.That(alteration.Filters[0].Ranking.GroupBy.Cases[0].Predication, Is.TypeOf<SinglePredicationXml>());
+            Assert.That(alteration.Filters[0].Ranking.GroupBy.Cases[1].Predication, Is.Not.Null);
+            Assert.That(alteration.Filters[0].Ranking.GroupBy.Cases[1].Predication, Is.TypeOf<CombinationPredicationXml>());
+        }
+
+        [Test]
         public void Serialize_DefaultNoGroup_RankingXml()
         {
             var filterXml = new FilterXml
@@ -211,6 +245,80 @@ namespace NBi.Testing.Unit.Xml.Items.Calculation
             Assert.That(content, Is.StringContaining("boolean"));
             Assert.That(content, Is.StringContaining("bar"));
             Assert.That(content, Is.Not.StringContaining("text"));
+        }
+
+        [Test]
+        public void Serialize_WithGroupByCase_RankingXml()
+        {
+            var filterXml = new FilterXml
+            {
+                Ranking = new RankingXml()
+                {
+                    Operand = new ColumnPositionIdentifier(1),
+                    Type = ColumnType.DateTime,
+                    Rank = new BottomRankingXml(),
+                    GroupBy = new GroupByXml()
+                    {
+                        Cases = new List<CaseXml>()
+                        {
+                            new CaseXml()
+                            {
+                                Predication = new SinglePredicationXml()
+                                {
+                                    Operand = new ColumnPositionIdentifier(1),
+                                    ColumnType = ColumnType.DateTime,
+                                    Predicate = new MatchesDateXml()
+                                }
+                            },
+                            new CaseXml()
+                            {
+                                Predication = new CombinationPredicationXml()
+                                {
+                                    Operator = NBi.Core.Calculation.CombinationOperator.And,
+                                    Predicates = new List<SinglePredicationXml>()
+                                    {
+                                        new SinglePredicationXml()
+                                        {
+                                            Operand = new ColumnPositionIdentifier(2),
+                                            ColumnType = ColumnType.Text,
+                                            Predicate = new LowerCaseXml()
+                                        },
+                                        new SinglePredicationXml()
+                                        {
+                                            Operand = new ColumnPositionIdentifier(4),
+                                            ColumnType = ColumnType.Numeric,
+                                            Predicate = new LessThanXml()
+                                            {
+                                                Value = "10"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                        }
+                    }
+                }
+            };
+
+            var serializer = new XmlSerializer(typeof(FilterXml));
+            var content = string.Empty;
+            using (var stream = new MemoryStream())
+            using (var writer = new StreamWriter(stream, Encoding.UTF8))
+            {
+                serializer.Serialize(writer, filterXml);
+                content = Encoding.UTF8.GetString(stream.ToArray());
+            }
+
+            Debug.WriteLine(content);
+
+            Assert.That(content, Is.StringContaining("bottom"));
+            Assert.That(content, Is.Not.StringContaining("count"));
+            Assert.That(content, Is.StringContaining("group-by"));
+            Assert.That(content, Is.StringContaining("case"));
+            Assert.That(content, Is.StringContaining("matches-date"));
+            Assert.That(content, Is.StringContaining("and"));
+            Assert.That(content, Is.StringContaining("lower-case"));
+            Assert.That(content, Is.StringContaining("less-than"));
         }
     }
 }

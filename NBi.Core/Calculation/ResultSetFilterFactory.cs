@@ -63,5 +63,16 @@ namespace NBi.Core.Calculation
 
             return new FilterGroupByFilter(ranking, grouping);
         }
+
+        //public IResultSetFilter Instantiate(IRankingInfo rankingInfo, IEnumerable<IPredication> predications)
+        //{
+        //    var groupingFactory = new GroupByFactory();
+        //    var grouping = groupingFactory.Instantiate(columns);
+
+        //    var rankingFactory = new RankingFactory();
+        //    var ranking = rankingFactory.Instantiate(rankingInfo);
+
+        //    return new FilterGroupByFilter(ranking, grouping);
+        //}
     }
 }

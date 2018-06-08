@@ -10,9 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace NBi.Xml.Items.Calculation
+namespace NBi.Xml.Items.Calculation.Predication
 {
-    public class CombinationPredicateXml
+    public class CombinationPredicationXml : AbstractPredicationXml
     {
         [XmlAttribute("operator")]
         public CombinationOperator Operator { get; set; }
@@ -22,6 +22,6 @@ namespace NBi.Xml.Items.Calculation
         public bool Not { get; set; }
 
         [XmlElement("predicate")]
-        public List<PredicationXml> Predicates { get; set; }
+        public List<SinglePredicationXml> Predicates { get; set; }
     }
 }

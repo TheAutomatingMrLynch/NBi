@@ -13,6 +13,7 @@ using NBi.Xml.Constraints.Comparer;
 using NBi.Xml.Items.Calculation;
 using NBi.Core.Evaluate;
 using System;
+using NBi.Xml.Items.Calculation.Predication;
 
 namespace NBi.Xml.Constraints
 {
@@ -48,10 +49,10 @@ namespace NBi.Xml.Constraints
         private List<AliasXml> internalAliases;
 
         [XmlElement("predicate")]
-        public PredicationXml Predication { get; set; }
+        public SinglePredicationXml Predication { get; set; }
 
         [XmlElement("combination")]
-        public CombinationPredicateXml Combination { get; set; }
+        public CombinationPredicationXml Combination { get; set; }
 
         public NoRowsXml()
         {

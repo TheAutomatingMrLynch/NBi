@@ -3,6 +3,7 @@ using NBi.Xml;
 using NBi.Xml.Constraints;
 using NBi.Xml.Constraints.Comparer;
 using NBi.Xml.Items.Calculation;
+using NBi.Xml.Items.Calculation.Predication;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -80,7 +81,7 @@ namespace NBi.Testing.Unit.Xml.Items.Calculation
         {
             var allRowsXml = new AllRowsXml
             {
-                Predication = new PredicationXml()
+                Predication = new SinglePredicationXml()
                 {
                     Operand = new ColumnPositionIdentifier(1),
                     Predicate = new FalseXml()
@@ -106,7 +107,7 @@ namespace NBi.Testing.Unit.Xml.Items.Calculation
         {
             var allRowsXml = new AllRowsXml
             {
-                Predication = new PredicationXml()
+                Predication = new SinglePredicationXml()
                 {
                     Operand = new ColumnPositionIdentifier(1),
                     Predicate = new ModuloXml() { SecondOperand = "10", Value = "5" }

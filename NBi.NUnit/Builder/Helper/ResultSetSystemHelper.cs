@@ -79,10 +79,17 @@ namespace NBi.NUnit.Builder.Helper
                     }
                     else
                     {
-                        yield return factory.Instantiate(
-                            filterXml.Ranking, 
-                            filterXml.Ranking?.GroupBy?.Columns
-                            ).Apply;
+                        if (filterXml.Ranking.GroupBy?.Columns != null)
+                            yield return factory.Instantiate(
+                                filterXml.Ranking,
+                                filterXml.Ranking?.GroupBy?.Columns
+                                ).Apply;
+                        else
+                            yield return null;
+                                //factory.Instantiate(
+                                //filterXml.Ranking,
+                                //filterXml.Ranking?.GroupBy?.Cases
+                                //).Apply;
                     }
                 }
             }
