@@ -1,4 +1,5 @@
-﻿using NBi.Core.Variable;
+﻿using NBi.Core.Transformation;
+using NBi.Core.Variable;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,9 +18,9 @@ namespace NBi.Core.Scalar.Resolver
             this.args = args;
         }
 
-        public GlobalVariableScalarResolver(string name, IDictionary<string, ITestVariable> variables)
+        public GlobalVariableScalarResolver(string name, IDictionary<string, ITestVariable> variables, IEnumerable<ITransformer> transformers)
         {
-            this.args = new GlobalVariableScalarResolverArgs(name, variables);
+            this.args = new GlobalVariableScalarResolverArgs(name, variables, transformers);
         }
 
         public T Execute()
@@ -27,9 +28,20 @@ namespace NBi.Core.Scalar.Resolver
             CheckVariableExists(args.VariableName, args.GlobalVariables);
             var evaluation = EvaluateVariable(args.GlobalVariables[args.VariableName]);
             var typedEvaluation = StrongTypingVariable(evaluation);
-            DisplayVariable(args.VariableName, typedEvaluation);
+            var transformedEvaluation = TransformVariable(typedEvaluation, args.Transformers);
+            DisplayVariable(args.VariableName, transformedEvaluation);
 
             return (T)typedEvaluation;
+        }
+
+        private object TransformVariable(object typedEvaluation, IEnumerable<ITransformer> transformers)
+        {
+            var output = typedEvaluation;
+
+            foreach (var transformer in transformers)
+                output = transformer.Execute(output);
+
+            return output;
         }
 
         private void DisplayVariable(string name, object value)

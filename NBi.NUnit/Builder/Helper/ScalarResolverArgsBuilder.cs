@@ -5,6 +5,7 @@ using NBi.Core.Scalar.Resolver;
 using NBi.Core.Transformation;
 using NBi.Core.Variable;
 using NBi.Xml.Items;
+using NBi.Xml.Items.Alteration.Transform;
 using NBi.Xml.Items.ResultSet;
 using NBi.Xml.Settings;
 using NBi.Xml.Systems;
@@ -87,8 +88,25 @@ namespace NBi.NUnit.Builder.Helper
 
             else if (obj is string && !string.IsNullOrEmpty((string)obj) && ((string)obj).Trim().StartsWith("@"))
             {
-                var variableName = ((string)obj).Trim().Substring(1);
-                args = new GlobalVariableScalarResolverArgs(variableName, globalVariables);
+                var pipes = ((string)obj).Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                var variableName = pipes[0].Trim().Substring(1);
+
+                var factory = new TransformerFactory();
+                var transformers = new List<ITransformer>();
+                foreach (var code in pipes.Skip(1))
+                {
+                    var info = new LightTransformXml()
+                    {
+                        OriginalType = Core.ResultSet.ColumnType.Numeric,
+                        Language=LanguageType.Native,
+                        Code = code.Trim(),
+                    };
+                    var transformer = factory.Instantiate(info);
+                    transformer.Initialize(info.Code);
+                    transformers.Add(transformer);
+                }
+
+                args = new GlobalVariableScalarResolverArgs(variableName, globalVariables, transformers);
             }
 
             else if (obj is string && !string.IsNullOrEmpty((string)obj) && ((string)obj).Trim().StartsWith("~"))

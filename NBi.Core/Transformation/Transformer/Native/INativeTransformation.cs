@@ -9,5 +9,6 @@ namespace NBi.Core.Transformation.Transformer.Native
     interface INativeTransformation
     {
         object Evaluate(object value);
+
     }
 }

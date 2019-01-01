@@ -1,4 +1,6 @@
-﻿using NBi.Core.Variable;
+﻿using NBi.Core.Transformation;
+using NBi.Core.Transformation.Transformer;
+using NBi.Core.Variable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +13,13 @@ namespace NBi.Core.Scalar.Resolver
     {
         public string VariableName { get; }
         public IDictionary<string, ITestVariable> GlobalVariables { get; }
+        public IEnumerable<ITransformer> Transformers { get; }
 
-        public GlobalVariableScalarResolverArgs(string variableName, IDictionary<string, ITestVariable> globalVariables)
+        public GlobalVariableScalarResolverArgs(string variableName, IDictionary<string, ITestVariable> globalVariables, IEnumerable<ITransformer> transformers)
         {
             this.VariableName = variableName;
-            this.GlobalVariables = globalVariables;
+            this.GlobalVariables = globalVariables ?? new Dictionary<string, ITestVariable>();
+            this.Transformers = transformers ?? new List<ITransformer>();
         }
         
     }

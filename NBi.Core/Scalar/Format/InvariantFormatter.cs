@@ -46,7 +46,7 @@ namespace NBi.Core.Scalar.Format
         protected IScalarResolverArgs BuildArgs(string text)
         {
             if (text.StartsWith("@"))
-                return new GlobalVariableScalarResolverArgs(text.Substring(1), globalVariables);
+                return new GlobalVariableScalarResolverArgs(text.Substring(1), globalVariables, null);
             else
                 throw new ArgumentException($"A fomatter cannot handle any other scalar than variables at this moment. The value '{text}' is not recognized as a variable didn't you forget the arobas (@)?");
         }

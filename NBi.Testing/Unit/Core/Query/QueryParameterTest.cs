@@ -24,7 +24,7 @@ namespace NBi.Testing.Unit.Core.Query
         public void GetValue_Variable_CorrectValue()
         {
             var variable = new GlobalVariable(new CSharpScalarResolver<object>("Math.Min(30, 50)"));
-            var resolver = new GlobalVariableScalarResolver<object>("alpha", new Dictionary<string, ITestVariable>() {{ "alpha", variable }});
+            var resolver = new GlobalVariableScalarResolver<object>("alpha", new Dictionary<string, ITestVariable>() {{ "alpha", variable }}, null);
 
             var param = new QueryParameter("param", resolver);
             Assert.That(param.GetValue(), Is.EqualTo(30));
@@ -35,7 +35,7 @@ namespace NBi.Testing.Unit.Core.Query
         {
             var internalResolverMock = new Mock<IScalarResolver<object>>();
             internalResolverMock.Setup(x => x.Execute()).Returns(It.IsAny<object>());
-            var resolver = new GlobalVariableScalarResolver<object>("alpha", new Dictionary<string, ITestVariable>() { { "alpha", new GlobalVariable(internalResolverMock.Object) } });
+            var resolver = new GlobalVariableScalarResolver<object>("alpha", new Dictionary<string, ITestVariable>() { { "alpha", new GlobalVariable(internalResolverMock.Object) } }, null);
 
             var param = new QueryParameter("param", resolver);
             param.GetValue();

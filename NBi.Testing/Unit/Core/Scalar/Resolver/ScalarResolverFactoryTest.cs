@@ -29,7 +29,7 @@ namespace NBi.Testing.Unit.Core.Scalar.Resolver
         [Test]
         public void Instantiate_GlobalVariableArgs_GlobalVariableResolver()
         {
-            var args = new GlobalVariableScalarResolverArgs("myVar", new Dictionary<string, ITestVariable>() { { "myVar", null } });
+            var args = new GlobalVariableScalarResolverArgs("myVar", new Dictionary<string, ITestVariable>() { { "myVar", null } }, null);
 
             var factory = new ScalarResolverFactory(null);
             var resolver = factory.Instantiate<object>(args);

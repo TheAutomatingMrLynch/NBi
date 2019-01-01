@@ -60,5 +60,12 @@ namespace NBi.Core.Transformation
 
             return transformer;
         }
+
+        public ITransformer Instantiate(LanguageType languageType)
+        {
+            if (languageType == LanguageType.Native)
+                return new NativeTransformer<object>();
+            throw new ArgumentOutOfRangeException();
+        }
     }
 }
