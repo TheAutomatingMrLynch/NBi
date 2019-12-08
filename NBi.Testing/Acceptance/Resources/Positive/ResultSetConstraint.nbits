@@ -1712,7 +1712,7 @@
         </equal-to>
       </assert>
     </test>
-    <test name="Complex chaining two summarizations" uid="0264">
+    <test name="Complex chaining two summarizations" uid="0265">
       <system-under-test>
         <result-set>
           <query>
@@ -1771,6 +1771,41 @@
               <rename identifier="#1" new-name="UtcDateTime"/>
               <rename identifier="#2" new-name="ActualGenerationOutput"/>
             </alteration>
+          </result-set>
+        </equal-to>
+      </assert>
+    </test>
+    <test name="Summarization on concatenation of text" uid="0266">
+      <system-under-test>
+        <result-set>
+          <query>
+            select 'A' as Key1, 'alpha' as Value
+            union all select 'B', 'beta'
+            union all select 'B', 'gamma'
+            union all select 'B', 'delta'
+            union all select 'A', 'epsilon'
+          </query>
+          <alteration>
+            <summarize>
+              <concatenate column="[Value]" type="text" separator=" - "/>
+              <group-by>
+                <column identifier="Key1" type="text"/>
+              </group-by>
+            </summarize>
+          </alteration>
+        </result-set>
+      </system-under-test>
+      <assert>
+        <equal-to keys="all-except-last" values-default-type="text">
+          <result-set>
+            <row>
+              <cell>A</cell>
+              <cell>alpha - epsilon</cell>
+            </row>
+            <row>
+              <cell>B</cell>
+              <cell>beta - gamma - delta</cell>
+            </row>
           </result-set>
         </equal-to>
       </assert>
