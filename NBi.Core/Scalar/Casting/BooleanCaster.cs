@@ -39,7 +39,6 @@ namespace NBi.Core.Scalar.Casting
             return (base.IsValid(value) || StringParsing(value) != ThreeStateBoolean.Unknown);
         }
 
-
         protected ThreeStateBoolean IntParsing(object obj)
         {
             if (IsParsableNumeric(obj))

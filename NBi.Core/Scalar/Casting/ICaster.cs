@@ -10,6 +10,7 @@ namespace NBi.Core.Scalar.Casting
     {
         new T Execute(object obj);
         bool IsValid(object obj);
+        bool IsStrictlyValid(object obj);
     }
 
     public interface ICaster

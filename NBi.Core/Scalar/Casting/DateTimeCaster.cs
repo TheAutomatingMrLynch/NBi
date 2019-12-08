@@ -96,5 +96,7 @@ namespace NBi.Core.Scalar.Casting
             catch (Exception)
             { return false; }
         }
+
+        public bool IsStrictlyValid(object obj) => IsValid(obj);
     }
 }
