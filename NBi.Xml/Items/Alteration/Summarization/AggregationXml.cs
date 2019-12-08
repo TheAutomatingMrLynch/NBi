@@ -29,11 +29,13 @@ namespace NBi.Xml.Items.Alteration.Summarization
         public string EmptySeriesStrategyName { get; set; }
         [XmlAttribute("if-missing-value")]
         public string MissingValuesStrategyName { get; set; }
+        [XmlIgnore]
+        public virtual IDictionary<string, object> Parameters { get => new Dictionary<string, object>(); }
     }
 
     public class SumXml : AggregationXml
     {
-        public SumXml() : base(AggregationFunctionType.Sum) { } 
+        public SumXml() : base(AggregationFunctionType.Sum) { }
     }
 
     public class AverageXml : AggregationXml
@@ -49,5 +51,16 @@ namespace NBi.Xml.Items.Alteration.Summarization
     public class MinXml : AggregationXml
     {
         public MinXml() : base(AggregationFunctionType.Min) { }
+    }
+
+    public class ConcatenateXml : AggregationXml
+    {
+        public ConcatenateXml() : base(AggregationFunctionType.Concatenate) { }
+
+        [XmlAttribute("separator")]
+        public string Separator { get; set; }
+
+        [XmlIgnore]
+        public override IDictionary<string, object> Parameters { get => new Dictionary<string, object>() { { "separator", Separator } }; }
     }
 }
