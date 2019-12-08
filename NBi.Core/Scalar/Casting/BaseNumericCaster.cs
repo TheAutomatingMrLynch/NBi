@@ -21,8 +21,8 @@ namespace NBi.Core.Scalar.Casting
                     || value is long
                     || value is float
                     || value is double
-                    || value is decimal)
-                    && IsParsableNumeric(value);
+                    || value is decimal
+                    || IsParsableNumeric(value));
         }
 
         public virtual bool IsValid(object value)

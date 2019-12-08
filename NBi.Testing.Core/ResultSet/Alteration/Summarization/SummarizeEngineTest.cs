@@ -219,9 +219,9 @@ namespace NBi.Testing.Core.ResultSet.Alteration.Summarization
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Columns.Count, Is.EqualTo(3));
             Assert.That(result.Rows.Count, Is.EqualTo(1));
-            Assert.That(Convert.ToInt32(result.Rows[0][0]) == 10);
-            Assert.That(Convert.ToInt32(result.Rows[0][1]) == 1);
-            Assert.That(Convert.ToInt32(result.Rows[0][2]) == 4);
+            Assert.That(Convert.ToInt32(result.Rows[0][0]), Is.EqualTo(10));
+            Assert.That(Convert.ToInt32(result.Rows[0][1]), Is.EqualTo(1));
+            Assert.That(Convert.ToInt32(result.Rows[0][2]), Is.EqualTo(4));
         }
 
         [Test]
