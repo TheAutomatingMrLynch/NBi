@@ -7,16 +7,33 @@ using System.Threading.Tasks;
 
 namespace NBi.Core.Sequence.Transformation.Aggregation.Strategy
 {
-    public class ReplaceByDefaultStrategy : IMissingValueStrategy
+    abstract class ReplaceByDefaultStrategy<T> : IMissingValueStrategy
     {
-        private decimal DefaultValue { get; }
+        private T DefaultValue { get; }
+        public ICaster<T> Caster { get; }
 
-        public ReplaceByDefaultStrategy(decimal defaultValue) => DefaultValue = defaultValue;
+        protected ReplaceByDefaultStrategy(ICaster<T> caster, T defaultValue) 
+            => (Caster, DefaultValue) = (caster, defaultValue);
 
         public IEnumerable<object> Execute(IEnumerable<object> values)
-        {
-            var caster = new NumericCaster();
-            return values.Select(x => caster.IsStrictlyValid(x) ? caster.Execute(x) : DefaultValue).Cast<object>();
-        }
+            => values.Select(x => Caster.IsStrictlyValid(x) ? Caster.Execute(x) : DefaultValue).Cast<object>();
+    }
+
+    class ReplaceByDefaultStrategyText :ReplaceByDefaultStrategy<string>
+    {
+        public ReplaceByDefaultStrategyText(string defaultValue)
+        : base(new TextCaster(), defaultValue) { }
+    }
+
+    class ReplaceByDefaultStrategyNumeric :ReplaceByDefaultStrategy<decimal>
+    {
+        public ReplaceByDefaultStrategyNumeric(decimal defaultValue)
+        : base(new NumericCaster(), defaultValue) { }
+    }
+
+    class ReplaceByDefaultStrategyDateTime :ReplaceByDefaultStrategy<DateTime>
+    {
+        public ReplaceByDefaultStrategyDateTime(DateTime defaultValue)
+        : base(new DateTimeCaster(), defaultValue) { }
     }
 }

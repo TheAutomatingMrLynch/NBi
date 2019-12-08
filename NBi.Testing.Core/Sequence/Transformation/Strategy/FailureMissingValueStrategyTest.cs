@@ -14,7 +14,7 @@ namespace NBi.Testing.Unit.Core.Sequence.Transformation.Strategy
         public void Execute_NoSpecialValue_NoException()
         {
             var list = new List<object>() { 1, 3, 5 };
-            var strategy = new FailureMissingValueStrategy();
+            var strategy = new FailureMissingValueStrategyNumeric();
             Assert.DoesNotThrow(() => strategy.Execute(list));
         }
 
@@ -22,7 +22,7 @@ namespace NBi.Testing.Unit.Core.Sequence.Transformation.Strategy
         public void Execute_NoSpecialValue_SameValues()
         {
             var list = new List<object>() { 1, 3, 5 };
-            var strategy = new FailureMissingValueStrategy();
+            var strategy = new FailureMissingValueStrategyNumeric();
             var result = strategy.Execute(list);
             Assert.That(result, Has.Member(1));
             Assert.That(result, Has.Member(3));
@@ -30,18 +30,35 @@ namespace NBi.Testing.Unit.Core.Sequence.Transformation.Strategy
         }
 
         [Test]
-        public void Execute_Blank_BlankDropped()
+        public void Execute_Blank_Exception()
         {
             var list = new List<object>() { 1, "(blank)", 3, 5 };
-            var strategy = new FailureMissingValueStrategy();
+            var strategy = new FailureMissingValueStrategyNumeric();
             Assert.Throws<ArgumentException>(() => strategy.Execute(list));
         }
 
         [Test]
-        public void Execute_Null_NullDropped()
+        public void Execute_Null_Exception()
         {
             var list = new List<object>() { 1, 3, 5, null };
-            var strategy = new FailureMissingValueStrategy();
+            var strategy = new FailureMissingValueStrategyNumeric();
+            Assert.Throws<ArgumentException>(() => strategy.Execute(list));
+        }
+
+        [Test]
+        public void Execute_NullAsText_Exception()
+        {
+            var list = new List<object>() { 1, 3, 5, "(null)" };
+            var strategy = new FailureMissingValueStrategyNumeric();
+            Assert.Throws<ArgumentException>(() => strategy.Execute(list));
+        }
+
+
+        [Test]
+        public void Execute_TextNullAsText_Exception()
+        {
+            var list = new List<object>() { 1, 3, 5, "(null)" };
+            var strategy = new FailureMissingValueStrategyText();
             Assert.Throws<ArgumentException>(() => strategy.Execute(list));
         }
     }

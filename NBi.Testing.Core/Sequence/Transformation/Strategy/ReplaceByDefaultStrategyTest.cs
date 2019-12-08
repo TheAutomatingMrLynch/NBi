@@ -14,7 +14,7 @@ namespace NBi.Testing.Unit.Core.Sequence.Transformation.Strategy
         public void Execute_NothingToReplace_NothingDropped()
         {
             var list = new List<object>() { 1, 3, 5 };
-            var strategy = new ReplaceByDefaultStrategy(0);
+            var strategy = new ReplaceByDefaultStrategyNumeric(0);
             Assert.That(strategy.Execute(list).Count, Is.EqualTo(3));
         }
 
@@ -22,7 +22,7 @@ namespace NBi.Testing.Unit.Core.Sequence.Transformation.Strategy
         public void Execute_NothingToReplace_SameValues()
         {
             var list = new List<object>() { 1, 3, 5 };
-            var strategy = new ReplaceByDefaultStrategy(0);
+            var strategy = new ReplaceByDefaultStrategyNumeric(0);
             Assert.That(strategy.Execute(list), Has.Member(1));
             Assert.That(strategy.Execute(list), Has.Member(3));
             Assert.That(strategy.Execute(list), Has.Member(5));
@@ -32,7 +32,7 @@ namespace NBi.Testing.Unit.Core.Sequence.Transformation.Strategy
         public void Execute_Blank_BlankReplaced()
         {
             var list = new List<object>() { 1, "(blank)", 3, 5 };
-            var strategy = new ReplaceByDefaultStrategy(-1);
+            var strategy = new ReplaceByDefaultStrategyNumeric(-1);
             Assert.That(strategy.Execute(list).Count, Is.EqualTo(4));
             Assert.That(strategy.Execute(list), Has.Member(-1));
             Assert.That(strategy.Execute(list), Has.Member(1));
@@ -44,12 +44,24 @@ namespace NBi.Testing.Unit.Core.Sequence.Transformation.Strategy
         public void Execute_Null_NullReplaced()
         {
             var list = new List<object>() { 1, 3, 5, null };
-            var strategy = new ReplaceByDefaultStrategy(0);
+            var strategy = new ReplaceByDefaultStrategyNumeric(0);
             Assert.That(strategy.Execute(list).Count, Is.EqualTo(4));
             Assert.That(strategy.Execute(list), Has.Member(0));
             Assert.That(strategy.Execute(list), Has.Member(1));
             Assert.That(strategy.Execute(list), Has.Member(3));
             Assert.That(strategy.Execute(list), Has.Member(5));
+        }
+
+        [Test]
+        public void Execute_TextNull_NullReplaced()
+        {
+            var list = new List<object>() { 1, 3, 5, null };
+            var strategy = new ReplaceByDefaultStrategyText("");
+            Assert.That(strategy.Execute(list).Count, Is.EqualTo(4));
+            Assert.That(strategy.Execute(list), Has.Member("1"));
+            Assert.That(strategy.Execute(list), Has.Member("3"));
+            Assert.That(strategy.Execute(list), Has.Member("5"));
+            Assert.That(strategy.Execute(list), Has.Member(""));
         }
     }
 }
