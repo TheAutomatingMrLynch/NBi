@@ -212,7 +212,8 @@ namespace NBi.NUnit.Builder.Helper
                         new ColumnAggregationArgs(
                             summarizeXml.Aggregation.Identifier,
                             summarizeXml.Aggregation.Function,
-                            summarizeXml.Aggregation.ColumnType
+                            summarizeXml.Aggregation.ColumnType,
+                            summarizeXml.Aggregation.Parameters
                         )
                     };
             var groupBys = summarizeXml.GroupBy?.Columns?.Cast<IColumnDefinitionLight>() ?? new List<IColumnDefinitionLight>();

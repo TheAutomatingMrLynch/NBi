@@ -766,6 +766,7 @@
     <Compile Include="Sequence\Transformation\Aggregation\AggregationArgs.cs" />
     <Compile Include="Sequence\Transformation\Aggregation\AggregationFactory.cs" />
     <Compile Include="Sequence\Transformation\Aggregation\AggregationFunctionType.cs" />
+    <Compile Include="Sequence\Transformation\Aggregation\Function\Concatenate.cs" />
     <Compile Include="Sequence\Transformation\Aggregation\IAggregationStrategy.cs" />
     <Compile Include="Sequence\Transformation\Aggregation\Function\BaseAggregation.cs" />
     <Compile Include="Sequence\Transformation\Aggregation\IAggregationFunction.cs" />
@@ -773,6 +774,7 @@
     <Compile Include="Sequence\Transformation\Aggregation\Function\Min.cs" />
     <Compile Include="Sequence\Transformation\Aggregation\Function\Sum.cs" />
     <Compile Include="Sequence\Transformation\Aggregation\Function\Average.cs" />
+    <Compile Include="Sequence\Transformation\Aggregation\Strategy\MissingValueStrategyFactory.cs" />
     <Compile Include="Sequence\Transformation\ISequenceTransformation.cs" />
     <Compile Include="Sequence\Transformation\Aggregation\Strategy\FailureEmptySeriesStrategy.cs" />
     <Compile Include="Sequence\Transformation\Aggregation\Strategy\IEmptySeriesStrategy.cs" />

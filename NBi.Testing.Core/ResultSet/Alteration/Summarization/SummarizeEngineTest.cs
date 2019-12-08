@@ -64,6 +64,29 @@ namespace NBi.Testing.Core.ResultSet.Alteration.Summarization
         }
 
         [Test]
+        public void Execute_SingleKeySingleAggregationWithParameters_ExpectedResultSet()
+        {
+            var rs = Build();
+
+            var args = new SummarizeArgs(
+                    new List<ColumnAggregationArgs>()
+                    { new ColumnAggregationArgs(new ColumnNameIdentifier("valueColumn"), AggregationFunctionType.Concatenate, ColumnType.Text, new Dictionary<string, object>() {{"Separator", " - " } }) },
+                    new List<IColumnDefinitionLight>()
+                    { Mock.Of<IColumnDefinitionLight>(x => x.Identifier == new ColumnNameIdentifier("keyColumn") && x.Type == ColumnType.Text) }
+                );
+
+            var summarize = new SummarizeEngine(args);
+            var result = summarize.Execute(rs);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Columns.Count, Is.EqualTo(2));
+            Assert.That(result.Rows.Cast<DataRow>().Any(x => x["keyColumn"] as string == "alpha"));
+            Assert.That(result.Rows.Cast<DataRow>().Any(x => x["keyColumn"] as string == "beta"));
+            Assert.That(result.Rows.Count, Is.EqualTo(2));
+            Assert.That((string)result.Rows.Cast<DataRow>().Single(x => x["keyColumn"] as string == "alpha")["valueColumn"] == "1 - 2 - 4");
+            Assert.That((string)result.Rows.Cast<DataRow>().Single(x => x["keyColumn"] as string == "beta")["valueColumn"] == "3");
+        }
+
+        [Test]
         public void Execute_MultipleKeySingleAggregation_ExpectedResultSet()
         {
             var rs = new ObjectsResultSetResolver(
@@ -89,7 +112,7 @@ namespace NBi.Testing.Core.ResultSet.Alteration.Summarization
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Columns.Count, Is.EqualTo(3));
             Assert.That(result.Rows.Cast<DataRow>().Any(x => x["ColumnA"] as string == "alpha" && x["ColumnB"] as string == "foo"));
-            Assert.That(result.Rows.Cast<DataRow>().Any(x => x["ColumnA"] as string == "beta"  && x["ColumnB"] as string == "foo"));
+            Assert.That(result.Rows.Cast<DataRow>().Any(x => x["ColumnA"] as string == "beta" && x["ColumnB"] as string == "foo"));
             Assert.That(result.Rows.Cast<DataRow>().Any(x => x["ColumnA"] as string == "alpha" && x["ColumnB"] as string == "bar"));
             Assert.That(result.Rows.Count, Is.EqualTo(3));
         }
@@ -120,7 +143,7 @@ namespace NBi.Testing.Core.ResultSet.Alteration.Summarization
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Columns.Count, Is.EqualTo(3));
             Assert.That(result.Rows.Cast<DataRow>().Any(x => x["ColumnB"] as string == "alpha" && x["ColumnA"] as string == "foo"));
-            Assert.That(result.Rows.Cast<DataRow>().Any(x => x["ColumnB"] as string == "beta"  && x["ColumnA"] as string == "foo"));
+            Assert.That(result.Rows.Cast<DataRow>().Any(x => x["ColumnB"] as string == "beta" && x["ColumnA"] as string == "foo"));
             Assert.That(result.Rows.Cast<DataRow>().Any(x => x["ColumnB"] as string == "alpha" && x["ColumnA"] as string == "bar"));
             Assert.That(result.Rows.Count, Is.EqualTo(3));
         }
