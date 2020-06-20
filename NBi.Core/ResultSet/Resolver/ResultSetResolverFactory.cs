@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using NBi.Core.Injection;
-using NBi.Core.FlatFile;
 using NBi.Extensibility.Resolving;
+using NBi.Core.FlatFile.Parsing;
 
 namespace NBi.Core.ResultSet.Resolver
 {

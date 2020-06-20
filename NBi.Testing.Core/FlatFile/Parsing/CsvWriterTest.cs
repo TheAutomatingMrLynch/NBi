@@ -1,5 +1,5 @@
 ﻿using NBi.Core;
-using NBi.Core.FlatFile;
+using NBi.Core.FlatFile.Parsing;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NBi.Testing.Core.FlatFile
+namespace NBi.Testing.Core.FlatFile.Parsing
 {
     class CsvWriterTest
     {
@@ -29,7 +29,7 @@ namespace NBi.Testing.Core.FlatFile
             table.AcceptChanges();
         }
 
-        private CsvProfile Csv = CsvProfile.SemiColumnDoubleQuote;
+        private readonly CsvProfile Csv = CsvProfile.SemiColumnDoubleQuote;
 
         [Test]
         public void Write_TwoRowsWithHeader_ThreeLines()

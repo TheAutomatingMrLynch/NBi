@@ -12,9 +12,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NBi.Core.Scalar.Format;
-using NBi.Core.FlatFile;
 using NBi.Core.Transformation.Transformer;
 using NBi.Core.Transformation;
+using NBi.Core.FlatFile.Storing;
+using NBi.Core.FlatFile.Parsing;
 
 namespace NBi.Core.Injection
 {

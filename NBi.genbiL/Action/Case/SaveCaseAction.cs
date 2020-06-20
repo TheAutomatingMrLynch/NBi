@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using NBi.Core.FlatFile;
+using NBi.Core.FlatFile.Parsing;
 using NBi.GenbiL.Stateful;
 
 namespace NBi.GenbiL.Action.Case

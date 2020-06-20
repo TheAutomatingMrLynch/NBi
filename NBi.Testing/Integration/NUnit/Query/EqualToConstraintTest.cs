@@ -12,7 +12,7 @@ using NBi.Core.Scalar.Comparer;
 using NBi.Core;
 using NBi.Extensibility.Query;
 using NBi.Core.Scalar.Resolver;
-using NBi.Core.FlatFile;
+using NBi.Core.FlatFile.Parsing;
 #endregion
 
 namespace NBi.Testing.Integration.NUnit.Query

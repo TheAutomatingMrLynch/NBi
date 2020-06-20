@@ -46,7 +46,7 @@ namespace NBi.Core.ResultSet.Resolver
             if (!provider.Exists())
             {
                 if (args.Redirection == null)
-                    throw new ExternalDependencyNotFoundException(provider.FullPath);
+                    throw new ExternalDependencyNotFoundException(provider.Uri);
                 else
                     return args.Redirection.Execute();
             }

@@ -1,4 +1,4 @@
-﻿using NBi.Core.FlatFile;
+﻿using NBi.Core.FlatFile.Parsing;
 using System;
 using System.Data.SqlClient;
 using System.Linq;

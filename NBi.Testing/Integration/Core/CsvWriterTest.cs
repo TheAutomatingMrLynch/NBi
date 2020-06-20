@@ -1,5 +1,5 @@
 ﻿using NBi.Core;
-using NBi.Core.FlatFile;
+using NBi.Core.FlatFile.Parsing;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

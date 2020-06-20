@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using NBi.Core.Configuration;
 using NBi.Extensibility.FlatFile;
 
-namespace NBi.Core.FlatFile
+namespace NBi.Core.FlatFile.Parsing
 {
     public class FlatFileReaderFactory
     {

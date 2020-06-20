@@ -109,8 +109,7 @@
     <Compile Include="Calculation\Predication\AndCombinationPredicationTest.cs" />
     <Compile Include="Calculation\Predication\OrCombinationPredicationTest.cs" />
     <Compile Include="Calculation\Predication\XOrCombinationPredicationTest.cs" />
-    <Compile Include="FlatFile\LocalDiskStoreTest.cs" />
-    <Compile Include="FlatFile\FlatFileStoreFactoryTest.cs" />
+    <Compile Include="FlatFile\Storing\FlatFileStoreFactoryTest.cs" />
     <Compile Include="ResultSet\Alteration\Merging\CartesianProductEngineTest.cs" />
     <Compile Include="ResultSet\Filtering\UniquenessFilterTest.cs" />
     <Compile Include="ResultSet\Filtering\PredicationFilterTest.cs" />
@@ -132,9 +131,9 @@
     <Compile Include="FileOnDisk.cs" />
     <Compile Include="Evaluate\ExpressionComparableTest.cs" />
     <Compile Include="Evaluate\RowValidatorTest.cs" />
-    <Compile Include="FlatFile\CsvReaderTest.cs" />
-    <Compile Include="FlatFile\CsvWriterTest.cs" />
-    <Compile Include="FlatFile\FlatFileReaderFactoryTest.cs" />
+    <Compile Include="FlatFile\Parsing\CsvReaderTest.cs" />
+    <Compile Include="FlatFile\Parsing\CsvWriterTest.cs" />
+    <Compile Include="FlatFile\Parsing\FlatFileReaderFactoryTest.cs" />
     <Compile Include="Format\RegexBuilderTest.cs" />
     <Compile Include="DataSerialization\Flattenizer\JsonPathEngineTest.cs" />
     <Compile Include="Injection\ServiceLocatorTest.cs" />
@@ -340,7 +339,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Include="app.config" />
-    <EmbeddedResource Include="FlatFile\Resources\MyData_2016_01.csv" />
     <None Include="packages.config" />
     <EmbeddedResource Include="ResultSet\Resolver\Resources\MyData_2016_01.csv" />
   </ItemGroup>

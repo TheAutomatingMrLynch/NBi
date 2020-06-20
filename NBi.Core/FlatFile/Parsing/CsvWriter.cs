@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace NBi.Core.FlatFile
+namespace NBi.Core.FlatFile.Parsing
 {
     public class CsvWriter
     {
@@ -26,11 +26,11 @@ namespace NBi.Core.FlatFile
 
         public void RaiseProgressStatus(string status, int current, int total)
             => ProgressStatusChanged?.Invoke(this, new ProgressStatusEventArgs(string.Format(status, current, total), current, total));
-        
 
-        public void Write (DataTable table, string filename)
+
+        public void Write(DataTable table, string filename)
         {
-            using (StreamWriter writer = new StreamWriter(filename, false, Encoding.UTF8))
+            using (var writer = new StreamWriter(filename, false, Encoding.UTF8))
             {
                 Write(table, writer);
             }
@@ -39,7 +39,7 @@ namespace NBi.Core.FlatFile
         protected internal void Write(DataTable table, TextWriter writer)
         {
             RaiseProgressStatus("Writing CSV file");
-            
+
             if (FirstLineIsColumnName)
                 WriteHeader(table, writer);
 
@@ -52,16 +52,16 @@ namespace NBi.Core.FlatFile
         {
             foreach (DataRow row in table.Rows)
             {
-                int rowCount = 0;
-                int count = table.Rows.Count;
+                var rowCount = 0;
+                var count = table.Rows.Count;
                 RaiseProgressStatus("writing row {0} of {1}", rowCount, count);
 
-                for (int i = 0; i < table.Columns.Count; i++)
+                for (var i = 0; i < table.Columns.Count; i++)
                 {
                     var content = row[i].ToString();
                     if (content.Contains(Definition.FieldSeparator) || content.Contains(Definition.RecordSeparator))
                         content = Definition.TextQualifier + content + Definition.TextQualifier;
-                    
+
                     writer.Write(content);
                     writer.Write(i == table.Columns.Count - 1 ? Definition.RecordSeparator : Definition.FieldSeparator.ToString());
                 }
@@ -71,7 +71,7 @@ namespace NBi.Core.FlatFile
         protected void WriteHeader(DataTable table, TextWriter writer)
         {
             RaiseProgressStatus("Writing header", 0, 0);
-            for (int i = 0; i < table.Columns.Count; i++)
+            for (var i = 0; i < table.Columns.Count; i++)
             {
                 writer.Write(table.Columns[i].ColumnName);
                 writer.Write(i == table.Columns.Count - 1 ? Definition.RecordSeparator : Definition.FieldSeparator.ToString());

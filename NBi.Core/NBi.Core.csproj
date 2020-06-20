@@ -174,8 +174,9 @@
     <Compile Include="Decoration\IO\FolderExistsConditionArgs.cs" />
     <Compile Include="Decoration\IO\IIoConditionArgs.cs" />
     <Compile Include="Decoration\Process\IoConditionFactory.cs" />
-    <Compile Include="FlatFile\FlatFileStoreFactory.cs" />
-    <Compile Include="FlatFile\LocalDiskFileStore.cs" />
+    <Compile Include="FlatFile\Storing\FlatFileStoreFactory.cs" />
+    <Compile Include="FlatFile\Storing\WebFileStore.cs" />
+    <Compile Include="FlatFile\Storing\LocalDiskFileStore.cs" />
     <Compile Include="ResultSet\Alteration\Merging\CartesianProductArgs.cs" />
     <Compile Include="ResultSet\Alteration\Merging\CartesianProductEngine.cs" />
     <Compile Include="ResultSet\Alteration\Merging\IMergingArgs.cs" />
@@ -305,7 +306,7 @@
     <Compile Include="Decoration\Process\IProcessConditionArgs.cs" />
     <Compile Include="DirectoryInfoExtentions.cs" />
     <Compile Include="Etl\EtlRunnerProvider.cs" />
-    <Compile Include="FlatFile\FlatFileReaderFactory.cs" />
+    <Compile Include="FlatFile\Parsing\FlatFileReaderFactory.cs" />
     <Compile Include="DataSerialization\Flattening\PathFlattenizer.cs" />
     <Compile Include="Injection\ConfigurationModule.cs" />
     <Compile Include="Injection\QueryModule.cs" />
@@ -317,7 +318,7 @@
     <Compile Include="CommandTimeoutException.cs" />
     <Compile Include="Decoration\DataEngineering\IConnectionWaitCommandArgs.cs" />
     <Compile Include="Decoration\DataEngineering\Commands\ConnectionWaitCommand.cs" />
-    <Compile Include="FlatFile\CsvWriter.cs" />
+    <Compile Include="FlatFile\Parsing\CsvWriter.cs" />
     <Compile Include="Decoration\DataEngineering\Commands\SqlServer\BatchRunCommand.cs" />
     <Compile Include="DataType\CaptionFilter.cs" />
     <Compile Include="DataType\CommandDescription.cs" />
@@ -351,7 +352,7 @@
     <Compile Include="Decoration\Grouping\GroupCommandFactory.cs" />
     <Compile Include="ExecutionFactory.cs" />
     <Compile Include="Decoration\IDecorationCondition.cs" />
-    <Compile Include="FlatFile\CsvReader.cs" />
+    <Compile Include="FlatFile\Parsing\CsvReader.cs" />
     <Compile Include="Analysis\Request\BaseDiscoveryRequest.cs" />
     <Compile Include="Analysis\Request\FactoryValidations\AtLeastOneNotNull.cs" />
     <Compile Include="Analysis\Request\FactoryValidations\MeasureNotNull.cs" />
@@ -710,7 +711,7 @@
     <Compile Include="ResultSet\ResultResultSet.cs" />
     <Compile Include="ResultSet\Equivalence\IEquivaler.cs" />
     <Compile Include="ConnectionException.cs" />
-    <Compile Include="FlatFile\CsvProfile.cs" />
+    <Compile Include="FlatFile\Parsing\CsvProfile.cs" />
     <Compile Include="Query\ParserResult.cs" />
     <Compile Include="Query\Performance\PerformanceResult.cs" />
     <Compile Include="Analysis\Member\MemberResult.cs" />

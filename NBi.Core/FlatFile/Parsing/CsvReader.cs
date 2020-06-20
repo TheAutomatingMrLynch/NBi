@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace NBi.Core.FlatFile
+namespace NBi.Core.FlatFile.Parsing
 {
     public class CsvReader : PocketCsvReader.CsvReader, IFlatFileReader
     {

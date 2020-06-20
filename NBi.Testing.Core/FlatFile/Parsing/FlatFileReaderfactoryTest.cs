@@ -1,4 +1,4 @@
-﻿using NBi.Core.FlatFile;
+﻿using NBi.Core.FlatFile.Parsing;
 using NBi.Core.Injection;
 using NBi.Extensibility;
 using NBi.Extensibility.FlatFile;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NBi.Testing.Core.FlatFile
+namespace NBi.Testing.Core.FlatFile.Parsing
 {
     public class FlatFileReaderFactoryTest
     {

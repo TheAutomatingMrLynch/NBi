@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using NBi.Extensibility.FlatFile;
 
-namespace NBi.Core.FlatFile
+namespace NBi.Core.FlatFile.Parsing
 {
     public class CsvProfile : PocketCsvReader.CsvProfile, IFlatFileProfile
     {

@@ -16,6 +16,7 @@ using System.Reflection;
 using NBi.Extensibility.FlatFile;
 using Moq;
 using NBi.Extensibility;
+using NBi.Core.FlatFile.Parsing;
 
 namespace NBi.Testing.Core.ResultSet.Resolver
 {

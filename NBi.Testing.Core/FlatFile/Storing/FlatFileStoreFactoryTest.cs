@@ -1,4 +1,4 @@
-﻿using NBi.Core.FlatFile;
+﻿using NBi.Core.FlatFile.Storing;
 using NBi.Core.Injection;
 using NBi.Extensibility;
 using NBi.Extensibility.FlatFile;
@@ -11,14 +11,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NBi.Testing.Core.FlatFile
+namespace NBi.Testing.Core.FlatFile.Storing
 {
     public class FlatFileStoreFactoryTest
     {
         #region Fake
         public class FakeFlatFileStore : IFlatFileStore
         {
-            public string FullPath => throw new NotImplementedException();
+            public FakeFlatFileStore(string uri) { }
+            public string Uri => throw new NotImplementedException();
 #pragma warning disable CA1063 // Implement IDisposable Correctly
             public void Dispose() => throw new NotImplementedException();
 #pragma warning restore CA1063 // Implement IDisposable Correctly
@@ -28,7 +29,8 @@ namespace NBi.Testing.Core.FlatFile
 
         public class FakeFlatFileStore2 : IFlatFileStore
         {
-            public string FullPath => throw new NotImplementedException();
+            public FakeFlatFileStore2(string uri) { }
+            public string Uri => throw new NotImplementedException();
 #pragma warning disable CA1063 // Implement IDisposable Correctly
             public void Dispose() => throw new NotImplementedException();
 #pragma warning restore CA1063 // Implement IDisposable Correctly
@@ -38,7 +40,8 @@ namespace NBi.Testing.Core.FlatFile
 
         public class FakeFlatFileStore3 : IFlatFileStore
         {
-            public string FullPath => throw new NotImplementedException();
+            public FakeFlatFileStore3(string uri) { }
+            public string Uri => throw new NotImplementedException();
 #pragma warning disable CA1063 // Implement IDisposable Correctly
             public void Dispose() => throw new NotImplementedException();
 #pragma warning restore CA1063 // Implement IDisposable Correctly
@@ -48,10 +51,10 @@ namespace NBi.Testing.Core.FlatFile
 
         public class FakeFlatFileStoreWrong : IFlatFileStore
         {
-            public FakeFlatFileStoreWrong(string whatsup)
+            public FakeFlatFileStoreWrong(int whatsup)
                 : base() { }
 
-            public string FullPath => throw new NotImplementedException();
+            public string Uri => throw new NotImplementedException();
 #pragma warning disable CA1063 // Implement IDisposable Correctly
             public void Dispose() => throw new NotImplementedException();
 #pragma warning restore CA1063 // Implement IDisposable Correctly
@@ -74,6 +77,40 @@ namespace NBi.Testing.Core.FlatFile
             var factory = localServiceLocator.GetFlatFileStoreFactory();
             var engine = factory.Instantiate(string.Empty, "C:\\file.txt");
             Assert.IsInstanceOf<LocalDiskFileStore>(engine);
+        }
+
+        [Test]
+        public void Instantiate_OneExtensionFileScheme_LocalDiskProvider()
+        {
+            var localServiceLocator = new ServiceLocator();
+            var config = localServiceLocator.GetConfiguration();
+            var extensions = new Dictionary<Type, IDictionary<string, string>>
+            {
+                { typeof(FakeFlatFileStore), new Dictionary<string, string>() { { "extension", "fake" } } },
+            };
+            config.LoadExtensions(extensions);
+
+            var factory = localServiceLocator.GetFlatFileStoreFactory();
+            var engine = factory.Instantiate(string.Empty, $"file://sharedDisk/path/myFile.txt");
+            Assert.IsInstanceOf<LocalDiskFileStore>(engine);
+        }
+
+        [TestCase("http")]
+        [TestCase("https")]
+        [Test]
+        public void Instantiate_OneExtensionWebScheme_WebProvider(string scheme)
+        {
+            var localServiceLocator = new ServiceLocator();
+            var config = localServiceLocator.GetConfiguration();
+            var extensions = new Dictionary<Type, IDictionary<string, string>>
+            {
+                { typeof(FakeFlatFileStore), new Dictionary<string, string>() { { "extension", "fake" } } },
+            };
+            config.LoadExtensions(extensions);
+
+            var factory = localServiceLocator.GetFlatFileStoreFactory();
+            var engine = factory.Instantiate(string.Empty, $"{scheme}://www.path.com/myFile.txt");
+            Assert.IsInstanceOf<WebFileStore>(engine);
         }
 
         [Test]

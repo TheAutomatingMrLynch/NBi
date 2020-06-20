@@ -154,6 +154,8 @@
     <Compile Include="Integration\Core\Decoration\IO\Conditions\FolderExistsConditionTest.cs" />
     <Compile Include="Integration\Core\Decoration\Process\Commands\WaitCommandTest.cs" />
     <Compile Include="Integration\Core\Decoration\Process\Commands\StopCommandTest.cs" />
+    <Compile Include="Integration\Core\FlatFile\Storing\WebFileStoreTest.cs" />
+    <Compile Include="Integration\Core\FlatFile\Storing\LocalDiskStoreTest.cs" />
     <Compile Include="Integration\Core\IO\Filtering\NullRootFilterTest.cs" />
     <Compile Include="Integration\Core\IO\FileListerTest.cs" />
     <Compile Include="Integration\Core\Query\Command\AdomdCommandFactoryTest.cs" />
@@ -634,6 +636,7 @@
     <EmbeddedResource Include="Integration\Core\Resources\MyBatch.cmd" />
     <EmbeddedResource Include="Integration\Core\Resources\MyInvalidBatch.cmd" />
     <EmbeddedResource Include="Integration\GenbiL\Resources\Simple.genbil" />
+    <EmbeddedResource Include="Integration\Core\FlatFile\Storing\Resources\MyData_2016_01.csv" />
     <None Include="Integration\GenbiL\Resources\action.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

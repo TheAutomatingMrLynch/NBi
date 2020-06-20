@@ -361,7 +361,7 @@
         <unique-rows/>
       </assert>
     </test>
-    <test name="External result-set with if-missing" uid="0103">
+    <test name="External result-set with if-missing" uid="0104">
       <system-under-test>
         <result-set>
           <file>
@@ -378,7 +378,19 @@
         <unique-rows/>
       </assert>
     </test>
-    <test name="Embedded query" uid="0104">
+    <test name="External result-set with https" uid="0105">
+      <system-under-test>
+        <result-set>
+          <file>
+            <path>~https://github.com/Seddryck/NBi/blob/develop/NBi.Testing/Acceptance/Resources/Csv/ResellerOrderCountByYearBefore{@year:yyyy}.csv</path>
+          </file>
+        </result-set>
+      </system-under-test>
+      <assert>
+        <unique-rows/>
+      </assert>
+    </test>
+    <test name="Embedded query" uid="0120">
       <system-under-test>
         <resultSet>
           <query>
@@ -398,7 +410,7 @@
         </all-rows>
       </assert>
     </test>
-    <test name="External query" uid="0105">
+    <test name="External query" uid="0121">
       <system-under-test>
         <resultSet>
           <query file="..\Query\ResellerOrderCount.sql">
@@ -414,7 +426,7 @@
         </all-rows>
       </assert>
     </test>
-    <test name="Query from assembly" uid="0106">
+    <test name="Query from assembly" uid="0122">
       <system-under-test>
         <resultSet>
           <query>
@@ -430,7 +442,7 @@
         </equalTo>
       </assert>
     </test>
-    <test name="Query from report" uid="0107">
+    <test name="Query from report" uid="0123">
       <condition>
         <service-running name="MSSQL$SQL2017"/>
       </condition>
@@ -451,7 +463,7 @@
         </equalTo>
       </assert>
     </test>
-    <test name="Query with variable" uid="0108">
+    <test name="Query with variable" uid="0124">
       <system-under-test>
         <resultSet>
           <query>

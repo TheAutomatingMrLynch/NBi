@@ -10,7 +10,7 @@ namespace NBi.Extensibility.FlatFile
 {
     public interface IFlatFileStore : IDisposable
     {
-        string FullPath { get; }
+        string Uri { get; }
         bool Exists();
         Stream GetStream();
     }
