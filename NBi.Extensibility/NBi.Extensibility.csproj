@@ -58,6 +58,7 @@
     <Compile Include="Decoration\DataEngineering\IBatchRunner.cs" />
     <Compile Include="ExternalDependencyNotFoundException.cs" />
     <Compile Include="FlatFile\IFlatFileProfile.cs" />
+    <Compile Include="FlatFile\IFlatFileStore.cs" />
     <Compile Include="FlatFile\IFlatFileReader.cs" />
     <Compile Include="IEtlRunResult.cs" />
     <Compile Include="IExecutable.cs" />

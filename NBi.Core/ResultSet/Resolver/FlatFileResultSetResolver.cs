@@ -1,5 +1,6 @@
 ﻿using NBi.Core.Injection;
 using NBi.Extensibility;
+using NBi.Extensibility.FlatFile;
 using NBi.Extensibility.Resolving;
 using System;
 using System.Collections.Generic;
@@ -25,34 +26,37 @@ namespace NBi.Core.ResultSet.Resolver
 
         public virtual IResultSet Execute()
         {
-            var path = args.Path.Execute();
-            var file = (Path.IsPathRooted(path)) ? path : args.BasePath + path;
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            var providerFactory = serviceLocator.GetFlatFileStoreFactory();
+            using (var provider = providerFactory.Instantiate(args.BasePath, args.Path.Execute()))
+            {
+                var readerFactory = serviceLocator.GetFlatFileReaderFactory();
+                var reader = readerFactory.Instantiate(args.ParserName, args.Profile);
+                var rs = Execute(provider, reader);
+                stopWatch.Stop();
+                Trace.WriteLineIf(NBiTraceSwitch.TraceInfo, $"Time needed to load data from flat file: {stopWatch.Elapsed:d'.'hh':'mm':'ss'.'fff'ms'}");
+                Trace.WriteLineIf(NBiTraceSwitch.TraceInfo, $"Result-set contains {rs.Rows.Count} row{(rs.Rows.Count > 1 ? "s" : string.Empty)} and {rs.Columns.Count} column{(rs.Columns.Count > 1 ? "s" : string.Empty)}");
+                return rs;
+            }
+        }
 
-            if (!IsFileExisting(file))
+        protected internal virtual IResultSet Execute(IFlatFileStore provider, IFlatFileReader reader)
+        {
+            if (!provider.Exists())
             {
                 if (args.Redirection == null)
-                    throw new ExternalDependencyNotFoundException(file);
+                    throw new ExternalDependencyNotFoundException(provider.FullPath);
                 else
                     return args.Redirection.Execute();
             }
-            else
-                Trace.WriteLineIf(Extensibility.NBiTraceSwitch.TraceInfo, $"Loading data from flat file '{file}'");
 
-            var stopWatch = new Stopwatch();
-            stopWatch.Start();
-            var factory = serviceLocator.GetFlatFileReaderFactory();
-            var reader = factory.Instantiate(args.ParserName, args.Profile);
-            var dataTable = reader.ToDataTable(file);
-
+            var stream = provider.GetStream();
+            var dataTable = reader.ToDataTable(stream);
             var rs = new ResultSet();
             rs.Load(dataTable);
-            stopWatch.Stop();
-            Trace.WriteLineIf(Extensibility.NBiTraceSwitch.TraceInfo, $"Time needed to load data from flat file: {stopWatch.Elapsed:d'.'hh':'mm':'ss'.'fff'ms'}");
-            Trace.WriteLineIf(Extensibility.NBiTraceSwitch.TraceInfo, $"Result-set contains {dataTable.Rows.Count} row{(dataTable.Rows.Count > 1 ? "s" : string.Empty)} and {dataTable.Columns.Count} column{(dataTable.Columns.Count > 1 ? "s" : string.Empty)}");
+
             return rs;
         }
-
-        protected virtual bool IsFileExisting(string fullpath) => File.Exists(fullpath);
-
     }
 }

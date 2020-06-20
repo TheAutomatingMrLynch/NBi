@@ -6,6 +6,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace NBi.Testing.Core.FlatFile
             public event ProgressStatusHandler ProgressStatusChanged { add { } remove { } }
 
             public DataTable ToDataTable(string filename) => throw new NotImplementedException();
+            public DataTable ToDataTable(Stream stream) => throw new NotImplementedException();
         }
 
         public class FakeFlatFileReader2 : IFlatFileReader
@@ -27,6 +29,7 @@ namespace NBi.Testing.Core.FlatFile
             public event ProgressStatusHandler ProgressStatusChanged { add { } remove { } }
 
             public DataTable ToDataTable(string filename) => throw new NotImplementedException();
+            public DataTable ToDataTable(Stream stream) => throw new NotImplementedException();
         }
 
         public class FakeFlatFileReader3 : IFlatFileReader
@@ -34,6 +37,7 @@ namespace NBi.Testing.Core.FlatFile
             public event ProgressStatusHandler ProgressStatusChanged { add { } remove { } }
 
             public DataTable ToDataTable(string filename) => throw new NotImplementedException();
+            public DataTable ToDataTable(Stream stream) => throw new NotImplementedException();
         }
 
         public class FakeFlatFileReaderWrong : IFlatFileReader
@@ -44,6 +48,7 @@ namespace NBi.Testing.Core.FlatFile
             public event ProgressStatusHandler ProgressStatusChanged { add { } remove { } }
 
             public DataTable ToDataTable(string filename) => throw new NotImplementedException();
+            public DataTable ToDataTable(Stream stream) => throw new NotImplementedException();
         }
         #endregion
 

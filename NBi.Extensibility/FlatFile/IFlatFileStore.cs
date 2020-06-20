@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace NBi.Extensibility.FlatFile
 {
-    public interface IFlatFileReader
+    public interface IFlatFileStore : IDisposable
     {
-        event ProgressStatusHandler ProgressStatusChanged;
-        DataTable ToDataTable(string filename);
-        DataTable ToDataTable(Stream stream);
+        string FullPath { get; }
+        bool Exists();
+        Stream GetStream();
     }
 }

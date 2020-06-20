@@ -60,6 +60,10 @@ namespace NBi.Core.Injection
         {
             return kernel.Get<FlatFileReaderFactory>();
         }
+        public virtual FlatFileStoreFactory GetFlatFileStoreFactory()
+        {
+            return kernel.Get<FlatFileStoreFactory>();
+        }
 
         public virtual ScalarResolverFactory GetScalarResolverFactory()
         {
