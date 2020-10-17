@@ -542,6 +542,12 @@
     <Compile Include="ResultSet\Filtering\BaseFilter.cs" />
     <Compile Include="ResultSet\Filtering\PredicationFilter.cs" />
     <Compile Include="ResultSet\Filtering\UniquenessFilter.cs" />
+    <Compile Include="ResultSet\Intersection\IntersectorFactory.cs" />
+    <Compile Include="ResultSet\Intersection\Intersector.cs" />
+    <Compile Include="ResultSet\Intersection\NameIntersector.cs" />
+    <Compile Include="ResultSet\Intersection\OrdinalIntersector.cs" />
+    <Compile Include="ResultSet\Intersection\ResultIntersectionRows.cs" />
+    <Compile Include="ResultSet\Intersection\SettingsIntersectionBuilder.cs" />
     <Compile Include="ResultSet\KeyCollectionEqualityComparer.cs" />
     <Compile Include="ResultSet\Lookup\Behavior.cs" />
     <Compile Include="ResultSet\Combination\CartesianProductSequenceCombination.cs" />
