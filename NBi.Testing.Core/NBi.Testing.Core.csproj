@@ -183,6 +183,7 @@
     <Compile Include="ResultSet\Equivalence\SettingsOrdinalResultSetTest.cs" />
     <Compile Include="ResultSet\Equivalence\SingleRowNameEquivalerTest.cs" />
     <Compile Include="ResultSet\Equivalence\SingleRowOrdinalEquivalerTest.cs" />
+    <Compile Include="ResultSet\Intersection\OrdinalIntersectorTest.cs" />
     <Compile Include="ResultSet\JsonResultSetTest.cs" />
     <Compile Include="ResultSet\KeyCollectionTest.cs" />
     <Compile Include="ResultSet\Lookup\CellsRetrieverByNameTest.cs" />
