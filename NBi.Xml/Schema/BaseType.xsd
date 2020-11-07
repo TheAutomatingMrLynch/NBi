@@ -1279,6 +1279,7 @@
                 <xs:element name="unique-rows" type="unique-rows-type"/>
                 <xs:element name="lookup-exists" type="lookup-exists-type"/>
                 <xs:element name="lookup-matches" type="lookup-matches-type"/>
+                <xs:element name="intersect" type="intersect-type"/>
                 <xs:element name="score" type="score-type"/>
               </xs:choice>
             </xs:complexType>
@@ -1923,6 +1924,30 @@
     </xs:attribute>
     <xs:attribute name="keys-names" type="xs:string" use="optional" />
     <xs:attribute name="values-names" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="intersect-type">
+    <xs:sequence>
+      <xs:element name="column" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="transformation" minOccurs="0" maxOccurs="1" type="transformation-type"/>
+            <xs:element name="transform" minOccurs="0" maxOccurs="1" type="transformation-type"/>
+          </xs:choice>
+          <xs:attribute name="index" type="xs:int" use="optional" />
+          <xs:attribute name="name" type="xs:string" use="optional" />
+          <xs:attribute name="role" use="required" >
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="key"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="type" type="column-type-enum" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="result-set" minOccurs="0" maxOccurs="1" type="result-set-type"/>
+    </xs:sequence>
+    <xs:attribute name="not" type="xs:boolean" use="optional" />
   </xs:complexType>
   <xs:complexType name="equivalent-to-type">
     <xs:choice>

@@ -55,6 +55,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BaseXmlTest.cs" />
+    <Compile Include="Constraints\IntersectXmlTest.cs" />
     <Compile Include="Constraints\SomeRowsXmlTest.cs" />
     <Compile Include="Constraints\SingleRowXmlTest.cs" />
     <Compile Include="FileOnDisk.cs" />
@@ -429,6 +430,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\UniqueXmlTestSuite.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\IntersectXmlTestSuite.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

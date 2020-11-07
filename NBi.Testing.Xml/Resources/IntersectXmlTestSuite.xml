@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<testSuite name="The Query TestSuite" xmlns="http://NBi/TestSuite">
+	<settings>
+		<default apply-to="system-under-test">
+			<connectionString>Data Source=.\SQL2017;Initial Catalog=AdventureWorks2017;User Id=sa;password=Password12!</connectionString>
+		</default>
+	</settings>
+	<test name="Some of the names are expected" uid="0001">
+		<system-under-test>
+      <result-set>
+        <query>select FirstName + ' ' + LastName as FullName, BusinessEntityID  from [Person].[Person] where PersonType='EM'</query>
+      </result-set>
+		</system-under-test>
+		<assert>
+      <intersect>
+        <column name="FullName" role="key"/>
+        <result-set>
+          <row>
+            <cell>Rob Walters</cell>
+            <cell>Dylan Miller</cell>
+          </row>
+        </result-set>
+      </intersect>
+		</assert>
+  </test>
+  <test name="Job candidates cross with some employees" uid="0001">
+    <system-under-test>
+      <result-set>
+        <query>select JobCandidateId, BusinessEntityId from [HumanResources].[JobCandidate]</query>
+      </result-set>
+    </system-under-test>
+    <assert>
+      <intersect>
+        <column name="BusinessEntityId" role="key"/>
+        <result-set>
+          <query>
+            select BusinessEntityID, NationalIDNumber from [HumanResources].[Employee]
+          </query>
+        </result-set>
+      </intersect>
+    </assert>
+  </test>
+  <test name="Job candidates does not cross with some employees who left the company" uid="0001">
+    <system-under-test>
+      <result-set>
+        <query>select JobCandidateId, BusinessEntityId from [HumanResources].[JobCandidate]</query>
+      </result-set>
+    </system-under-test>
+    <assert>
+      <intersect not="true">
+        <column name="BusinessEntityId" role="key"/>
+        <result-set>
+          <query>
+            select BusinessEntityID, NationalIDNumber from [HumanResources].[Employee] where CurrentFlag = 0
+          </query>
+        </result-set>
+      </intersect>
+    </assert>
+  </test>
+</testSuite>

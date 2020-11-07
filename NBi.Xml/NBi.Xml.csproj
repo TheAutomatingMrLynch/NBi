@@ -65,6 +65,7 @@
     <Compile Include="Constraints\Comparer\SequenceReferencePredicateXml.cs" />
     <Compile Include="Constraints\Comparer\ScalarReferencePredicateXml.cs" />
     <Compile Include="Constraints\Comparer\ReferencePredicateXml.cs" />
+    <Compile Include="Constraints\IntersectXml.cs" />
     <Compile Include="Constraints\LookupMatchesXml.cs" />
     <Compile Include="Constraints\ScoreXml.cs" />
     <Compile Include="Constraints\Comparer\ICultureSensitiveTextPredicateXml.cs" />
