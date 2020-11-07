@@ -7,7 +7,7 @@ if ((Get-Service $mssqlName).Status -eq "Running")
     { Write-Host "Service '$mssqlName' is already running" }
 else
 {
-    Write-Host "Starting service '$mssqlName'"
+    Write-Host "Starting service '$mssqlName' ..."
     Start-Service $mssqlName
     Write-Host "Service '$mssqlName' is $((Get-Service $mssqlName).Status)"
 }
