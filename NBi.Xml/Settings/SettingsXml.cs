@@ -28,14 +28,11 @@ namespace NBi.Xml.Settings
 
         public bool ShouldSerializeCsvProfile()
         {
-            var value =
+            var value = 
                 CsvProfile.InternalFieldSeparator != GetDefaultValue<string>(x => x.InternalFieldSeparator)
                 || CsvProfile.InternalRecordSeparator != GetDefaultValue<string>(x => x.InternalRecordSeparator)
-                || CsvProfile.InternalTextQualifier != GetDefaultValue<string>(x => x.InternalTextQualifier)
-                || CsvProfile.InternalEmptyCell != GetDefaultValue<string>(x => x.InternalEmptyCell)
-                || CsvProfile.InternalMissingCell != GetDefaultValue<string>(x => x.InternalMissingCell)
-                || CsvProfile.InternalFirstRowHeader != GetDefaultValue<bool>(x => x.InternalFirstRowHeader);
-            
+                || CsvProfile.InternalTextQualifier != GetDefaultValue<string>(x => x.InternalTextQualifier);
+
             return value;
         }
 
@@ -105,7 +102,7 @@ namespace NBi.Xml.Settings
             References = new List<ReferenceXml>();
             ParallelizeQueries = true;
             CsvProfile = new CsvProfileXml
-                (
+            (
                 GetDefaultValue<string>(x => x.InternalFieldSeparator)[0]
                 , '\"'
                 , GetDefaultValue<string>(x => x.InternalRecordSeparator)
